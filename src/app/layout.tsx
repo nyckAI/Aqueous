@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Inter } from "next/font/google";
-import { Sidebar } from "@/components/sidebar/Sidebar";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { SidebarLayout } from "@/components/sidebar/SidebarLayout";
 import "./globals.css";
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,13 +35,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geist.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full font-sans">
-        <Sidebar />
-        <div className="ml-56 flex min-h-dvh min-w-0 flex-1 flex-col bg-background-neutral">
-          {children}
-        </div>
+        <SidebarLayout>{children}</SidebarLayout>
       </body>
     </html>
   );

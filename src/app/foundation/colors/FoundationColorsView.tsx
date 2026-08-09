@@ -123,17 +123,19 @@ function PaletteColumn({ palette }: { palette: PaletteGroup }) {
 
 export function FoundationColorsView() {
   return (
-    <main className="flex flex-1 flex-col px-8 py-10">
-      <p className="text-[13px] leading-[22px] text-text-neutral">Foundation</p>
-      <h1 className="mt-1 text-2xl font-semibold tracking-tight text-text-primary">
-        Colors
-      </h1>
-      <p className="mt-2 max-w-xl text-base leading-7 text-text-neutral">
-        Color allows us to distinguish from other brands and create a sense of
-        identity in our marketing &amp; product.
-      </p>
+    <main className="flex flex-1 flex-col">
+      <div className="bg-background-neutral-hover px-8 py-10">
+        <p className="text-[13px] leading-[22px] text-text-neutral">Foundation</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-text-primary">
+          Colors
+        </h1>
+        <p className="mt-2 max-w-xl text-base leading-7 text-text-neutral">
+          Color allows us to distinguish from other brands and create a sense of
+          identity in our marketing &amp; product.
+        </p>
+      </div>
 
-      <section className="mt-10">
+      <section className="px-8 py-10">
         <h2 className="text-lg font-semibold text-text-primary">The Palette</h2>
         <p className="mt-1 text-sm text-text-neutral">
           Click any swatch to copy its hex value.

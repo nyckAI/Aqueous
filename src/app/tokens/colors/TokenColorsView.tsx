@@ -13,6 +13,15 @@ import {
   groupTokensByAttribute,
   type ColorTokenEntry,
 } from "@/lib/color-tokens";
+import {
+  allFontSizeTokens,
+  weightTokens,
+  familyTokens,
+  fontSizeCategoryDescriptions,
+  fontValueCategoryDescriptions,
+  type FontSizeTokenEntry,
+  type FontValueTokenEntry,
+} from "@/lib/font-tokens";
 
 function matchesQuery(token: ColorTokenEntry, query: string) {
   const q = query.trim().toLowerCase();
@@ -24,6 +33,28 @@ function matchesQuery(token: ColorTokenEntry, query: string) {
     token.attribute.toLowerCase().includes(q)
   );
 }
+
+function matchesFontSizeQuery(token: FontSizeTokenEntry, query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  return (
+    token.name.toLowerCase().includes(q) ||
+    token.fontSize.toLowerCase().includes(q) ||
+    token.category.toLowerCase().includes(q)
+  );
+}
+
+function matchesFontValueQuery(token: FontValueTokenEntry, query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  return (
+    token.name.toLowerCase().includes(q) ||
+    token.value.toLowerCase().includes(q) ||
+    token.category.toLowerCase().includes(q)
+  );
+}
+
+const FONT_SIZE_CATEGORIES = ["heading", "body", "caption", "button", "micro"] as const;
 
 function slugify(attribute: string): string {
   return `bg-${attribute}`;
@@ -121,6 +152,57 @@ function TokenRow({ token }: { token: ColorTokenEntry }) {
   );
 }
 
+function FontSizeTokenRow({ token }: { token: FontSizeTokenEntry }) {
+  const isHeading = token.category === "heading";
+  return (
+    <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] items-center gap-6 py-5">
+      <div className="min-w-0">
+        <CopyableTokenName name={token.name} />
+      </div>
+      <div className="flex items-center gap-2 font-mono text-sm text-text-neutral">
+        <span>{token.fontSize}</span>
+        <span className="text-text-disabled">/</span>
+        <span>{token.lineHeight}</span>
+        <span className="text-text-disabled">/</span>
+        <span>{token.letterSpacing}</span>
+      </div>
+      <p
+        className="truncate text-text-primary"
+        style={{
+          fontSize: token.fontSize,
+          lineHeight: token.lineHeight,
+          letterSpacing: token.letterSpacing,
+          ...(isHeading && { fontWeight: 700, fontFamily: 'var(--font-geist)' }),
+        }}
+      >
+        The quick brown fox
+      </p>
+    </div>
+  );
+}
+
+function FontValueTokenRow({ token }: { token: FontValueTokenEntry }) {
+  const isWeight = token.category === "weight";
+  return (
+    <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] items-center gap-6 py-5">
+      <div className="min-w-0">
+        <CopyableTokenName name={token.name} />
+      </div>
+      <span className="font-mono text-sm text-text-neutral">{token.value}</span>
+      <p
+        className="truncate text-base text-text-primary"
+        style={
+          isWeight
+            ? { fontWeight: Number(token.value) }
+            : { fontFamily: token.value }
+        }
+      >
+        The quick brown fox
+      </p>
+    </div>
+  );
+}
+
 function TocButton({
   active,
   indent,
@@ -208,6 +290,69 @@ function TableOfContents({
         >
           Icon
         </TocButton>
+
+        <TocButton
+          active={filter === "font"}
+          onClick={() => onFilterChange("font")}
+        >
+          Font
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-heading"}
+          indent
+          onClick={() => onFilterChange("font-heading")}
+        >
+          Heading
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-body"}
+          indent
+          onClick={() => onFilterChange("font-body")}
+        >
+          Body
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-caption"}
+          indent
+          onClick={() => onFilterChange("font-caption")}
+        >
+          Caption
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-button"}
+          indent
+          onClick={() => onFilterChange("font-button")}
+        >
+          Button
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-micro"}
+          indent
+          onClick={() => onFilterChange("font-micro")}
+        >
+          Micro
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-weight"}
+          indent
+          onClick={() => onFilterChange("font-weight")}
+        >
+          Weight
+        </TocButton>
+
+        <TocButton
+          active={filter === "font-family"}
+          indent
+          onClick={() => onFilterChange("font-family")}
+        >
+          Family
+        </TocButton>
       </div>
     </nav>
   );
@@ -245,6 +390,28 @@ export function TokenColorsView() {
     );
     return groupTokensByAttribute(filtered, iconAttributeDescriptions, "Icon");
   }, [deferredQuery]);
+
+  const filteredFontSizeGroups = useMemo(() => {
+    const filtered = allFontSizeTokens.filter((t) =>
+      matchesFontSizeQuery(t, deferredQuery),
+    );
+    return FONT_SIZE_CATEGORIES.map((cat) => ({
+      category: cat,
+      label: cat.charAt(0).toUpperCase() + cat.slice(1),
+      description: fontSizeCategoryDescriptions[cat] || "",
+      tokens: filtered.filter((t) => t.category === cat),
+    })).filter((g) => g.tokens.length > 0);
+  }, [deferredQuery]);
+
+  const filteredWeightTokens = useMemo(
+    () => weightTokens.filter((t) => matchesFontValueQuery(t, deferredQuery)),
+    [deferredQuery],
+  );
+
+  const filteredFamilyTokens = useMemo(
+    () => familyTokens.filter((t) => matchesFontValueQuery(t, deferredQuery)),
+    [deferredQuery],
+  );
 
   return (
     <main className="flex flex-1 flex-col px-10 py-10">
@@ -427,6 +594,105 @@ export function TokenColorsView() {
               })
             )}
           </div>
+        </section>
+        )}
+
+        {(filter === null || filter === "font" || filter?.startsWith("font-")) && (
+        <section id="font" className="mt-16">
+          <h2 className="text-xl font-bold text-text-primary">Font</h2>
+
+          {/* Size-based tokens: Heading, Body, Caption, Button, Micro */}
+          {filteredFontSizeGroups.filter(
+            (g) => filter === null || filter === "font" || filter === `font-${g.category}`,
+          ).length > 0 && (
+            <div className="mt-6">
+              <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
+                <span>Token</span>
+                <span>Size / Line-height / Tracking</span>
+                <span>Preview</span>
+              </div>
+
+              {filteredFontSizeGroups
+                .filter(
+                  (g) =>
+                    filter === null ||
+                    filter === "font" ||
+                    filter === `font-${g.category}`,
+                )
+                .map((group, gi, arr) => (
+                  <div
+                    key={group.category}
+                    id={`font-${group.category}`}
+                    className={
+                      gi < arr.length - 1
+                        ? "border-b border-border-disabled"
+                        : undefined
+                    }
+                  >
+                    <h3 className="mt-6 text-sm font-semibold capitalize text-text-primary">
+                      {group.label}
+                    </h3>
+                    {group.tokens.map((token) => (
+                      <FontSizeTokenRow key={token.name} token={token} />
+                    ))}
+                    <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                      {group.description}
+                    </p>
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* Weight */}
+          {(filter === null || filter === "font" || filter === "font-weight") &&
+            filteredWeightTokens.length > 0 && (
+              <div id="font-weight" className="mt-10">
+                <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
+                  <span>Token</span>
+                  <span>Value</span>
+                  <span>Preview</span>
+                </div>
+                <h3 className="mt-6 text-sm font-semibold text-text-primary">
+                  Weight
+                </h3>
+                {filteredWeightTokens.map((token) => (
+                  <FontValueTokenRow key={token.name} token={token} />
+                ))}
+                <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                  {fontValueCategoryDescriptions.weight}
+                </p>
+              </div>
+            )}
+
+          {/* Family */}
+          {(filter === null || filter === "font" || filter === "font-family") &&
+            filteredFamilyTokens.length > 0 && (
+              <div id="font-family" className="mt-10">
+                <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
+                  <span>Token</span>
+                  <span>Value</span>
+                  <span>Preview</span>
+                </div>
+                <h3 className="mt-6 text-sm font-semibold text-text-primary">
+                  Family
+                </h3>
+                {filteredFamilyTokens.map((token) => (
+                  <FontValueTokenRow key={token.name} token={token} />
+                ))}
+                <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                  {fontValueCategoryDescriptions.family}
+                </p>
+              </div>
+            )}
+
+          {/* Empty state */}
+          {filteredFontSizeGroups.length === 0 &&
+            filteredWeightTokens.length === 0 &&
+            filteredFamilyTokens.length === 0 && (
+              <p className="py-8 text-sm text-text-neutral">
+                No tokens match &ldquo;{query.trim()}&rdquo;.
+              </p>
+            )}
         </section>
         )}
         </div>
