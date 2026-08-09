@@ -1,6 +1,6 @@
 "use client";
 
-import { useDeferredValue, useMemo, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import {
   backgroundColorTokens,
@@ -231,12 +231,18 @@ function TocButton({
   );
 }
 
+const OBSERVED_IDS = [
+  "color", "background", "border", "text", "icon",
+  "font", "font-heading", "font-body", "font-caption",
+  "font-button", "font-micro", "font-weight", "font-family",
+];
+
 function TableOfContents({
-  filter,
-  onFilterChange,
+  activeSection,
+  onNavigate,
 }: {
-  filter: string | null;
-  onFilterChange: (value: string | null) => void;
+  activeSection: string;
+  onNavigate: (id: string) => void;
 }) {
   return (
     <nav
@@ -248,109 +254,59 @@ function TableOfContents({
           On this page
         </p>
 
-        <TocButton active={filter === null} onClick={() => onFilterChange(null)}>
+        <TocButton active={activeSection === "top"} onClick={() => onNavigate("top")}>
           All Tokens
         </TocButton>
 
-        <TocButton
-          active={filter === "color"}
-          onClick={() => onFilterChange("color")}
-        >
+        <TocButton active={activeSection === "color"} onClick={() => onNavigate("color")}>
           Color
         </TocButton>
 
-        <TocButton
-          active={filter === "background"}
-          indent
-          onClick={() => onFilterChange("background")}
-        >
+        <TocButton active={activeSection === "background"} indent onClick={() => onNavigate("background")}>
           Background
         </TocButton>
 
-        <TocButton
-          active={filter === "border"}
-          indent
-          onClick={() => onFilterChange("border")}
-        >
+        <TocButton active={activeSection === "border"} indent onClick={() => onNavigate("border")}>
           Border
         </TocButton>
 
-        <TocButton
-          active={filter === "text"}
-          indent
-          onClick={() => onFilterChange("text")}
-        >
+        <TocButton active={activeSection === "text"} indent onClick={() => onNavigate("text")}>
           Text
         </TocButton>
 
-        <TocButton
-          active={filter === "icon"}
-          indent
-          onClick={() => onFilterChange("icon")}
-        >
+        <TocButton active={activeSection === "icon"} indent onClick={() => onNavigate("icon")}>
           Icon
         </TocButton>
 
-        <TocButton
-          active={filter === "font"}
-          onClick={() => onFilterChange("font")}
-        >
+        <TocButton active={activeSection === "font"} onClick={() => onNavigate("font")}>
           Font
         </TocButton>
 
-        <TocButton
-          active={filter === "font-heading"}
-          indent
-          onClick={() => onFilterChange("font-heading")}
-        >
+        <TocButton active={activeSection === "font-heading"} indent onClick={() => onNavigate("font-heading")}>
           Heading
         </TocButton>
 
-        <TocButton
-          active={filter === "font-body"}
-          indent
-          onClick={() => onFilterChange("font-body")}
-        >
+        <TocButton active={activeSection === "font-body"} indent onClick={() => onNavigate("font-body")}>
           Body
         </TocButton>
 
-        <TocButton
-          active={filter === "font-caption"}
-          indent
-          onClick={() => onFilterChange("font-caption")}
-        >
+        <TocButton active={activeSection === "font-caption"} indent onClick={() => onNavigate("font-caption")}>
           Caption
         </TocButton>
 
-        <TocButton
-          active={filter === "font-button"}
-          indent
-          onClick={() => onFilterChange("font-button")}
-        >
+        <TocButton active={activeSection === "font-button"} indent onClick={() => onNavigate("font-button")}>
           Button
         </TocButton>
 
-        <TocButton
-          active={filter === "font-micro"}
-          indent
-          onClick={() => onFilterChange("font-micro")}
-        >
+        <TocButton active={activeSection === "font-micro"} indent onClick={() => onNavigate("font-micro")}>
           Micro
         </TocButton>
 
-        <TocButton
-          active={filter === "font-weight"}
-          indent
-          onClick={() => onFilterChange("font-weight")}
-        >
+        <TocButton active={activeSection === "font-weight"} indent onClick={() => onNavigate("font-weight")}>
           Weight
         </TocButton>
 
-        <TocButton
-          active={filter === "font-family"}
-          indent
-          onClick={() => onFilterChange("font-family")}
-        >
+        <TocButton active={activeSection === "font-family"} indent onClick={() => onNavigate("font-family")}>
           Family
         </TocButton>
       </div>
@@ -360,8 +316,40 @@ function TableOfContents({
 
 export function TokenColorsView() {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState("top");
   const deferredQuery = useDeferredValue(query);
+
+  const scrollToSection = useCallback((id: string) => {
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveSection("top");
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  useEffect(() => {
+    const elements = OBSERVED_IDS
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -80% 0px" },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const bgGroups = useMemo(() => {
     const filtered = backgroundColorTokens.filter((token) =>
@@ -437,8 +425,9 @@ export function TokenColorsView() {
 
       <div className="mt-12 flex gap-8">
         <div className="min-w-0 flex-1">
-        {(filter === null || filter === "color" || filter === "background") && (
-        <section id="background">
+
+        <div id="color" className="scroll-mt-8">
+        <section id="background" className="scroll-mt-8">
           <h2 className="text-xl font-bold text-text-primary">Background</h2>
 
           <div className="mt-6">
@@ -475,10 +464,8 @@ export function TokenColorsView() {
             )}
           </div>
         </section>
-        )}
 
-        {(filter === null || filter === "color" || filter === "border") && (
-        <section id="border" className={filter !== "border" ? "mt-16" : undefined}>
+        <section id="border" className="mt-16 scroll-mt-8">
           <h2 className="text-xl font-bold text-text-primary">Border</h2>
 
           <div className="mt-6">
@@ -515,10 +502,8 @@ export function TokenColorsView() {
             )}
           </div>
         </section>
-        )}
 
-        {(filter === null || filter === "color" || filter === "text") && (
-        <section id="text" className={filter !== "text" ? "mt-16" : undefined}>
+        <section id="text" className="mt-16 scroll-mt-8">
           <h2 className="text-xl font-bold text-text-primary">Text</h2>
 
           <div className="mt-6">
@@ -555,10 +540,8 @@ export function TokenColorsView() {
             )}
           </div>
         </section>
-        )}
 
-        {(filter === null || filter === "color" || filter === "icon") && (
-        <section id="icon" className={filter !== "icon" ? "mt-16" : undefined}>
+        <section id="icon" className="mt-16 scroll-mt-8">
           <h2 className="text-xl font-bold text-text-primary">Icon</h2>
 
           <div className="mt-6">
@@ -595,16 +578,12 @@ export function TokenColorsView() {
             )}
           </div>
         </section>
-        )}
+        </div>
 
-        {(filter === null || filter === "font" || filter?.startsWith("font-")) && (
-        <section id="font" className="mt-16">
+        <section id="font" className="mt-16 scroll-mt-8">
           <h2 className="text-xl font-bold text-text-primary">Font</h2>
 
-          {/* Size-based tokens: Heading, Body, Caption, Button, Micro */}
-          {filteredFontSizeGroups.filter(
-            (g) => filter === null || filter === "font" || filter === `font-${g.category}`,
-          ).length > 0 && (
+          {filteredFontSizeGroups.length > 0 && (
             <div className="mt-6">
               <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
                 <span>Token</span>
@@ -612,80 +591,64 @@ export function TokenColorsView() {
                 <span>Preview</span>
               </div>
 
-              {filteredFontSizeGroups
-                .filter(
-                  (g) =>
-                    filter === null ||
-                    filter === "font" ||
-                    filter === `font-${g.category}`,
-                )
-                .map((group, gi, arr) => (
-                  <div
-                    key={group.category}
-                    id={`font-${group.category}`}
-                    className={
-                      gi < arr.length - 1
-                        ? "border-b border-border-disabled"
-                        : undefined
-                    }
-                  >
-                    <h3 className="mt-6 text-sm font-semibold capitalize text-text-primary">
-                      {group.label}
-                    </h3>
-                    {group.tokens.map((token) => (
-                      <FontSizeTokenRow key={token.name} token={token} />
-                    ))}
-                    <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
-                      {group.description}
-                    </p>
-                  </div>
-                ))}
+              {filteredFontSizeGroups.map((group, gi, arr) => (
+                <div
+                  key={group.category}
+                  id={`font-${group.category}`}
+                  className={`scroll-mt-8${gi < arr.length - 1 ? " border-b border-border-disabled" : ""}`}
+                >
+                  <h3 className="mt-6 text-sm font-semibold capitalize text-text-primary">
+                    {group.label}
+                  </h3>
+                  {group.tokens.map((token) => (
+                    <FontSizeTokenRow key={token.name} token={token} />
+                  ))}
+                  <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                    {group.description}
+                  </p>
+                </div>
+              ))}
             </div>
           )}
 
-          {/* Weight */}
-          {(filter === null || filter === "font" || filter === "font-weight") &&
-            filteredWeightTokens.length > 0 && (
-              <div id="font-weight" className="mt-10">
-                <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
-                  <span>Token</span>
-                  <span>Value</span>
-                  <span>Preview</span>
-                </div>
-                <h3 className="mt-6 text-sm font-semibold text-text-primary">
-                  Weight
-                </h3>
-                {filteredWeightTokens.map((token) => (
-                  <FontValueTokenRow key={token.name} token={token} />
-                ))}
-                <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
-                  {fontValueCategoryDescriptions.weight}
-                </p>
+          {filteredWeightTokens.length > 0 && (
+            <div id="font-weight" className="mt-10 scroll-mt-8">
+              <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
+                <span>Token</span>
+                <span>Value</span>
+                <span>Preview</span>
               </div>
-            )}
+              <h3 className="mt-6 text-sm font-semibold text-text-primary">
+                Weight
+              </h3>
+              {filteredWeightTokens.map((token) => (
+                <FontValueTokenRow key={token.name} token={token} />
+              ))}
+              <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                {fontValueCategoryDescriptions.weight}
+              </p>
+            </div>
+          )}
 
-          {/* Family */}
-          {(filter === null || filter === "font" || filter === "font-family") &&
-            filteredFamilyTokens.length > 0 && (
-              <div id="font-family" className="mt-10">
-                <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
-                  <span>Token</span>
-                  <span>Value</span>
-                  <span>Preview</span>
-                </div>
-                <h3 className="mt-6 text-sm font-semibold text-text-primary">
-                  Family
-                </h3>
-                {filteredFamilyTokens.map((token) => (
-                  <FontValueTokenRow key={token.name} token={token} />
-                ))}
-                <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
-                  {fontValueCategoryDescriptions.family}
-                </p>
+          {filteredFamilyTokens.length > 0 && (
+            <div id="font-family" className="mt-10 scroll-mt-8">
+              <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 border-b border-border-neutral pb-3 text-sm text-text-neutral">
+                <span>Token</span>
+                <span>Value</span>
+                <span>Preview</span>
               </div>
-            )}
+              <h3 className="mt-6 text-sm font-semibold text-text-primary">
+                Family
+              </h3>
+              {filteredFamilyTokens.map((token) => (
+                <FontValueTokenRow key={token.name} token={token} />
+              ))}
+              <p className="max-w-3xl pb-6 text-sm leading-6 text-text-neutral">
+                {fontValueCategoryDescriptions.family}
+              </p>
+            </div>
+          )}
 
-          {/* Empty state */}
           {filteredFontSizeGroups.length === 0 &&
             filteredWeightTokens.length === 0 &&
             filteredFamilyTokens.length === 0 && (
@@ -694,10 +657,10 @@ export function TokenColorsView() {
               </p>
             )}
         </section>
-        )}
+
         </div>
 
-        <TableOfContents filter={filter} onFilterChange={setFilter} />
+        <TableOfContents activeSection={activeSection} onNavigate={scrollToSection} />
       </div>
     </main>
   );
