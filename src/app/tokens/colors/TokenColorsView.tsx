@@ -18,6 +18,7 @@ import {
   weightTokens,
   familyTokens,
   fontSizeCategoryDescriptions,
+  fontSizeCategoryFamilies,
   fontValueCategoryDescriptions,
   type FontSizeTokenEntry,
   type FontValueTokenEntry,
@@ -597,9 +598,16 @@ export function TokenColorsView() {
                   id={`font-${group.category}`}
                   className={`scroll-mt-8${gi < arr.length - 1 ? " border-b border-border-disabled" : ""}`}
                 >
-                  <h3 className="mt-6 text-sm font-semibold capitalize text-text-primary">
-                    {group.label}
-                  </h3>
+                  <div className="mt-6 flex items-baseline gap-2">
+                    <h3 className="text-sm font-semibold capitalize text-text-primary">
+                      {group.label}
+                    </h3>
+                    {fontSizeCategoryFamilies[group.category] && (
+                      <span className="rounded-full bg-background-neutral-hover px-2 py-0.5 text-xs text-text-neutral">
+                        {fontSizeCategoryFamilies[group.category]}
+                      </span>
+                    )}
+                  </div>
                   {group.tokens.map((token) => (
                     <FontSizeTokenRow key={token.name} token={token} />
                   ))}

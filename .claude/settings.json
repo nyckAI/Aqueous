@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3940/foundation/colors)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/foundation/colors)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/foundation/colors)",
+      "mcp__figma__get_metadata",
+      "mcp__figma__get_screenshot"
     ]
   }
 }

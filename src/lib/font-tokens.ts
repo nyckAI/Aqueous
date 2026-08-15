@@ -81,11 +81,19 @@ export const fontSizeCategoryDescriptions: Record<string, string> = {
   body:
     "Use for paragraphs, descriptions, and general content. Rendered in Inter.",
   caption:
-    "Use for secondary labels, helper text, and metadata.",
+    "Use for secondary labels, helper text, and metadata. Rendered in Inter.",
   button:
-    "Use for button labels and inline actions across all button sizes.",
+    "Use for button labels and inline actions across all button sizes. Rendered in Inter.",
   micro:
-    "Use for badges, tags, and the smallest interface labels.",
+    "Use for badges, tags, and the smallest interface labels. Rendered in Inter.",
+};
+
+export const fontSizeCategoryFamilies: Record<string, string> = {
+  heading: "Geist",
+  body: "Inter",
+  caption: "Inter",
+  button: "Inter",
+  micro: "Inter",
 };
 
 export const fontValueCategoryDescriptions: Record<string, string> = {

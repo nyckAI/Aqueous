@@ -27,7 +27,7 @@ export const Body = {
 
 /* ── Font / Captions ── */
 export const Captions = {
-  'font-caption-lg': { fontSize: '13px', lineHeight: '18px', letterSpacing: '0em' },
+  'font-caption-lg': { fontSize: '14px', lineHeight: '20px', letterSpacing: '0em' },
   'font-caption-md': { fontSize: '12px', lineHeight: '16px', letterSpacing: '0em' },
 } as const satisfies Record<string, FontStyle>;
 
@@ -35,12 +35,12 @@ export const Captions = {
 export const Buttons = {
   'font-button-lg': { fontSize: '16px', lineHeight: '24px', letterSpacing: '0em' },
   'font-button-md': { fontSize: '14px', lineHeight: '20px', letterSpacing: '0em' },
-  'font-button-sm': { fontSize: '13px', lineHeight: '18px', letterSpacing: '0em' },
+  'font-button-sm': { fontSize: '12px', lineHeight: '16px', letterSpacing: '0em' },
 } as const satisfies Record<string, FontStyle>;
 
 /* ── Font / Micro ── */
 export const Micro = {
-  'font-micro': { fontSize: '11px', lineHeight: '14px', letterSpacing: '0.02em' },
+  'font-micro': { fontSize: '12px', lineHeight: '16px', letterSpacing: '0.02em' },
   'font-micro-sm': { fontSize: '10px', lineHeight: '12px', letterSpacing: '0.02em' },
 } as const satisfies Record<string, FontStyle>;
 
