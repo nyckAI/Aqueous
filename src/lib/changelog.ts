@@ -17,6 +17,56 @@ export type VersionEntry = {
 
 export const changelog: VersionEntry[] = [
   {
+    version: "0.4.0",
+    date: "2026-08-15",
+    author: "Jason Jeong",
+    summary: "Integrated 35 shadcn/ui base components with live previews, code snippets, and dynamic sidebar navigation.",
+    changes: [
+      {
+        type: "added",
+        title: "35 shadcn/ui base components",
+        description:
+          "Installed Accordion, Alert, Alert Dialog, Avatar, Badge, Breadcrumb, Button, Calendar, Card, Checkbox, Collapsible, Dialog, Drawer, Dropdown Menu, Hover Card, Input, Input OTP, Label, Pagination, Popover, Progress, Radio Group, Scroll Area, Select, Separator, Sheet, Skeleton, Slider, Spinner, Switch, Table, Tabs, Textarea, Toggle, and Tooltip as unstyled base skeletons.",
+        timestamp: "2026-08-15",
+      },
+      {
+        type: "added",
+        title: "Component preview and code pages",
+        description:
+          "Each component has a dedicated page at /components/[slug] with a Preview tab showing a live interactive demo and a Code tab with copy-to-clipboard source.",
+        timestamp: "2026-08-15",
+      },
+      {
+        type: "added",
+        title: "Component index page",
+        description:
+          "Added /components with a grid of linked cards for all 35 components, each displaying name and description.",
+        timestamp: "2026-08-15",
+      },
+      {
+        type: "added",
+        title: "Dynamic sidebar component navigation",
+        description:
+          "Components section in the sidebar is now auto-generated from the component registry and sorted alphabetically. New components added to the registry appear automatically.",
+        timestamp: "2026-08-15",
+      },
+      {
+        type: "added",
+        title: "Component registry",
+        description:
+          "Created a central component registry at src/lib/component-registry.ts that drives the sidebar, static route generation, and component index page.",
+        timestamp: "2026-08-15",
+      },
+      {
+        type: "changed",
+        title: "Overview page component count",
+        description:
+          "Component count stat card now dynamically reads from the component registry instead of showing 0.",
+        timestamp: "2026-08-15",
+      },
+    ],
+  },
+  {
     version: "0.3.0",
     date: "2026-08-06",
     author: "Jason Jeong",

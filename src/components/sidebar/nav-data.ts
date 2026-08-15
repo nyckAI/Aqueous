@@ -1,5 +1,13 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Palette, SwatchBook, Type } from "lucide-react";
+import {
+  LayoutDashboard,
+  Palette,
+  SwatchBook,
+  Type,
+  Component,
+  Minus,
+} from "lucide-react";
+import { componentRegistry } from "@/lib/component-registry";
 
 export type NavItem = {
   label: string;
@@ -11,6 +19,18 @@ export type NavSection = {
   title: string;
   items: NavItem[];
 };
+
+const componentNavItems: NavItem[] = [
+  { label: "All Components", href: "/components", icon: Component },
+  ...componentRegistry
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((c) => ({
+      label: c.name,
+      href: `/components/${c.slug}`,
+      icon: Minus,
+    })),
+];
 
 /** Design system docs sections */
 export const navSections: NavSection[] = [
@@ -51,6 +71,6 @@ export const navSections: NavSection[] = [
   },
   {
     title: "Components",
-    items: [],
+    items: componentNavItems,
   },
 ];

@@ -69,6 +69,22 @@ does not exist yet, create one at the top of the `changelog` array.
 
 ---
 
+## [0.4.0] — 2026-08-15
+
+### Added
+
+- **35 shadcn/ui base components** — Installed Accordion, Alert, Alert Dialog, Avatar, Badge, Breadcrumb, Button, Calendar, Card, Checkbox, Collapsible, Dialog, Drawer, Dropdown Menu, Hover Card, Input, Input OTP, Label, Pagination, Popover, Progress, Radio Group, Scroll Area, Select, Separator, Sheet, Skeleton, Slider, Spinner, Switch, Table, Tabs, Textarea, Toggle, and Tooltip as unstyled base skeletons `2026-08-15`
+- **Component preview and code pages** — Each component has a dedicated page at `/components/[slug]` with a Preview tab showing a live interactive demo and a Code tab with copy-to-clipboard source `2026-08-15`
+- **Component index page** — Added `/components` with a grid of linked cards for all 35 components, each displaying name and description `2026-08-15`
+- **Dynamic sidebar component navigation** — Components section in the sidebar is auto-generated from the component registry and sorted alphabetically; new components appear automatically `2026-08-15`
+- **Component registry** — Created a central component registry at `src/lib/component-registry.ts` that drives the sidebar, static route generation, and component index page `2026-08-15`
+
+### Changed
+
+- **Overview page component count** — Component count stat card now dynamically reads from the component registry instead of showing 0 `2026-08-15`
+
+---
+
 ## [0.1.0] — 2026-07-30
 
 ### Added

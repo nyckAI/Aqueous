@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { SidebarLayout } from "@/components/sidebar/SidebarLayout";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 const geist = Geist({
@@ -38,7 +39,9 @@ export default function RootLayout({
       className={`${geist.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full font-sans">
-        <SidebarLayout>{children}</SidebarLayout>
+        <TooltipProvider>
+          <SidebarLayout>{children}</SidebarLayout>
+        </TooltipProvider>
       </body>
     </html>
   );

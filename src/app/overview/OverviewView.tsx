@@ -6,7 +6,9 @@ import { changelog, type ChangeType, type VersionEntry } from "@/lib/changelog";
 import { totalTokenCount } from "@/lib/color-tokens";
 import packageJson from "../../../package.json";
 
-const COMPONENT_COUNT = 0;
+import { componentRegistry } from "@/lib/component-registry";
+
+const COMPONENT_COUNT = componentRegistry.length;
 
 const typeLabels: Record<ChangeType, string> = {
   added: "Added",

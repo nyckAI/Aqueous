@@ -1,0 +1,61 @@
+/* ── Accordion — Nyck Design System Tokens ── */
+
+.accordion-root {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Item ── */
+.accordion-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-neutral);
+}
+
+/* ── Trigger ── */
+.accordion-trigger {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.accordion-trigger:hover {
+  color: var(--color-text-brand);
+}
+
+.accordion-trigger:focus-visible {
+  border: 1px solid var(--color-border-focused);
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.accordion-trigger[aria-disabled="true"] {
+  pointer-events: none;
+  color: var(--color-text-disabled);
+}
+
+/* ── Trigger icon ── */
+.accordion-trigger-icon {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  color: var(--color-icon-neutral);
+}
+
+/* ── Content ── */
+.accordion-content {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-neutral);
+}
+
+.accordion-content-inner a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.accordion-content-inner a:hover {
+  color: var(--color-text-brand);
+}
+
+.accordion-content-inner p:not(:last-child) {
+  margin-bottom: 16px;
+}
