@@ -91,6 +91,13 @@ import {
 } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
 import {
+  TextField,
+  SearchField,
+  TextFieldGroup,
+  TextFieldLabel,
+  TextFieldDescription,
+} from "@/components/ui/textfield";
+import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
@@ -162,6 +169,8 @@ import {
   AlertTriangle,
   XCircle,
   Bell,
+  Upload,
+  SquarePen,
 } from "lucide-react";
 
 type Demo = { preview: React.ReactNode; code: string };
@@ -200,7 +209,7 @@ function CollapsibleDemoPreview() {
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
       <div className="flex items-center gap-2">
-        <CollapsibleTrigger render={<Button variant="outline" size="sm" />}>
+        <CollapsibleTrigger render={<Button variant="default" size="sm" />}>
           {open ? "Hide" : "Show"} content
         </CollapsibleTrigger>
       </div>
@@ -483,7 +492,7 @@ function AlertDialogDemo(): Demo {
   return {
     preview: (
       <AlertDialog>
-        <AlertDialogTrigger render={<Button variant="outline" />}>
+        <AlertDialogTrigger render={<Button variant="default" />}>
           Open Alert Dialog
         </AlertDialogTrigger>
         <AlertDialogContent>
@@ -502,7 +511,7 @@ function AlertDialogDemo(): Demo {
       </AlertDialog>
     ),
     code: `<AlertDialog>
-  <AlertDialogTrigger render={<Button variant="outline" />}>
+  <AlertDialogTrigger render={<Button variant="default" />}>
     Open Alert Dialog
   </AlertDialogTrigger>
   <AlertDialogContent>
@@ -541,14 +550,18 @@ function BadgeDemo(): Demo {
     preview: (
       <div className="flex flex-wrap gap-2">
         <Badge>Default</Badge>
-        <Badge variant="secondary">Secondary</Badge>
         <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="info">Informative</Badge>
+        <Badge variant="success">Successful</Badge>
         <Badge variant="outline">Outline</Badge>
       </div>
     ),
     code: `<Badge>Default</Badge>
-<Badge variant="secondary">Secondary</Badge>
 <Badge variant="destructive">Destructive</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="info">Informative</Badge>
+<Badge variant="success">Successful</Badge>
 <Badge variant="outline">Outline</Badge>`,
   };
 }
@@ -590,24 +603,86 @@ function BreadcrumbDemo(): Demo {
   };
 }
 
+const BUTTON_TYPES = [
+  { key: "default", label: "Default" },
+  { key: "primary", label: "Primary" },
+  { key: "subtle", label: "Subtle" },
+  { key: "success", label: "Success" },
+  { key: "danger", label: "Danger" },
+  { key: "warning", label: "Warning" },
+  { key: "info", label: "Info" },
+] as const;
+
+/* A button carries at most one icon — never both leading and trailing. */
+const BUTTON_ICON_DIRECTIONS = [
+  { key: "none", label: "No icon", left: false, right: false },
+  { key: "left", label: "Icon left", left: true, right: false },
+  { key: "right", label: "Icon right", left: false, right: true },
+] as const;
+
+const BUTTON_SIZES = [
+  { key: "default", label: "Main buttons", note: "36px tall — 12px / 8px padding" },
+  { key: "compact", label: "Compact buttons", note: "28px tall — 8px / 4px padding" },
+] as const;
+
 function ButtonDemo(): Demo {
   return {
     preview: (
-      <div className="flex flex-wrap gap-2">
-        <Button>Default</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="destructive">Destructive</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="link">Link</Button>
+      <div className="flex flex-col gap-12">
+        {BUTTON_SIZES.map((size) => (
+          <div key={size.key} className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-base font-semibold">{size.label}</h3>
+              <p className="text-sm text-muted-foreground">{size.note}</p>
+            </div>
+            {BUTTON_TYPES.map(({ key, label }) => (
+              <div key={key} className="flex flex-col gap-3">
+                <h4 className="text-sm font-medium">{label}</h4>
+                <div className="flex flex-wrap gap-6">
+                  {BUTTON_ICON_DIRECTIONS.map((direction) => (
+                    <div
+                      key={direction.key}
+                      className="flex flex-col items-start gap-1.5"
+                    >
+                      <Button variant={key} size={size.key}>
+                        {direction.left && <Upload data-icon="inline-start" />}
+                        {label}
+                        {direction.right && <Upload data-icon="inline-end" />}
+                      </Button>
+                      <span className="text-xs text-muted-foreground">
+                        {direction.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     ),
-    code: `<Button>Default</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>`,
+    code: `{/* Main button (default size) — 36px tall */}
+<Button variant="primary">
+  <Upload data-icon="inline-start" />
+  Primary
+</Button>
+
+{/* Compact button — 28px tall */}
+<Button variant="primary" size="compact">
+  <Upload data-icon="inline-start" />
+  Primary
+</Button>
+
+{/* A button takes at most one icon — leading, trailing, or none.
+   Never pair a leading and a trailing icon on the same button. */}
+<Button variant="primary">Primary</Button>
+<Button variant="primary">
+  Primary
+  <Upload data-icon="inline-end" />
+</Button>
+
+{/* Both sizes support every type:
+   default | primary | subtle | success | danger | warning | info */}`,
   };
 }
 
@@ -677,7 +752,7 @@ function CollapsibleDemo(): Demo {
     code: `const [open, setOpen] = useState(false);
 
 <Collapsible open={open} onOpenChange={setOpen}>
-  <CollapsibleTrigger render={<Button variant="outline" size="sm" />}>
+  <CollapsibleTrigger render={<Button variant="default" size="sm" />}>
     {open ? "Hide" : "Show"} content
   </CollapsibleTrigger>
   <CollapsibleContent>
@@ -693,7 +768,7 @@ function DialogDemo(): Demo {
   return {
     preview: (
       <Dialog>
-        <DialogTrigger render={<Button variant="outline" />}>
+        <DialogTrigger render={<Button variant="default" />}>
           Open Dialog
         </DialogTrigger>
         <DialogContent>
@@ -715,7 +790,7 @@ function DialogDemo(): Demo {
       </Dialog>
     ),
     code: `<Dialog>
-  <DialogTrigger render={<Button variant="outline" />}>
+  <DialogTrigger render={<Button variant="default" />}>
     Open Dialog
   </DialogTrigger>
   <DialogContent>
@@ -740,7 +815,7 @@ function DrawerDemo(): Demo {
   return {
     preview: (
       <Drawer>
-        <DrawerTrigger render={<Button variant="outline" />}>
+        <DrawerTrigger render={<Button variant="default" />}>
           Open Drawer
         </DrawerTrigger>
         <DrawerContent>
@@ -757,7 +832,7 @@ function DrawerDemo(): Demo {
           </div>
           <DrawerFooter>
             <Button>Submit</Button>
-            <DrawerClose render={<Button variant="outline" />}>
+            <DrawerClose render={<Button variant="default" />}>
               Cancel
             </DrawerClose>
           </DrawerFooter>
@@ -765,7 +840,7 @@ function DrawerDemo(): Demo {
       </Drawer>
     ),
     code: `<Drawer>
-  <DrawerTrigger render={<Button variant="outline" />}>
+  <DrawerTrigger render={<Button variant="default" />}>
     Open Drawer
   </DrawerTrigger>
   <DrawerContent>
@@ -780,7 +855,7 @@ function DrawerDemo(): Demo {
     </div>
     <DrawerFooter>
       <Button>Submit</Button>
-      <DrawerClose render={<Button variant="outline" />}>
+      <DrawerClose render={<Button variant="default" />}>
         Cancel
       </DrawerClose>
     </DrawerFooter>
@@ -793,7 +868,7 @@ function DropdownMenuDemo(): Demo {
   return {
     preview: (
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="outline" />}>
+        <DropdownMenuTrigger render={<Button variant="default" />}>
           Open Menu
         </DropdownMenuTrigger>
         <DropdownMenuContent>
@@ -809,7 +884,7 @@ function DropdownMenuDemo(): Demo {
       </DropdownMenu>
     ),
     code: `<DropdownMenu>
-  <DropdownMenuTrigger render={<Button variant="outline" />}>
+  <DropdownMenuTrigger render={<Button variant="default" />}>
     Open Menu
   </DropdownMenuTrigger>
   <DropdownMenuContent>
@@ -866,14 +941,61 @@ function HoverCardDemo(): Demo {
   };
 }
 
-function InputDemo(): Demo {
+function TextfieldDemo(): Demo {
   return {
     preview: (
-      <div className="w-full max-w-xs">
-        <Input type="email" placeholder="Email address" />
+      <div className="flex w-full max-w-md flex-col gap-10">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-base font-semibold">Search field</h3>
+            <p className="text-sm text-muted-foreground">
+              Filled search input with a leading magnifier.
+            </p>
+          </div>
+          <SearchField />
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-base font-semibold">Text field</h3>
+            <p className="text-sm text-muted-foreground">
+              Takes at most one icon — leading, trailing, or none.
+            </p>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <TextField placeholder="Default state" />
+            <span className="text-xs text-muted-foreground">No icon</span>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <TextField icon={SquarePen} placeholder="Default state" />
+            <span className="text-xs text-muted-foreground">Icon left</span>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <TextField
+              icon={SquarePen}
+              iconPosition="end"
+              placeholder="Default state"
+            />
+            <span className="text-xs text-muted-foreground">Icon right</span>
+          </div>
+        </div>
       </div>
     ),
-    code: `<Input type="email" placeholder="Email address" />`,
+    code: `{/* Search field */}
+<SearchField />
+<SearchField placeholder="Search suppliers" />
+
+{/* Text field — no icon */}
+<TextField placeholder="Default state" />
+
+{/* Text field — icon left */}
+<TextField icon={SquarePen} placeholder="Default state" />
+
+{/* Text field — icon right */}
+<TextField icon={SquarePen} iconPosition="end" placeholder="Default state" />
+
+{/* A text field takes at most one icon. The single \`icon\` + \`iconPosition\`
+   API makes a leading + trailing pair impossible to express. */}`,
   };
 }
 
@@ -910,16 +1032,80 @@ function InputOTPDemo(): Demo {
   };
 }
 
+const FIELD_DESCRIPTION =
+  "This is the text field description. If any text field has a description, the description will be shown below the actual text field.";
+
 function LabelDemo(): Demo {
   return {
     preview: (
-      <div className="grid w-full max-w-xs gap-1.5">
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" placeholder="you@example.com" />
+      <div className="flex w-full max-w-md flex-col gap-8">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-base font-semibold">Label and description</h3>
+            <p className="text-sm text-muted-foreground">
+              A label sits 4px above the field; a description sits 8px below it.
+            </p>
+          </div>
+          <TextFieldGroup>
+            <TextFieldLabel htmlFor="field-default">Field Label</TextFieldLabel>
+            <TextField
+              id="field-default"
+              icon={SquarePen}
+              placeholder="Default state"
+            />
+            <TextFieldDescription>{FIELD_DESCRIPTION}</TextFieldDescription>
+          </TextFieldGroup>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-base font-semibold">Label only</h3>
+            <p className="text-sm text-muted-foreground">
+              The description is optional — omit it and the label still applies.
+            </p>
+          </div>
+          <TextFieldGroup>
+            <TextFieldLabel htmlFor="field-no-desc">Field Label</TextFieldLabel>
+            <TextField id="field-no-desc" placeholder="Default state" />
+          </TextFieldGroup>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-base font-semibold">Focused</h3>
+            <p className="text-sm text-muted-foreground">
+              Focusing the field switches its border to{" "}
+              <code>--color-border-focused</code>. Click into the field below.
+            </p>
+          </div>
+          <TextFieldGroup>
+            <TextFieldLabel htmlFor="field-selected">Field Label</TextFieldLabel>
+            <TextField
+              id="field-selected"
+              icon={SquarePen}
+              iconPosition="end"
+              placeholder="Selected state"
+            />
+            <TextFieldDescription>{FIELD_DESCRIPTION}</TextFieldDescription>
+          </TextFieldGroup>
+        </div>
       </div>
     ),
-    code: `<Label htmlFor="email">Email</Label>
-<Input type="email" id="email" placeholder="you@example.com" />`,
+    code: `{/* Label + field + description */}
+<TextFieldGroup>
+  <TextFieldLabel htmlFor="field">Field Label</TextFieldLabel>
+  <TextField id="field" icon={SquarePen} placeholder="Default state" />
+  <TextFieldDescription>
+    This is the text field description. If any text field has a description,
+    the description will be shown below the actual text field.
+  </TextFieldDescription>
+</TextFieldGroup>
+
+{/* The description is optional */}
+<TextFieldGroup>
+  <TextFieldLabel htmlFor="name">Field Label</TextFieldLabel>
+  <TextField id="name" placeholder="Default state" />
+</TextFieldGroup>`,
   };
 }
 
@@ -980,7 +1166,7 @@ function PopoverDemo(): Demo {
   return {
     preview: (
       <Popover>
-        <PopoverTrigger render={<Button variant="outline" />}>
+        <PopoverTrigger render={<Button variant="default" />}>
           Open Popover
         </PopoverTrigger>
         <PopoverContent>
@@ -1000,7 +1186,7 @@ function PopoverDemo(): Demo {
       </Popover>
     ),
     code: `<Popover>
-  <PopoverTrigger render={<Button variant="outline" />}>
+  <PopoverTrigger render={<Button variant="default" />}>
     Open Popover
   </PopoverTrigger>
   <PopoverContent>
@@ -1156,7 +1342,7 @@ function SheetDemo(): Demo {
   return {
     preview: (
       <Sheet>
-        <SheetTrigger render={<Button variant="outline" />}>
+        <SheetTrigger render={<Button variant="default" />}>
           Open Sheet
         </SheetTrigger>
         <SheetContent>
@@ -1175,7 +1361,7 @@ function SheetDemo(): Demo {
       </Sheet>
     ),
     code: `<Sheet>
-  <SheetTrigger render={<Button variant="outline" />}>
+  <SheetTrigger render={<Button variant="default" />}>
     Open Sheet
   </SheetTrigger>
   <SheetContent>
@@ -1397,7 +1583,7 @@ function TooltipDemo(): Demo {
     preview: (
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger render={<Button variant="outline" />}>
+          <TooltipTrigger render={<Button variant="default" />}>
             Hover me
           </TooltipTrigger>
           <TooltipContent>
@@ -1408,7 +1594,7 @@ function TooltipDemo(): Demo {
     ),
     code: `<TooltipProvider>
   <Tooltip>
-    <TooltipTrigger render={<Button variant="outline" />}>
+    <TooltipTrigger render={<Button variant="default" />}>
       Hover me
     </TooltipTrigger>
     <TooltipContent>
@@ -1439,7 +1625,7 @@ const demos: Record<string, () => Demo> = {
   drawer: DrawerDemo,
   "dropdown-menu": DropdownMenuDemo,
   "hover-card": HoverCardDemo,
-  input: InputDemo,
+  textfield: TextfieldDemo,
   "input-otp": InputOTPDemo,
   label: LabelDemo,
   pagination: PaginationDemo,

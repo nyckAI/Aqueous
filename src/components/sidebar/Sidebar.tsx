@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
-import { PanelLeft, PanelLeftOpen } from "lucide-react";
 import { navSections } from "./nav-data";
 import { SidebarIcon } from "./SidebarIcon";
+import { SidebarCollapseHandle } from "./SidebarCollapseHandle";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -29,19 +30,19 @@ function NavLink({
     <Link
       href={href}
       title={collapsed ? label : undefined}
-      className={`flex w-full items-center rounded-lg transition-colors ${
-        collapsed ? "justify-center px-0 py-2.5" : "gap-2 px-2 py-3"
+      className={`flex w-full items-center gap-2 rounded-md bg-transparent p-2 transition-colors ${
+        collapsed ? "justify-center" : ""
       } ${
         active
-          ? "bg-background-brand hover:bg-background-brand-hover active:bg-background-brand-pressed"
-          : "bg-transparent hover:bg-background-brand active:bg-background-brand-hover"
+          ? "hover:bg-background-selected active:bg-background-selected-hover"
+          : "hover:bg-background-neutral-hover active:bg-background-neutral-pressed"
       }`}
     >
       <SidebarIcon icon={icon} active={active} />
       {!collapsed && (
         <span
-          className={`truncate text-base font-medium leading-none ${
-            active ? "text-text-brand" : "text-text-neutral"
+          className={`truncate font-[family-name:var(--font-family-body)] font-medium text-[length:var(--font-button-md-size)] leading-[var(--font-button-md-line-height)] tracking-[var(--font-button-md-letter-spacing)] whitespace-nowrap ${
+            active ? "text-text-selected" : "text-text-neutral"
           }`}
         >
           {label}
@@ -52,114 +53,89 @@ function NavLink({
 }
 
 export function Sidebar({
-  width,
   collapsed,
-  resizing,
   onToggle,
-  onResizeStart,
 }: {
-  width: number;
   collapsed: boolean;
-  resizing: boolean;
   onToggle: () => void;
-  onResizeStart: (e: React.MouseEvent) => void;
 }) {
   const pathname = usePathname();
-  const transitionClass = resizing
-    ? ""
-    : "transition-[width] duration-200";
+  const [handleHovered, setHandleHovered] = useState(false);
 
   return (
-    <aside
-      className={`fixed inset-y-0 left-0 z-30 flex flex-col overflow-y-auto overflow-x-hidden border-r border-border-neutral bg-background-neutral py-9 ${
-        collapsed ? "items-center px-2" : "pl-2.5 pr-4"
-      } ${transitionClass}`}
-      style={{ width }}
-    >
-      <div className={`flex w-full flex-col gap-4 ${collapsed ? "items-center" : ""}`}>
-        {/* Brand header */}
+    <>
+      <aside
+        className={`sticky top-0 h-dvh shrink-0 overflow-y-auto overflow-x-hidden bg-background-neutral transition-[width] duration-200 ${
+          collapsed ? (handleHovered ? "w-[62px]" : "w-14") : "w-fit"
+        }`}
+      >
         <div
-          className={`flex w-full items-center px-2 ${
-            collapsed ? "justify-center" : "justify-between"
+          className={`flex h-full flex-col pt-8 pb-3 ${
+            collapsed ? "items-center px-2" : "px-5"
           }`}
         >
-          <div className="flex items-center gap-2.5">
-            <div className="relative flex size-[30px] shrink-0 items-center justify-center rounded-lg bg-brand-500">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/sidebar/logo-n.svg"
-                alt=""
-                width={17}
-                height={19}
-                className="h-[19px] w-[17px]"
-              />
-            </div>
-            {!collapsed && (
-              <span className="whitespace-nowrap text-base font-bold leading-[22px] text-text-primary">
-                Nyck AI
-              </span>
-            )}
-          </div>
-          {!collapsed && (
-            <button
-              type="button"
-              onClick={onToggle}
-              aria-label="Collapse sidebar"
-              className="flex size-5 shrink-0 cursor-pointer items-center justify-center"
+          <div className={`flex w-full flex-col gap-3 ${collapsed ? "items-center" : ""}`}>
+            {/* Brand header */}
+            <div
+              className={`flex w-full items-center ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
-              <SidebarIcon icon={PanelLeft} tone="primary" />
-            </button>
-          )}
-        </div>
-
-        {/* Expand button when collapsed */}
-        {collapsed && (
-          <button
-            type="button"
-            onClick={onToggle}
-            aria-label="Expand sidebar"
-            className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-background-brand active:bg-background-brand-hover"
-          >
-            <SidebarIcon icon={PanelLeftOpen} tone="primary" />
-          </button>
-        )}
-
-        {/* Nav sections */}
-        {navSections.map((section, sectionIndex) => (
-          <div
-            key={section.title || `section-${sectionIndex}`}
-            className={`flex w-full flex-col ${
-              sectionIndex === 0 ? "gap-3" : "gap-2"
-            } ${collapsed ? "items-center" : ""}`}
-          >
-            {section.title && !collapsed && (
-              <div className="flex w-full items-center px-2">
-                <p className="flex-1 text-[13px] leading-5.5 text-text-neutral">
-                  {section.title}
-                </p>
+              <div className="flex items-center gap-2.5">
+                <div className="relative flex size-[30px] shrink-0 items-center justify-center rounded-lg bg-brand-500">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/sidebar/logo-n.svg"
+                    alt=""
+                    width={17}
+                    height={19}
+                    className="h-[19px] w-[17px]"
+                  />
+                </div>
+                {!collapsed && (
+                  <span className="whitespace-nowrap font-[family-name:var(--font-family-heading)] font-bold text-[length:var(--font-heading-xs-size)] leading-[var(--font-heading-xs-line-height)] tracking-[var(--font-heading-xs-letter-spacing)] text-text-primary">
+                    Nyck AI
+                  </span>
+                )}
               </div>
-            )}
-            {section.items.map((item) => (
-              <NavLink
-                key={item.href}
-                href={item.href}
-                label={item.label}
-                icon={item.icon}
-                active={isActivePath(pathname, item.href)}
-                collapsed={collapsed}
-              />
+            </div>
+
+            {/* Nav sections */}
+            {navSections.map((section, sectionIndex) => (
+              <div
+                key={section.title || `section-${sectionIndex}`}
+                className={`flex w-full flex-col ${collapsed ? "items-center gap-2" : ""}`}
+              >
+                {section.title && !collapsed && (
+                  <div className="flex w-full items-center px-2">
+                    <p className="flex-1 font-[family-name:var(--font-family-body)] font-normal text-[length:var(--font-caption-md-size)] leading-[var(--font-caption-md-line-height)] tracking-[var(--font-caption-md-letter-spacing)] whitespace-nowrap text-text-tertiary">
+                      {section.title}
+                    </p>
+                  </div>
+                )}
+                {section.items.map((item) => (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    label={item.label}
+                    icon={item.icon}
+                    active={isActivePath(pathname, item.href)}
+                    collapsed={collapsed}
+                  />
+                ))}
+              </div>
             ))}
           </div>
-        ))}
-      </div>
+        </div>
+      </aside>
 
-      {/* Resize handle */}
-      {!collapsed && (
-        <div
-          onMouseDown={onResizeStart}
-          className="absolute inset-y-0 right-0 w-1 cursor-col-resize hover:bg-border-brand active:bg-border-brand"
-        />
-      )}
-    </aside>
+      {/* Collapse / expand handle — sits outside the nav bar, to its right */}
+      <SidebarCollapseHandle
+        collapsed={collapsed}
+        hovered={handleHovered}
+        onToggle={onToggle}
+        onHoverChange={setHandleHovered}
+      />
+    </>
   );
 }

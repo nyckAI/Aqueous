@@ -14,7 +14,7 @@ export function SidebarIcon({
   className = "",
 }: SidebarIconProps) {
   const colorClass = active
-    ? "text-icon-brand"
+    ? "text-icon-selected"
     : tone === "primary"
       ? "text-icon-primary"
       : tone === "brand"

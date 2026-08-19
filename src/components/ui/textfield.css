@@ -1,0 +1,145 @@
+/* ── Text Field & Search Field — Nyck Design System Tokens ── */
+
+/* ── Field group: label + field + description ──
+   Figma spaces the label 4px above the field, and the description 8px below
+   it. The group supplies the 4px; the description adds the remaining 4px. */
+.textfield-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.textfield-label {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.textfield-description {
+  margin-top: 4px;
+  color: var(--color-text-neutral);
+  font-family: var(--font-family-body);
+  font-size: var(--font-micro-sm-size);
+  line-height: var(--font-micro-sm-line-height);
+  letter-spacing: var(--font-micro-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── Text Field ── */
+.textfield-root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--color-background-neutral);
+  border: 1px solid var(--color-border-input);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.textfield-root:focus-within {
+  border-color: var(--color-border-focused);
+}
+
+.textfield-root:has(input:disabled) {
+  background-color: var(--color-background-neutral-disabled);
+  border-color: var(--color-border-disabled);
+}
+
+.textfield-icon {
+  flex-shrink: 0;
+  color: var(--color-icon-neutral);
+}
+
+.textfield-root:has(input:disabled) .textfield-icon {
+  color: var(--color-icon-disabled);
+}
+
+.textfield-input {
+  flex: 1 0 0;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-regular);
+}
+
+.textfield-input::placeholder {
+  color: var(--color-text-neutral);
+}
+
+.textfield-input:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+}
+
+.textfield-input:disabled::placeholder {
+  color: var(--color-text-disabled);
+}
+
+/* ── Search Field ── */
+.searchfield-root {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: var(--color-background-accentgray);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.searchfield-root:focus-within {
+  border-color: var(--color-border-focused);
+}
+
+.searchfield-root:has(input:disabled) {
+  background-color: var(--color-background-accentgray-disabled);
+}
+
+.searchfield-icon {
+  flex-shrink: 0;
+  color: var(--color-icon-neutral);
+}
+
+.searchfield-root:has(input:disabled) .searchfield-icon {
+  color: var(--color-icon-disabled);
+}
+
+.searchfield-input {
+  flex: 1 0 0;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.searchfield-input::placeholder {
+  color: var(--color-text-neutral);
+}
+
+.searchfield-input:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+}
+
+.searchfield-input:disabled::placeholder {
+  color: var(--color-text-disabled);
+}

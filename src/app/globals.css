@@ -16,7 +16,7 @@
   --brand-400: #609AFF;
   --brand-500: #0E6DF9;
   --brand-600: #0553C7;
-  --brand-700: #3C4E6B;
+  --brand-700: #073F94;
   --brand-800: #18273F;
   --brand-900: #08101E;
 
@@ -252,8 +252,8 @@
 
   /* ===========================================================
    * NYCK SEMANTIC COLORS — mirrors Design System/Foundations/colors.ts
-   * Used by Accordion and Alert only; every other component uses
-   * the shadcn defaults below instead.
+   * Used by Accordion, Alert, Badge, Breadcrumb, and Button; components
+   * not yet migrated fall back to the shadcn defaults below.
    * =========================================================== */
 
   /* ── Background ── */
@@ -291,6 +291,23 @@
   --color-background-info-hover: var(--brand-200);
   --color-background-info-pressed: var(--brand-300);
   --color-background-info-disabled: var(--brand-100);
+
+  /* Emphasis colors — solid, high-contrast fills (e.g. Main buttons) */
+  --color-background-brand-emphasis: var(--brand-500);
+  --color-background-brand-emphasis-hover: var(--brand-600);
+  --color-background-brand-emphasis-pressed: var(--brand-700);
+
+  --color-background-success-emphasis: var(--green-500);
+  --color-background-success-emphasis-hover: var(--green-600);
+  --color-background-success-emphasis-pressed: var(--green-700);
+
+  --color-background-danger-emphasis: var(--red-500);
+  --color-background-danger-emphasis-hover: var(--red-600);
+  --color-background-danger-emphasis-pressed: var(--red-700);
+
+  --color-background-warning-emphasis: var(--orange-500);
+  --color-background-warning-emphasis-hover: var(--orange-600);
+  --color-background-warning-emphasis-pressed: var(--orange-700);
 
   --color-background-accentgray: var(--neutral-200);
   --color-background-accentgray-hover: var(--neutral-300);
@@ -363,12 +380,15 @@
   --color-text-primary: var(--black);
   --color-text-brand: var(--brand-500);
   --color-text-neutral: var(--neutral-500);
+  --color-text-tertiary: var(--neutral-400);
+  --color-text-navigation: var(--neutral-700);
   --color-text-disabled: var(--neutral-300);
   --color-text-selected: var(--brand-500);
   --color-text-danger: var(--red-500);
   --color-text-warning: var(--orange-500);
   --color-text-success: var(--green-500);
   --color-text-info: var(--brand-500);
+  --color-text-contrast: var(--white);
 
   --color-text-accentgray: var(--neutral-500);
   --color-text-accentgreen: var(--green-500);
@@ -390,6 +410,7 @@
   --color-icon-warning: var(--orange-500);
   --color-icon-success: var(--green-500);
   --color-icon-info: var(--brand-500);
+  --color-icon-contrast: var(--white);
 
   --color-icon-accentgray: var(--neutral-500);
   --color-icon-accentgreen: var(--green-500);

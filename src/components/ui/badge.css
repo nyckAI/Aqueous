@@ -1,0 +1,56 @@
+/* ── Badge — Nyck Design System Tokens ── */
+
+.badge-root {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 20px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  font-family: var(--font-family-body);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+  font-weight: var(--font-weight-regular);
+}
+
+/* ── Default ── */
+.badge-root[data-variant="default"] {
+  background-color: var(--color-background-accentgray);
+  color: var(--color-text-primary);
+}
+
+/* ── Info ── */
+.badge-root[data-variant="info"] {
+  background-color: var(--color-background-info);
+  color: var(--color-text-info);
+}
+
+/* ── Success ── */
+.badge-root[data-variant="success"] {
+  background-color: var(--color-background-success);
+  color: var(--color-text-success);
+}
+
+/* ── Warning ── */
+.badge-root[data-variant="warning"] {
+  background-color: var(--color-background-warning);
+  color: var(--color-text-warning);
+}
+
+/* ── Destructive ── */
+.badge-root[data-variant="destructive"] {
+  background-color: var(--color-background-danger);
+  color: var(--color-text-danger);
+}
+
+/* ── Outline ── */
+.badge-root[data-variant="outline"] {
+  background-color: var(--color-background-neutral);
+  border-color: var(--color-border-neutral);
+  color: var(--color-text-primary);
+}

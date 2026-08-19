@@ -1,0 +1,131 @@
+/* ── Button — Nyck Design System Tokens ── */
+
+.button-root {
+  font-family: var(--font-family-body);
+  font-size: var(--font-button-md-size);
+  line-height: var(--font-button-md-line-height);
+  letter-spacing: var(--font-button-md-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── Default ── */
+.button-root[data-variant="default"] {
+  background-color: var(--color-background-neutral);
+  color: var(--color-text-primary);
+}
+.button-root[data-variant="default"]:not(:focus-visible) {
+  border-color: var(--color-border-neutral);
+}
+.button-root[data-variant="default"]:not(:disabled):hover {
+  background-color: var(--color-background-neutral-hover);
+}
+.button-root[data-variant="default"]:not(:disabled):active {
+  background-color: var(--color-background-neutral-pressed);
+}
+.button-root[data-variant="default"]:disabled {
+  background-color: var(--color-background-neutral-disabled);
+  border-color: var(--color-border-disabled);
+}
+
+/* ── Subtle ── */
+.button-root[data-variant="subtle"] {
+  background-color: transparent;
+  color: var(--color-text-primary);
+}
+.button-root[data-variant="subtle"]:not(:disabled):hover {
+  background-color: var(--color-background-neutral-hover);
+}
+.button-root[data-variant="subtle"]:not(:disabled):active {
+  background-color: var(--color-background-neutral-pressed);
+}
+.button-root[data-variant="subtle"]:disabled {
+  background-color: transparent;
+}
+
+/* ── Primary / Info (brand emphasis) ── */
+.button-root[data-variant="primary"],
+.button-root[data-variant="info"] {
+  background-color: var(--color-background-brand-emphasis);
+  color: var(--color-text-contrast);
+}
+.button-root[data-variant="primary"]:not(:disabled):hover,
+.button-root[data-variant="info"]:not(:disabled):hover {
+  background-color: var(--color-background-brand-emphasis-hover);
+}
+.button-root[data-variant="primary"]:not(:disabled):active,
+.button-root[data-variant="info"]:not(:disabled):active {
+  background-color: var(--color-background-brand-emphasis-pressed);
+}
+.button-root[data-variant="primary"]:disabled {
+  background-color: var(--color-background-neutral-disabled);
+  border-color: var(--color-border-disabled);
+  color: var(--color-text-disabled);
+}
+.button-root[data-variant="info"]:disabled {
+  background-color: var(--color-background-info-disabled);
+  color: var(--color-text-disabled);
+}
+
+/* ── Success ── */
+.button-root[data-variant="success"] {
+  background-color: var(--color-background-success-emphasis);
+  color: var(--color-text-contrast);
+}
+.button-root[data-variant="success"]:not(:disabled):hover {
+  background-color: var(--color-background-success-emphasis-hover);
+}
+.button-root[data-variant="success"]:not(:disabled):active {
+  background-color: var(--color-background-success-emphasis-pressed);
+}
+.button-root[data-variant="success"]:disabled {
+  background-color: var(--color-background-success-disabled);
+  color: var(--color-text-disabled);
+}
+
+/* ── Danger ── */
+.button-root[data-variant="danger"] {
+  background-color: var(--color-background-danger-emphasis);
+  color: var(--color-text-contrast);
+}
+.button-root[data-variant="danger"]:not(:disabled):hover {
+  background-color: var(--color-background-danger-emphasis-hover);
+}
+.button-root[data-variant="danger"]:not(:disabled):active {
+  background-color: var(--color-background-danger-emphasis-pressed);
+}
+.button-root[data-variant="danger"]:disabled {
+  background-color: var(--color-background-danger-disabled);
+  color: var(--color-text-disabled);
+}
+
+/* ── Warning ── */
+.button-root[data-variant="warning"] {
+  background-color: var(--color-background-warning-emphasis);
+  color: var(--color-text-contrast);
+}
+.button-root[data-variant="warning"]:not(:disabled):hover {
+  background-color: var(--color-background-warning-emphasis-hover);
+}
+.button-root[data-variant="warning"]:not(:disabled):active {
+  background-color: var(--color-background-warning-emphasis-pressed);
+}
+.button-root[data-variant="warning"]:disabled {
+  background-color: var(--color-background-warning-disabled);
+  color: var(--color-text-disabled);
+}
+
+/* ── Icon color follows text color per variant ── */
+.button-root[data-variant="default"] svg,
+.button-root[data-variant="subtle"] svg {
+  color: var(--color-icon-primary);
+}
+.button-root[data-variant="primary"] svg,
+.button-root[data-variant="info"] svg,
+.button-root[data-variant="success"] svg,
+.button-root[data-variant="danger"] svg,
+.button-root[data-variant="warning"] svg {
+  color: var(--color-icon-contrast);
+}
+.button-root:disabled svg {
+  color: var(--color-icon-disabled);
+}

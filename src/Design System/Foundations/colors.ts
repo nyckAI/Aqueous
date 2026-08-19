@@ -10,7 +10,7 @@ export const Brand = {
   'brand-400': '#609AFF',
   'brand-500': '#0E6DF9',
   'brand-600': '#0553C7',
-  'brand-700': '#3C4E6B',
+  'brand-700': '#073F94',
   'brand-800': '#18273F',
   'brand-900': '#08101E',
 } as const;
@@ -193,6 +193,23 @@ export const Background = {
   'color-background-info-pressed': Brand['brand-300'],
   'color-background-info-disabled': Brand['brand-100'],
 
+  /* Emphasis colors — solid, high-contrast fills (e.g. Main buttons) */
+  'color-background-brand-emphasis': Brand['brand-500'],
+  'color-background-brand-emphasis-hover': Brand['brand-600'],
+  'color-background-brand-emphasis-pressed': Brand['brand-700'],
+
+  'color-background-success-emphasis': Green['green-500'],
+  'color-background-success-emphasis-hover': Green['green-600'],
+  'color-background-success-emphasis-pressed': Green['green-700'],
+
+  'color-background-danger-emphasis': Red['red-500'],
+  'color-background-danger-emphasis-hover': Red['red-600'],
+  'color-background-danger-emphasis-pressed': Red['red-700'],
+
+  'color-background-warning-emphasis': Orange['orange-500'],
+  'color-background-warning-emphasis-hover': Orange['orange-600'],
+  'color-background-warning-emphasis-pressed': Orange['orange-700'],
+
 
   /* Non-important colors */
   'color-background-accentgray': Neutral['neutral-200'],
@@ -272,12 +289,15 @@ export const Text = {
   'color-text-primary': Neutral.Black,
   'color-text-brand': Brand['brand-500'],
   'color-text-neutral': Neutral['neutral-500'],
+  'color-text-tertiary': Neutral['neutral-400'],
+  'color-text-navigation': Neutral['neutral-700'],
   'color-text-disabled': Neutral['neutral-300'],
   'color-text-selected': Brand['brand-500'],
   'color-text-danger': Red['red-500'],
   'color-text-warning': Orange['orange-500'],
   'color-text-success': Green['green-500'],
   'color-text-info': Brand['brand-500'],
+  'color-text-contrast': Neutral.White,
 
   'color-text-accentgray': Neutral['neutral-500'],
   'color-text-accentgreen': Green['green-500'],
@@ -302,6 +322,7 @@ export const Icon = {
   'color-icon-warning': Orange['orange-500'],
   'color-icon-success': Green['green-500'],
   'color-icon-info': Brand['brand-500'],
+  'color-icon-contrast': Neutral.White,
 
   'color-icon-accentgray': Neutral['neutral-500'],
   'color-icon-accentgreen': Green['green-500'],
