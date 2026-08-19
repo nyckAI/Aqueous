@@ -1,7 +1,7 @@
 /* ── Accordion — Nyck Design System Tokens ── */
 
 .accordion-root {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-family-body);
 }
 
 /* ── Item ── */
@@ -11,9 +11,10 @@
 
 /* ── Trigger ── */
 .accordion-trigger {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
 }
 
@@ -42,8 +43,9 @@
 
 /* ── Content ── */
 .accordion-content {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
   color: var(--color-text-neutral);
 }
 

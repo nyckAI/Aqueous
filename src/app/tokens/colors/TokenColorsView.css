@@ -1,0 +1,199 @@
+/* ── Tokens / Colors — Nyck Design System Tokens ── */
+
+.tc-page-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-xl-size);
+  line-height: var(--font-heading-xl-line-height);
+  letter-spacing: var(--font-heading-xl-letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+.tc-search-icon {
+  color: var(--color-icon-neutral);
+}
+
+.tc-search-input {
+  border: 1px solid var(--color-border-neutral);
+  background-color: var(--color-background-neutral);
+  color: var(--color-text-primary);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.tc-search-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.tc-search-input:focus {
+  border-color: var(--color-border-focused);
+}
+
+.tc-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-md-size);
+  line-height: var(--font-heading-md-line-height);
+  letter-spacing: var(--font-heading-md-letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+.tc-column-headers {
+  border-bottom: 1px solid var(--color-border-neutral);
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.tc-empty-state {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.tc-group-divider {
+  border-bottom: 1px solid var(--color-border-disabled);
+}
+
+.tc-group-description {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.tc-group-heading {
+  color: var(--color-text-primary);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+}
+
+.tc-group-family-badge {
+  background-color: var(--color-background-neutral-hover);
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}
+
+/* ── Tooltip ── */
+.tc-tooltip {
+  background-color: var(--color-brand-900);
+  color: var(--color-white);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}
+
+/* ── Copyable token name ── */
+.tc-token-name-button {
+  background-color: var(--color-background-neutral-hover);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.tc-token-name-button:hover {
+  background-color: var(--color-background-accentgray-hover);
+}
+
+.tc-token-name-button:focus-visible {
+  outline-color: var(--color-border-focused);
+}
+
+/* ── Light value card ── */
+.tc-value-card {
+  border: 1px solid var(--color-border-neutral);
+  background-color: var(--color-background-neutral);
+}
+
+.tc-value-card:hover {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.tc-value-card:focus-visible {
+  outline-color: var(--color-border-focused);
+}
+
+.tc-value-swatch {
+  border: 1px solid var(--color-border-disabled);
+}
+
+.tc-value-primitive {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+}
+
+/* ── Dark value placeholder ── */
+.tc-dark-placeholder {
+  background-color: var(--neutral-700);
+}
+
+.tc-dark-swatch {
+  background-color: color-mix(in srgb, var(--color-black) 35%, transparent);
+}
+
+.tc-dark-value {
+  color: color-mix(in srgb, var(--color-white) 50%, transparent);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+}
+
+/* ── Font token rows ── */
+.tc-font-meta {
+  color: var(--color-text-neutral);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+}
+
+.tc-font-meta-divider {
+  color: var(--color-text-disabled);
+}
+
+.tc-font-preview {
+  color: var(--color-text-primary);
+}
+
+/* ── Table of contents ── */
+.tc-toc-nav {
+  border-left: 1px solid var(--color-border-disabled);
+}
+
+.tc-toc-heading {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+}
+
+.tc-toc-button {
+  border-left: 2px solid transparent;
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.tc-toc-button:hover {
+  color: var(--color-text-primary);
+}
+
+.tc-toc-button[data-active="true"] {
+  border-left-color: var(--color-border-brand);
+  color: var(--color-text-brand);
+  font-weight: var(--font-weight-medium);
+}

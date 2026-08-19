@@ -17,6 +17,35 @@ export type VersionEntry = {
 
 export const changelog: VersionEntry[] = [
   {
+    version: "Unreleased",
+    date: "",
+    author: "Jason Jeong",
+    summary: "",
+    changes: [],
+  },
+  {
+    version: "0.5.0",
+    date: "2026-08-19",
+    author: "Jason Jeong",
+    summary: "Restructured the Alert component and tokenized typography in Accordion and Alert.",
+    changes: [
+      {
+        type: "changed",
+        title: "Accordion component tokenized typography",
+        description:
+          "Trigger and content font size, line height, letter spacing, and font weight now reference typography tokens instead of hardcoded values.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Alert component restructure and tokenized typography",
+        description:
+          "Rebuilt Alert with new AlertIcon, AlertBody, AlertContent, AlertActions, and AlertClose subcomponents, moved variant coloring to icon-only via .alert-icon, and switched title/description/action text to typography tokens.",
+        timestamp: "2026-08-19",
+      },
+    ],
+  },
+  {
     version: "0.4.0",
     date: "2026-08-15",
     author: "Jason Jeong",

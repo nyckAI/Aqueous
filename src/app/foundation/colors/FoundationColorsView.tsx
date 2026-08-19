@@ -13,13 +13,14 @@ import {
   Teal,
   Slate,
 } from "@/Design System/Foundations/colors";
+import "./FoundationColorsView.css";
 
 function getContrastColor(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.55 ? "#000000" : "#FFFFFF";
+  return luminance > 0.55 ? Neutral.Black : Neutral.White;
 }
 
 type ColorScale = Record<string, string>;
@@ -87,13 +88,13 @@ function ColorSwatch({
     <button
       type="button"
       onClick={handleClick}
-      className="group/swatch relative flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white"
+      className="fc-swatch group/swatch relative flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-opacity hover:opacity-90"
       style={{ backgroundColor: hex, color: textColor }}
       aria-label={`${label}: ${hex}. Click to copy.`}
     >
-      <span className="text-sm font-medium">{label}</span>
+      <span className="fc-swatch-label">{label}</span>
       <span
-        className="text-xs opacity-0 transition-opacity group-hover/swatch:opacity-100"
+        className="fc-swatch-hex opacity-0 transition-opacity group-hover/swatch:opacity-100"
         aria-hidden
       >
         {copied ? "Copied!" : hex}
@@ -105,10 +106,8 @@ function ColorSwatch({
 function PaletteColumn({ palette }: { palette: PaletteGroup }) {
   return (
     <div className="min-w-0">
-      <h3 className="mb-3 text-sm font-semibold text-text-primary">
-        {palette.name}
-      </h3>
-      <div className="overflow-hidden rounded-lg border border-border-disabled">
+      <h3 className="fc-palette-name mb-3">{palette.name}</h3>
+      <div className="fc-palette-list overflow-hidden rounded-lg">
         {palette.colors.map((color) => (
           <ColorSwatch
             key={color.label}
@@ -124,20 +123,18 @@ function PaletteColumn({ palette }: { palette: PaletteGroup }) {
 export function FoundationColorsView() {
   return (
     <main className="flex flex-1 flex-col">
-      <div className="bg-background-neutral-hover px-8 py-10">
-        <p className="text-[13px] leading-[22px] text-text-neutral">Foundation</p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-text-primary">
-          Colors
-        </h1>
-        <p className="mt-2 max-w-xl text-base leading-7 text-text-neutral">
+      <div className="fc-header px-8 py-10">
+        <p className="fc-eyebrow">Foundation</p>
+        <h1 className="fc-title mt-1">Colors</h1>
+        <p className="fc-description mt-2 max-w-xl">
           Color allows us to distinguish from other brands and create a sense of
           identity in our marketing &amp; product.
         </p>
       </div>
 
       <section className="px-8 py-10">
-        <h2 className="text-lg font-semibold text-text-primary">The Palette</h2>
-        <p className="mt-1 text-sm text-text-neutral">
+        <h2 className="fc-section-title">The Palette</h2>
+        <p className="fc-section-caption mt-1">
           Click any swatch to copy its hex value.
         </p>
 

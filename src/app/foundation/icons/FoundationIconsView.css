@@ -1,0 +1,91 @@
+/* ── Foundation / Icons — Nyck Design System Tokens ── */
+
+.fi-header {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.fi-eyebrow {
+  color: var(--color-text-neutral);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.fi-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-lg-size);
+  line-height: var(--font-heading-lg-line-height);
+  letter-spacing: var(--font-heading-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fi-description {
+  color: var(--color-text-neutral);
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.fi-description a {
+  color: var(--color-text-primary);
+}
+
+.fi-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-sm-size);
+  line-height: var(--font-heading-sm-line-height);
+  letter-spacing: var(--font-heading-sm-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fi-section-caption {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.fi-search-input {
+  border: 1px solid var(--color-border-neutral);
+  background-color: var(--color-background-neutral);
+  color: var(--color-text-primary);
+}
+
+.fi-search-input:focus {
+  border-color: var(--color-border-brand);
+}
+
+.fi-search-input::placeholder {
+  color: var(--color-text-neutral);
+}
+
+.fi-search-icon {
+  color: var(--color-text-neutral);
+}
+
+.fi-card {
+  cursor: pointer;
+  border: 1px solid var(--color-border-disabled);
+  background-color: var(--color-background-neutral);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.fi-card:hover {
+  background-color: var(--color-background-accentgray-hover);
+  border-color: var(--color-border-neutral);
+}
+
+.fi-card-glyph {
+  color: var(--color-text-neutral);
+  transition: color 0.15s ease;
+}
+
+.fi-card:hover .fi-card-glyph {
+  color: var(--color-text-brand);
+}
+
+.fi-card-name {
+  width: 100%;
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}

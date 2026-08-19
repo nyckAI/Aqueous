@@ -6,7 +6,11 @@
       "mcp__figma__get_metadata",
       "mcp__figma__get_screenshot",
       "mcp__figma__use_figma",
-      "WebFetch(domain:ui.shadcn.com)"
+      "WebFetch(domain:ui.shadcn.com)",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_variable_defs",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)"
     ]
   }
 }

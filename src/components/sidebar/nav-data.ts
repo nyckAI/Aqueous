@@ -4,6 +4,7 @@ import {
   Palette,
   SwatchBook,
   Type,
+  Shapes,
   Component,
   Minus,
 } from "lucide-react";
@@ -56,6 +57,11 @@ export const navSections: NavSection[] = [
         label: "Typography",
         href: "/foundation/typography",
         icon: Type,
+      },
+      {
+        label: "Icons",
+        href: "/foundation/icons",
+        icon: Shapes,
       },
     ],
   },

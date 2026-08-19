@@ -7,10 +7,14 @@ export function ComponentPageClient({
   slug,
   name,
   description,
+  sourceTsx,
+  sourceCss,
 }: {
   slug: string;
   name: string;
   description: string;
+  sourceTsx: string | null;
+  sourceCss: string | null;
 }) {
   const demo = getComponentDemo(slug);
 
@@ -36,6 +40,8 @@ export function ComponentPageClient({
       description={description}
       preview={demo.preview}
       code={demo.code}
+      sourceTsx={sourceTsx}
+      sourceCss={sourceCss}
     />
   );
 }

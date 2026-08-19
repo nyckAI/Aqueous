@@ -1,0 +1,120 @@
+/* ── Overview — Nyck Design System Tokens ── */
+
+.ov-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-xl-size);
+  line-height: var(--font-heading-xl-line-height);
+  letter-spacing: var(--font-heading-xl-letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+.ov-description {
+  color: var(--color-text-neutral);
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.ov-stat-card {
+  border: 1px solid var(--color-border-disabled);
+  background-color: var(--color-background-neutral);
+}
+
+.ov-stat-label {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.ov-stat-value {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-heading-lg-size);
+  line-height: var(--font-heading-lg-line-height);
+  letter-spacing: var(--font-heading-lg-letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+.ov-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-md-size);
+  line-height: var(--font-heading-md-line-height);
+  letter-spacing: var(--font-heading-md-letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+.ov-badge {
+  background-color: var(--color-background-neutral-hover);
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.ov-badge-dot[data-type="added"] {
+  background-color: var(--color-icon-success);
+}
+.ov-badge-dot[data-type="changed"] {
+  background-color: var(--color-icon-brand);
+}
+.ov-badge-dot[data-type="removed"] {
+  background-color: var(--color-icon-danger);
+}
+.ov-badge-dot[data-type="fixed"] {
+  background-color: var(--color-icon-warning);
+}
+
+.ov-release-card {
+  border: 1px solid var(--color-border-disabled);
+  background-color: var(--color-background-neutral);
+}
+
+.ov-release-chevron {
+  color: var(--color-icon-neutral);
+}
+
+.ov-release-version {
+  color: var(--color-text-primary);
+  font-size: var(--font-body-md-size);
+  line-height: var(--font-body-md-line-height);
+  letter-spacing: var(--font-body-md-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ov-release-date {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.ov-release-summary {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.ov-release-body {
+  border-top: 1px solid var(--color-border-disabled);
+}
+
+.ov-release-rail {
+  border-left: 2px solid var(--color-border-disabled);
+}
+
+.ov-change-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.ov-change-description {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}

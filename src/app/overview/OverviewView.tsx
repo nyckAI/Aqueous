@@ -5,8 +5,8 @@ import { ChevronRight } from "lucide-react";
 import { changelog, type ChangeType, type VersionEntry } from "@/lib/changelog";
 import { totalTokenCount } from "@/lib/color-tokens";
 import packageJson from "../../../package.json";
-
 import { componentRegistry } from "@/lib/component-registry";
+import "./OverviewView.css";
 
 const COMPONENT_COUNT = componentRegistry.length;
 
@@ -15,13 +15,6 @@ const typeLabels: Record<ChangeType, string> = {
   changed: "Changed",
   removed: "Removed",
   fixed: "Fixed",
-};
-
-const typeDotColors: Record<ChangeType, string> = {
-  added: "bg-icon-success",
-  changed: "bg-icon-brand",
-  removed: "bg-icon-danger",
-  fixed: "bg-icon-warning",
 };
 
 function formatDate(dateStr: string): string {
@@ -42,19 +35,17 @@ function StatCard({
   value: string | number;
 }) {
   return (
-    <div className="flex flex-col gap-1 rounded-xl border border-border-disabled bg-background-neutral px-6 py-5">
-      <span className="text-sm text-text-neutral">{label}</span>
-      <span className="font-mono text-2xl font-bold tracking-tight text-text-primary">
-        {value}
-      </span>
+    <div className="ov-stat-card flex flex-col gap-1 rounded-xl px-6 py-5">
+      <span className="ov-stat-label">{label}</span>
+      <span className="ov-stat-value">{value}</span>
     </div>
   );
 }
 
 function ChangeTypeBadge({ type }: { type: ChangeType }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md bg-background-neutral-hover px-2 py-0.5 text-xs font-medium text-text-neutral">
-      <span className={`size-1.5 rounded-full ${typeDotColors[type]}`} />
+    <span className="ov-badge inline-flex items-center gap-1.5 rounded-md px-2 py-0.5">
+      <span className="ov-badge-dot size-1.5 rounded-full" data-type={type} />
       {typeLabels[type]}
     </span>
   );
@@ -69,43 +60,37 @@ function ReleaseSection({ release }: { release: VersionEntry }) {
       : `${formatDate(release.date)} • ${release.author}`;
 
   return (
-    <div className="rounded-xl border border-border-disabled bg-background-neutral">
+    <div className="ov-release-card rounded-xl">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className="flex w-full cursor-pointer items-start gap-3 px-6 py-5 text-left"
       >
         <ChevronRight
-          className={`mt-0.5 size-4 shrink-0 text-text-neutral transition-transform ${open ? "rotate-90" : ""}`}
+          className={`ov-release-chevron mt-0.5 size-4 shrink-0 transition-transform ${open ? "rotate-90" : ""}`}
           strokeWidth={2}
         />
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-3">
-            <h3 className="text-base font-semibold text-text-primary">
-              v{release.version}
-            </h3>
-            <span className="text-sm text-text-neutral">{dateAuthor}</span>
+            <h3 className="ov-release-version">v{release.version}</h3>
+            <span className="ov-release-date">{dateAuthor}</span>
           </div>
 
-          <p className="mt-1 text-sm leading-relaxed text-text-neutral">
-            {release.summary}
-          </p>
+          <p className="ov-release-summary mt-1">{release.summary}</p>
         </div>
       </button>
 
       {open && (
-        <div className="border-t border-border-disabled px-6 py-5">
-          <div className="flex flex-col gap-4 border-l-2 border-border-disabled pl-5">
+        <div className="ov-release-body px-6 py-5">
+          <div className="ov-release-rail flex flex-col gap-4 pl-5">
             {release.changes.map((change, i) => (
               <div key={i}>
                 <div className="flex items-center gap-2">
                   <ChangeTypeBadge type={change.type} />
                 </div>
-                <p className="mt-1.5 text-sm font-medium text-text-primary">
-                  {change.title}
-                </p>
-                <p className="mt-0.5 text-sm leading-relaxed text-text-neutral">
+                <p className="ov-change-title mt-1.5">{change.title}</p>
+                <p className="ov-change-description mt-0.5">
                   {change.description}
                 </p>
               </div>
@@ -121,10 +106,8 @@ export function OverviewView() {
   return (
     <main className="flex flex-1 flex-col px-10 py-10">
       <div className="max-w-3xl">
-        <h1 className="text-[32px] font-bold tracking-tight text-text-primary">
-          Aqueous Design System
-        </h1>
-        <p className="mt-3 text-base leading-relaxed text-text-neutral">
+        <h1 className="ov-title">Aqueous Design System</h1>
+        <p className="ov-description mt-3">
           Placeholder description — add your design system overview here.
         </p>
       </div>
@@ -136,7 +119,7 @@ export function OverviewView() {
       </div>
 
       <section className="mt-14 max-w-3xl">
-        <h2 className="text-xl font-bold text-text-primary">Changelog</h2>
+        <h2 className="ov-section-title">Changelog</h2>
 
         <div className="mt-6 flex flex-col gap-4">
           {changelog.map((release) => (

@@ -1,0 +1,85 @@
+/* ── Foundation / Typography — Nyck Design System Tokens ── */
+
+.ft-header {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.ft-eyebrow {
+  color: var(--color-text-neutral);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.ft-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-lg-size);
+  line-height: var(--font-heading-lg-line-height);
+  letter-spacing: var(--font-heading-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ft-description {
+  color: var(--color-text-neutral);
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.ft-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-body-lg-size);
+  line-height: var(--font-body-lg-line-height);
+  letter-spacing: var(--font-body-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ft-section-caption {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.ft-card {
+  border: 1px solid var(--color-border-disabled);
+}
+
+.ft-card-preview {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.ft-glyph {
+  color: var(--color-text-primary);
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ft-sample {
+  color: var(--color-text-neutral);
+  font-size: var(--font-body-lg-size);
+  line-height: var(--font-body-lg-line-height);
+  letter-spacing: var(--font-body-lg-letter-spacing);
+}
+
+.ft-card-name {
+  color: var(--color-text-primary);
+  font-size: var(--font-body-md-size);
+  line-height: var(--font-body-md-line-height);
+  letter-spacing: var(--font-body-md-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ft-card-role {
+  background-color: var(--color-background-neutral-hover);
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.ft-card-description {
+  color: var(--color-text-neutral);
+  font-size: 14px;
+  line-height: 24px;
+}

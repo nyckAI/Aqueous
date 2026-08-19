@@ -69,6 +69,19 @@ does not exist yet, create one at the top of the `changelog` array.
 
 ---
 
+## [Unreleased]
+
+---
+
+## [0.5.0] — 2026-08-19
+
+### Changed
+
+- **Accordion component tokenized typography** — Trigger and content font size, line height, letter spacing, and font weight now reference typography tokens instead of hardcoded values `2026-08-19`
+- **Alert component restructure and tokenized typography** — Rebuilt Alert with new AlertIcon, AlertBody, AlertContent, AlertActions, and AlertClose subcomponents, moved variant coloring to icon-only via `.alert-icon`, and switched title/description/action text to typography tokens `2026-08-19`
+
+---
+
 ## [0.4.0] — 2026-08-15
 
 ### Added

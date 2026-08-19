@@ -8,7 +8,17 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import {
+  Alert,
+  AlertIcon,
+  AlertBody,
+  AlertContent,
+  AlertTitle,
+  AlertDescription,
+  AlertActions,
+  AlertAction,
+  AlertClose,
+} from "@/components/ui/alert";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -151,6 +161,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   XCircle,
+  Bell,
 } from "lucide-react";
 
 type Demo = { preview: React.ReactNode; code: string };
@@ -284,78 +295,186 @@ function AlertDemo(): Demo {
     preview: (
       <div className="flex w-full flex-col gap-3">
         <Alert>
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components to your app using the CLI.
-          </AlertDescription>
+          <AlertBody>
+            <AlertIcon>
+              <Bell />
+            </AlertIcon>
+            <AlertContent>
+              <AlertTitle>I&apos;m a toast!</AlertTitle>
+              <AlertDescription>description here</AlertDescription>
+              <AlertActions>
+                <AlertAction>Action</AlertAction>
+                <AlertAction>Action</AlertAction>
+              </AlertActions>
+            </AlertContent>
+          </AlertBody>
+          <AlertClose />
         </Alert>
         <Alert variant="info">
-          <Info />
-          <AlertTitle>Info</AlertTitle>
-          <AlertDescription>
-            A new version of the design system is available.
-          </AlertDescription>
+          <AlertBody>
+            <AlertIcon>
+              <Info />
+            </AlertIcon>
+            <AlertContent>
+              <AlertTitle>Info</AlertTitle>
+              <AlertDescription>
+                A new version of the design system is available.
+              </AlertDescription>
+              <AlertActions>
+                <AlertAction>Action</AlertAction>
+                <AlertAction>Action</AlertAction>
+              </AlertActions>
+            </AlertContent>
+          </AlertBody>
+          <AlertClose />
         </Alert>
         <Alert variant="success">
-          <CheckCircle2 />
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>
-            Your changes have been saved successfully.
-          </AlertDescription>
+          <AlertBody>
+            <AlertIcon>
+              <CheckCircle2 />
+            </AlertIcon>
+            <AlertContent>
+              <AlertTitle>Success</AlertTitle>
+              <AlertDescription>
+                Your changes have been saved successfully.
+              </AlertDescription>
+              <AlertActions>
+                <AlertAction>Action</AlertAction>
+                <AlertAction>Action</AlertAction>
+              </AlertActions>
+            </AlertContent>
+          </AlertBody>
+          <AlertClose />
         </Alert>
         <Alert variant="warning">
-          <AlertTriangle />
-          <AlertTitle>Warning</AlertTitle>
-          <AlertDescription>
-            This action may have unintended consequences.
-          </AlertDescription>
+          <AlertBody>
+            <AlertIcon>
+              <AlertTriangle />
+            </AlertIcon>
+            <AlertContent>
+              <AlertTitle>Warning</AlertTitle>
+              <AlertDescription>
+                This action may have unintended consequences.
+              </AlertDescription>
+              <AlertActions>
+                <AlertAction>Action</AlertAction>
+                <AlertAction>Action</AlertAction>
+              </AlertActions>
+            </AlertContent>
+          </AlertBody>
+          <AlertClose />
         </Alert>
         <Alert variant="error">
-          <XCircle />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>
-            Your session has expired. Please log in again.
-          </AlertDescription>
+          <AlertBody>
+            <AlertIcon>
+              <XCircle />
+            </AlertIcon>
+            <AlertContent>
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Your session has expired. Please log in again.
+              </AlertDescription>
+              <AlertActions>
+                <AlertAction>Action</AlertAction>
+                <AlertAction>Action</AlertAction>
+              </AlertActions>
+            </AlertContent>
+          </AlertBody>
+          <AlertClose />
         </Alert>
       </div>
     ),
     code: `<Alert>
-  <AlertTitle>Heads up!</AlertTitle>
-  <AlertDescription>
-    You can add components to your app using the CLI.
-  </AlertDescription>
+  <AlertBody>
+    <AlertIcon>
+      <Bell />
+    </AlertIcon>
+    <AlertContent>
+      <AlertTitle>I'm a toast!</AlertTitle>
+      <AlertDescription>description here</AlertDescription>
+      <AlertActions>
+        <AlertAction>Action</AlertAction>
+        <AlertAction>Action</AlertAction>
+      </AlertActions>
+    </AlertContent>
+  </AlertBody>
+  <AlertClose />
 </Alert>
 
 <Alert variant="info">
-  <Info />
-  <AlertTitle>Info</AlertTitle>
-  <AlertDescription>
-    A new version of the design system is available.
-  </AlertDescription>
+  <AlertBody>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertContent>
+      <AlertTitle>Info</AlertTitle>
+      <AlertDescription>
+        A new version of the design system is available.
+      </AlertDescription>
+      <AlertActions>
+        <AlertAction>Action</AlertAction>
+        <AlertAction>Action</AlertAction>
+      </AlertActions>
+    </AlertContent>
+  </AlertBody>
+  <AlertClose />
 </Alert>
 
 <Alert variant="success">
-  <CheckCircle2 />
-  <AlertTitle>Success</AlertTitle>
-  <AlertDescription>
-    Your changes have been saved successfully.
-  </AlertDescription>
+  <AlertBody>
+    <AlertIcon>
+      <CheckCircle2 />
+    </AlertIcon>
+    <AlertContent>
+      <AlertTitle>Success</AlertTitle>
+      <AlertDescription>
+        Your changes have been saved successfully.
+      </AlertDescription>
+      <AlertActions>
+        <AlertAction>Action</AlertAction>
+        <AlertAction>Action</AlertAction>
+      </AlertActions>
+    </AlertContent>
+  </AlertBody>
+  <AlertClose />
 </Alert>
 
 <Alert variant="warning">
-  <AlertTriangle />
-  <AlertTitle>Warning</AlertTitle>
-  <AlertDescription>
-    This action may have unintended consequences.
-  </AlertDescription>
+  <AlertBody>
+    <AlertIcon>
+      <AlertTriangle />
+    </AlertIcon>
+    <AlertContent>
+      <AlertTitle>Warning</AlertTitle>
+      <AlertDescription>
+        This action may have unintended consequences.
+      </AlertDescription>
+      <AlertActions>
+        <AlertAction>Action</AlertAction>
+        <AlertAction>Action</AlertAction>
+      </AlertActions>
+    </AlertContent>
+  </AlertBody>
+  <AlertClose />
 </Alert>
 
 <Alert variant="error">
-  <XCircle />
-  <AlertTitle>Error</AlertTitle>
-  <AlertDescription>
-    Your session has expired. Please log in again.
-  </AlertDescription>
+  <AlertBody>
+    <AlertIcon>
+      <XCircle />
+    </AlertIcon>
+    <AlertContent>
+      <AlertTitle>Error</AlertTitle>
+      <AlertDescription>
+        Your session has expired. Please log in again.
+      </AlertDescription>
+      <AlertActions>
+        <AlertAction>Action</AlertAction>
+        <AlertAction>Action</AlertAction>
+      </AlertActions>
+    </AlertContent>
+  </AlertBody>
+  <AlertClose />
 </Alert>`,
   };
 }

@@ -1,0 +1,70 @@
+/* ── Foundation / Colors — Nyck Design System Tokens ── */
+
+.fc-header {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.fc-eyebrow {
+  color: var(--color-text-neutral);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.fc-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-lg-size);
+  line-height: var(--font-heading-lg-line-height);
+  letter-spacing: var(--font-heading-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fc-description {
+  color: var(--color-text-neutral);
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.fc-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-sm-size);
+  line-height: var(--font-heading-sm-line-height);
+  letter-spacing: var(--font-heading-sm-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fc-section-caption {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.fc-palette-name {
+  color: var(--color-text-primary);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fc-palette-list {
+  border: 1px solid var(--color-border-disabled);
+}
+
+.fc-swatch:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: -2px;
+}
+
+.fc-swatch-label {
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.fc-swatch-hex {
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}

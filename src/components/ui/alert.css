@@ -1,119 +1,70 @@
 /* ── Alert — Nyck Design System Tokens ── */
 
 .alert-root {
-  position: relative;
-  display: grid;
-  width: 100%;
-  gap: 2px;
-  border-radius: 8px;
-  border-width: 1px;
-  border-style: solid;
-  padding: 8px 10px;
-  text-align: left;
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.alert-root:has(> svg) {
-  grid-template-columns: auto 1fr;
-  column-gap: 8px;
-}
-
-.alert-root > svg {
-  grid-row: span 2;
-  transform: translateY(2px);
-  width: 16px;
-  height: 16px;
-}
-
-/* ── Default variant ── */
-.alert-root[data-variant="default"] {
   background-color: var(--color-background-neutral);
-  border-color: var(--color-border-neutral);
-  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-neutral);
+  font-family: var(--font-family-body);
 }
 
-.alert-root[data-variant="default"] > svg {
-  color: var(--color-icon-neutral);
+/* ── Icon color per variant ── */
+.alert-icon {
+  color: var(--color-icon-primary);
 }
-
-/* ── Info variant ── */
-.alert-root[data-variant="info"] {
-  background-color: var(--color-background-info);
-  border-color: var(--color-border-info);
-  color: var(--color-text-info);
-}
-
-.alert-root[data-variant="info"] > svg {
+[data-variant="info"] .alert-icon {
   color: var(--color-icon-info);
 }
-
-/* ── Success variant ── */
-.alert-root[data-variant="success"] {
-  background-color: var(--color-background-success);
-  border-color: var(--color-border-success);
-  color: var(--color-text-success);
-}
-
-.alert-root[data-variant="success"] > svg {
+[data-variant="success"] .alert-icon {
   color: var(--color-icon-success);
 }
-
-/* ── Warning variant ── */
-.alert-root[data-variant="warning"] {
-  background-color: var(--color-background-warning);
-  border-color: var(--color-border-warning);
-  color: var(--color-text-warning);
-}
-
-.alert-root[data-variant="warning"] > svg {
+[data-variant="warning"] .alert-icon {
   color: var(--color-icon-warning);
 }
-
-/* ── Error variant ── */
-.alert-root[data-variant="error"] {
-  background-color: var(--color-background-danger);
-  border-color: var(--color-border-danger);
-  color: var(--color-text-danger);
-}
-
-.alert-root[data-variant="error"] > svg {
+[data-variant="error"] .alert-icon {
   color: var(--color-icon-danger);
 }
 
 /* ── Title ── */
 .alert-title {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.alert-root:has(> svg) .alert-title {
-  grid-column-start: 2;
-}
-
-.alert-title a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--color-text-primary);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
 }
 
 /* ── Description ── */
 .alert-description {
-  font-size: 14px;
-  line-height: 20px;
-  opacity: 0.9;
+  color: var(--color-text-neutral);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-regular);
 }
 
-.alert-root:has(> svg) .alert-description {
-  grid-column-start: 2;
+/* ── Action links ── */
+.alert-action {
+  color: var(--color-text-neutral);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  background: none;
+  border: none;
+  padding: 0;
 }
 
-.alert-description a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.alert-action:hover {
+  color: var(--color-text-primary);
 }
 
-.alert-description p:not(:last-child) {
-  margin-bottom: 16px;
+/* ── Close/dismiss button ── */
+.alert-close {
+  color: var(--color-icon-neutral);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.alert-close:hover {
+  color: var(--color-icon-primary);
 }
