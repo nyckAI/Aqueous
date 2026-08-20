@@ -1,0 +1,145 @@
+{
+  "name": "@nyckai/aqueous-ui",
+  "version": "0.1.1",
+  "description": "Nyck's Aqueous design system — published React components.",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyckAI/Aqueous.git",
+    "directory": "packages/ui"
+  },
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./tokens.css": "./src/styles/tokens.css",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/ui/accordion.d.ts",
+      "import": "./dist/components/ui/accordion.js"
+    },
+    "./alert": {
+      "types": "./dist/components/ui/alert.d.ts",
+      "import": "./dist/components/ui/alert.js"
+    },
+    "./alert-dialog": {
+      "types": "./dist/components/ui/alert-dialog.d.ts",
+      "import": "./dist/components/ui/alert-dialog.js"
+    },
+    "./attachment": {
+      "types": "./dist/components/ui/attachment.d.ts",
+      "import": "./dist/components/ui/attachment.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/ui/avatar.d.ts",
+      "import": "./dist/components/ui/avatar.js"
+    },
+    "./badge": {
+      "types": "./dist/components/ui/badge.d.ts",
+      "import": "./dist/components/ui/badge.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/components/ui/breadcrumb.d.ts",
+      "import": "./dist/components/ui/breadcrumb.js"
+    },
+    "./button": {
+      "types": "./dist/components/ui/button.d.ts",
+      "import": "./dist/components/ui/button.js"
+    },
+    "./calendar": {
+      "types": "./dist/components/ui/calendar.d.ts",
+      "import": "./dist/components/ui/calendar.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/ui/checkbox.d.ts",
+      "import": "./dist/components/ui/checkbox.js"
+    },
+    "./label": {
+      "types": "./dist/components/ui/label.d.ts",
+      "import": "./dist/components/ui/label.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/ui/radio-group.d.ts",
+      "import": "./dist/components/ui/radio-group.js"
+    },
+    "./skeleton": {
+      "types": "./dist/components/ui/skeleton.d.ts",
+      "import": "./dist/components/ui/skeleton.js"
+    },
+    "./slider": {
+      "types": "./dist/components/ui/slider.d.ts",
+      "import": "./dist/components/ui/slider.js"
+    },
+    "./spinner": {
+      "types": "./dist/components/ui/spinner.d.ts",
+      "import": "./dist/components/ui/spinner.js"
+    },
+    "./switch": {
+      "types": "./dist/components/ui/switch.d.ts",
+      "import": "./dist/components/ui/switch.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/ui/textarea.d.ts",
+      "import": "./dist/components/ui/textarea.js"
+    },
+    "./textfield": {
+      "types": "./dist/components/ui/textfield.d.ts",
+      "import": "./dist/components/ui/textfield.js"
+    },
+    "./time-field": {
+      "types": "./dist/components/ui/time-field.d.ts",
+      "import": "./dist/components/ui/time-field.js"
+    },
+    "./toast": {
+      "types": "./dist/components/ui/toast.d.ts",
+      "import": "./dist/components/ui/toast.js"
+    },
+    "./toggle": {
+      "types": "./dist/components/ui/toggle.d.ts",
+      "import": "./dist/components/ui/toggle.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/components/ui/toggle-group.d.ts",
+      "import": "./dist/components/ui/toggle-group.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/ui/tooltip.d.ts",
+      "import": "./dist/components/ui/tooltip.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.7.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.28.0",
+    "react-day-picker": "^10.0.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsup": "^8.3.0",
+    "typescript": "^5"
+  }
+}
