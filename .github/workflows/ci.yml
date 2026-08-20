@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # NOTE: lint is intentionally excluded from this gate for now — apps/docs
+      # currently fails eslint on two pre-existing issues in carousel.tsx and
+      # use-mobile.ts (react-hooks/set-state-in-effect), unrelated to anything
+      # in this workflow or in packages/ui. Fix those and add `lint` back here.
+      - run: pnpm turbo run build typecheck
+      - name: Smoke-test @nyck/aqueous-ui's public exports
+        run: pnpm --filter docs smoke-test:ui
