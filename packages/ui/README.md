@@ -24,6 +24,31 @@ Tailwind-free build of this package.
 
 ## Install
 
+This package publishes to [GitHub Packages](https://npm.pkg.github.com),
+not the public npm registry — it's internal to Nyck. GitHub Packages
+requires authentication for both installing and publishing, even though
+the package itself is scoped `restricted` (private) rather than public.
+
+Add to your app's `.npmrc` (create one at your project root if you don't
+have one):
+
+```ini
+@nyck:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+Then set `NODE_AUTH_TOKEN` in your shell (locally) or as a repo secret
+(in CI) to a token with `read:packages` scope:
+
+- **Locally**: a [personal access token](https://github.com/settings/tokens)
+  (classic, `read:packages` scope) for your own GitHub account, since
+  you'll need access to the `nyck` org's packages.
+- **In CI**: the workflow's own `GITHUB_TOKEN` works automatically as
+  long as the job's permissions include `packages: read` and the runner
+  is in an org the token can see packages for.
+
+Then install as normal:
+
 ```bash
 npm install @nyck/aqueous-ui tailwindcss
 ```

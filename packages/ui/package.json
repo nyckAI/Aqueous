@@ -3,7 +3,13 @@
   "version": "0.1.1",
   "description": "Nyck's Aqueous design system — published React components.",
   "publishConfig": {
-    "access": "restricted"
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyck/Aqueous.git",
+    "directory": "packages/ui"
   },
   "type": "module",
   "sideEffects": [
