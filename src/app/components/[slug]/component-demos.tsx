@@ -1811,12 +1811,28 @@ function ToastDemoPreview() {
                 title: "I'm a toast!",
                 description: "description here",
                 type,
+                actionProps: {
+                  children: "Action",
+                  onClick: () => toast.add({ title: "Action clicked" }),
+                },
               })
             }
           >
             Show {label}
           </Button>
         ))}
+        <Button
+          variant="default"
+          onClick={() =>
+            toast.add({
+              title: "I'm a toast!",
+              description: "description here",
+              type: "success",
+            })
+          }
+        >
+          Show without action
+        </Button>
       </div>
     </Toaster>
   );
@@ -1828,6 +1844,7 @@ function ToastDemo(): Demo {
     code: `const toast = createToastManager();
 
 {/* type: "loading" | "error" | "warning" | "success" | "info" */}
+{/* actionProps is optional — omit it for a toast with no action button */}
 <Toaster>
   <Button
     onClick={() =>
@@ -1835,6 +1852,10 @@ function ToastDemo(): Demo {
         title: "I'm a toast!",
         description: "description here",
         type: "success",
+        actionProps: {
+          children: "Action",
+          onClick: () => console.log("Action clicked"),
+        },
       })
     }
   >
