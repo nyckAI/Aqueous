@@ -26,7 +26,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       # If there are pending changesets, this opens/updates a standing
-      # "Version Packages" PR that bumps @nyck/aqueous-ui's version and
+      # "Version Packages" PR that bumps @nyckai/aqueous-ui's version and
       # writes packages/ui/CHANGELOG.md from the accumulated changesets.
       # Merging that PR re-triggers this workflow; at that point there are
       # no pending changesets left, so this step instead runs the `publish`

@@ -9,7 +9,7 @@ import {
 } from "@shadcn/react/message-scroller"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@nyck/aqueous-ui"
+import { Button } from "@nyckai/aqueous-ui"
 import { ArrowDownIcon } from "lucide-react"
 
 function MessageScrollerProvider(

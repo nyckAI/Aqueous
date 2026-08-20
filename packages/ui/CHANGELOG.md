@@ -1,4 +1,4 @@
-# @nyck/aqueous-ui
+# @nyckai/aqueous-ui
 
 ## 0.1.1
 

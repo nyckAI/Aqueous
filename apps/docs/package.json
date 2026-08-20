@@ -12,7 +12,7 @@
     "smoke-test:ui": "node --import ./scripts/register-css-noop-loader.mjs scripts/smoke-test-aqueous-ui-exports.mjs"
   },
   "dependencies": {
-    "@nyck/aqueous-ui": "workspace:*",
+    "@nyckai/aqueous-ui": "workspace:*",
     "@base-ui/react": "^1.7.0",
     "@shadcn/react": "^0.3.0",
     "class-variance-authority": "^0.7.1",

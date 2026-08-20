@@ -4,7 +4,7 @@ export type ComponentMeta = {
   description: string;
   /**
    * Whether this component is audited against Nyck design tokens and
-   * considered stable enough to ship in the @nyck/aqueous-ui package.
+   * considered stable enough to ship in the @nyckai/aqueous-ui package.
    * This is the single source of truth for both the sidebar checkmark
    * and the packages/ui publish manifest (scripts/sync-ui-package.ts
    * reads this flag directly) — do not track a separate list anywhere.

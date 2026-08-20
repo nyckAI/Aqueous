@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { SidebarLayout } from "@/components/sidebar/SidebarLayout";
-import { TooltipProvider } from "@nyck/aqueous-ui";
+import { TooltipProvider } from "@nyckai/aqueous-ui";
 import "./globals.css";
 
 const geist = Geist({

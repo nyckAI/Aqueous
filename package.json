@@ -9,7 +9,7 @@
     "typecheck": "turbo run typecheck",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=@nyck/aqueous-ui && changeset publish"
+    "release": "turbo run build --filter=@nyckai/aqueous-ui && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.1",

@@ -1,11 +1,11 @@
-// Imports every subpath export @nyck/aqueous-ui declares in its "exports" map
+// Imports every subpath export @nyckai/aqueous-ui declares in its "exports" map
 // and asserts it resolves to at least one non-empty export. Run after
 // `pnpm build` (via the root `pnpm turbo run build` in CI) — catches a broken
 // exports map, a missing dist file, or a component that silently bundled to
 // nothing, none of which `tsc --noEmit` or a bundler build would necessarily
 // catch.
 //
-// Lives in apps/docs (not packages/ui) so it resolves @nyck/aqueous-ui
+// Lives in apps/docs (not packages/ui) so it resolves @nyckai/aqueous-ui
 // through this app's real workspace dependency — a package depending on
 // itself just to test itself creates a cycle Turbo refuses to build.
 

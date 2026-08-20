@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@nyck/aqueous-ui";
+} from "@nyckai/aqueous-ui";
 
 export function SidebarCollapseHandle({
   collapsed,

@@ -70,7 +70,7 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@nyck/aqueous-ui";
+} from "@nyckai/aqueous-ui";
 import type { DateRange } from "react-day-picker";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import {

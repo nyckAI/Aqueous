@@ -4,7 +4,7 @@ import * as React from "react"
 import { Questionnaire as QuestionnairePrimitive } from "@shadcn/react/questionnaire"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants, type Button } from "@nyck/aqueous-ui"
+import { buttonVariants, type Button } from "@nyckai/aqueous-ui"
 import { CheckIcon } from "lucide-react"
 
 function Questionnaire({

@@ -1,4 +1,4 @@
-# @nyck/aqueous-ui
+# @nyckai/aqueous-ui
 
 Nyck's Aqueous design system — published React components, built on
 [Base UI](https://base-ui.com) primitives and Tailwind CSS v4.
@@ -33,7 +33,7 @@ Add to your app's `.npmrc` (create one at your project root if you don't
 have one):
 
 ```ini
-@nyck:registry=https://npm.pkg.github.com
+@nyckai:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
@@ -42,7 +42,7 @@ Then set `NODE_AUTH_TOKEN` in your shell (locally) or as a repo secret
 
 - **Locally**: a [personal access token](https://github.com/settings/tokens)
   (classic, `read:packages` scope) for your own GitHub account, since
-  you'll need access to the `nyck` org's packages.
+  you'll need access to the `nyckAI` org's packages.
 - **In CI**: the workflow's own `GITHUB_TOKEN` works automatically as
   long as the job's permissions include `packages: read` and the runner
   is in an org the token can see packages for.
@@ -50,7 +50,7 @@ Then set `NODE_AUTH_TOKEN` in your shell (locally) or as a repo secret
 Then install as normal:
 
 ```bash
-npm install @nyck/aqueous-ui tailwindcss
+npm install @nyckai/aqueous-ui tailwindcss
 ```
 
 ## Set up your global CSS (one time)
@@ -59,16 +59,16 @@ In your app's root CSS file (e.g. `app/globals.css` in Next.js):
 
 ```css
 @import "tailwindcss";
-@import "@nyck/aqueous-ui/tokens.css";
-@source "../node_modules/@nyck/aqueous-ui/dist";
+@import "@nyckai/aqueous-ui/tokens.css";
+@source "../node_modules/@nyckai/aqueous-ui/dist";
 ```
 
-- **`@import "@nyck/aqueous-ui/tokens.css"`** registers every Nyck design
+- **`@import "@nyckai/aqueous-ui/tokens.css"`** registers every Nyck design
   token (brand/neutral/red/green/... color scales, typography sizes,
   radius scale) as real Tailwind theme values via `@theme inline` — so
   utilities like `bg-background-brand-emphasis` exist in your build, not
   just as inert CSS variables.
-- **`@source "../node_modules/@nyck/aqueous-ui/dist"`** is the line that
+- **`@source "../node_modules/@nyckai/aqueous-ui/dist"`** is the line that
   actually makes this work. Tailwind v4 excludes `node_modules` from its
   automatic content scanning by default, so without this line every
   utility class used inside this package's compiled components produces
@@ -85,7 +85,7 @@ import to point at your own loaded font instead.
 ## Use it
 
 ```tsx
-import { Button, Checkbox, Toaster, toast } from "@nyck/aqueous-ui";
+import { Button, Checkbox, Toaster, toast } from "@nyckai/aqueous-ui";
 
 function SignUpForm() {
   return (
@@ -102,7 +102,7 @@ function SignUpForm() {
 Or import a single component for a smaller import surface:
 
 ```tsx
-import { Button } from "@nyck/aqueous-ui/button";
+import { Button } from "@nyckai/aqueous-ui/button";
 ```
 
 No provider or theme wrapper is required — once the global CSS import
