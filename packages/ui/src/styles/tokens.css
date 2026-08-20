@@ -1,0 +1,413 @@
+/**
+ * Nyck design tokens — the CSS custom properties every component in this
+ * package is built on. Import this once at your app's root, after Tailwind:
+ *
+ *   @import "tailwindcss";
+ *   @import "@nyck/aqueous-ui/tokens.css";
+ *
+ * NOTE (packages/ui Phase 2 scaffold): this is a first-pass extraction from
+ * the docs app's globals.css, decoupled from its Next.js font-loader
+ * variables (--font-inter/--font-geist, which only exist in that app's own
+ * layout.tsx). The exact distribution shape here — whether this stays plain
+ * :root custom properties, becomes a Tailwind v4 @theme preset, how
+ * consumers load Inter, and how their own Tailwind build picks up utility
+ * classes from node_modules — is Phase 3 work and may still change.
+ */
+
+:root {
+  /* ===========================================================
+   * NYCK PRIMITIVE COLORS
+   * =========================================================== */
+
+  /* Brand */
+  --brand-100: #F7FAFF;
+  --brand-200: #E9F1FF;
+  --brand-300: #B8D2FE;
+  --brand-400: #609AFF;
+  --brand-500: #0E6DF9;
+  --brand-600: #0553C7;
+  --brand-700: #073F94;
+  --brand-800: #18273F;
+  --brand-900: #08101E;
+
+  /* Neutral */
+  --white: #FFFFFF;
+  --neutral-100: #F7F7F7;
+  --neutral-200: #EDEDED;
+  --neutral-300: #E1E1E1;
+  --neutral-400: #9E9E9E;
+  --neutral-500: #626262;
+  --neutral-700: #37393D;
+  --black: #000000;
+
+  /* Green */
+  --green-50: #F0FDF4;
+  --green-100: #DCFCE7;
+  --green-200: #BBF7D0;
+  --green-300: #86EFAC;
+  --green-400: #4ADE80;
+  --green-500: #22C55E;
+  --green-600: #16A34A;
+  --green-700: #15803D;
+  --green-800: #166534;
+  --green-900: #14532D;
+  --green-950: #052E16;
+
+  /* Red */
+  --red-50: #FEF2F2;
+  --red-100: #FEE2E2;
+  --red-200: #FECACA;
+  --red-300: #FCA5A5;
+  --red-400: #F87171;
+  --red-500: #EF4444;
+  --red-600: #DC2626;
+  --red-700: #B91C1C;
+  --red-800: #991B1B;
+  --red-900: #7F1D1D;
+  --red-950: #450A0A;
+
+  /* Orange */
+  --orange-50: #FFF7ED;
+  --orange-100: #FFEDD5;
+  --orange-200: #FED7AA;
+  --orange-300: #FDBA74;
+  --orange-400: #FB923C;
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+  --orange-700: #C2410C;
+  --orange-800: #9A3412;
+  --orange-900: #7C2D12;
+  --orange-950: #431407;
+
+  /* Yellow */
+  --yellow-50: #FEFCE8;
+  --yellow-100: #FEF9C3;
+  --yellow-200: #FEF08A;
+  --yellow-300: #FDE047;
+  --yellow-400: #FACC15;
+  --yellow-500: #EAB308;
+  --yellow-600: #CA8A04;
+  --yellow-700: #A16207;
+  --yellow-800: #854D0E;
+  --yellow-900: #713F12;
+  --yellow-950: #422006;
+
+  /* Purple */
+  --purple-50: #FAF5FF;
+  --purple-100: #F3E8FF;
+  --purple-200: #E9D5FF;
+  --purple-300: #D8B4FE;
+  --purple-400: #C084FC;
+  --purple-500: #A855F7;
+  --purple-600: #9333EA;
+  --purple-700: #7E22CE;
+  --purple-800: #6B21A8;
+  --purple-900: #581C87;
+  --purple-950: #3B0764;
+
+  /* Pink */
+  --pink-50: #FDF2F8;
+  --pink-100: #FCE7F3;
+  --pink-200: #FBCFE8;
+  --pink-300: #F9A8D4;
+  --pink-400: #F472B6;
+  --pink-500: #EC4899;
+  --pink-600: #DB2777;
+  --pink-700: #BE185D;
+  --pink-800: #9D174D;
+  --pink-900: #831843;
+  --pink-950: #500724;
+
+  /* Teal */
+  --teal-50: #F0F9FF;
+  --teal-100: #E0F2FE;
+  --teal-200: #BAE6FD;
+  --teal-300: #7DD3FC;
+  --teal-400: #38BDF8;
+  --teal-500: #0EA5E9;
+  --teal-600: #0284C7;
+  --teal-700: #0369A1;
+  --teal-800: #075985;
+  --teal-900: #0C4A6E;
+  --teal-950: #082F49;
+
+  /* Slate */
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+  --slate-950: #020617;
+
+  /* ===========================================================
+   * NYCK PRIMITIVE TYPOGRAPHY
+   * =========================================================== */
+
+  --font-heading-xxl-size: 40px;
+  --font-heading-xxl-line-height: 48px;
+  --font-heading-xxl-letter-spacing: -0.02em;
+  --font-heading-xl-size: 32px;
+  --font-heading-xl-line-height: 40px;
+  --font-heading-xl-letter-spacing: -0.02em;
+  --font-heading-lg-size: 24px;
+  --font-heading-lg-line-height: 32px;
+  --font-heading-lg-letter-spacing: -0.01em;
+  --font-heading-md-size: 20px;
+  --font-heading-md-line-height: 28px;
+  --font-heading-md-letter-spacing: -0.01em;
+  --font-heading-sm-size: 18px;
+  --font-heading-sm-line-height: 24px;
+  --font-heading-sm-letter-spacing: 0em;
+  --font-heading-xs-size: 16px;
+  --font-heading-xs-line-height: 22px;
+  --font-heading-xs-letter-spacing: 0em;
+
+  --font-body-lg-size: 18px;
+  --font-body-lg-line-height: 28px;
+  --font-body-lg-letter-spacing: 0em;
+  --font-body-md-size: 16px;
+  --font-body-md-line-height: 24px;
+  --font-body-md-letter-spacing: 0em;
+  --font-body-sm-size: 14px;
+  --font-body-sm-line-height: 20px;
+  --font-body-sm-letter-spacing: 0em;
+
+  --font-caption-lg-size: 14px;
+  --font-caption-lg-line-height: 20px;
+  --font-caption-lg-letter-spacing: 0em;
+  --font-caption-md-size: 12px;
+  --font-caption-md-line-height: 16px;
+  --font-caption-md-letter-spacing: 0em;
+
+  --font-button-lg-size: 16px;
+  --font-button-lg-line-height: 24px;
+  --font-button-lg-letter-spacing: 0em;
+  --font-button-md-size: 14px;
+  --font-button-md-line-height: 20px;
+  --font-button-md-letter-spacing: 0em;
+  --font-button-sm-size: 12px;
+  --font-button-sm-line-height: 16px;
+  --font-button-sm-letter-spacing: 0em;
+
+  --font-micro-size: 12px;
+  --font-micro-line-height: 16px;
+  --font-micro-letter-spacing: 0.02em;
+  --font-micro-sm-size: 10px;
+  --font-micro-sm-line-height: 12px;
+  --font-micro-sm-letter-spacing: 0.02em;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Nyck's typeface is Inter (see docs/design-tokens.md) — consumers should
+     load Inter themselves (e.g. next/font/google) and are free to override
+     these two variables to point at however they've loaded it. */
+  --font-family-heading: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-family-body: Inter, ui-sans-serif, system-ui, sans-serif;
+
+  /* ===========================================================
+   * Shared theme primitives some components still fall back to
+   * (focus rings, invalid states) pending full token migration.
+   * =========================================================== */
+  --destructive: oklch(0.577 0.245 27.325);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  /* ===========================================================
+   * NYCK SEMANTIC COLORS
+   * =========================================================== */
+
+  /* ── Background ── */
+  --color-background-brand: var(--brand-100);
+  --color-background-brand-hover: var(--brand-200);
+  --color-background-brand-pressed: var(--brand-300);
+  --color-background-brand-disabled: var(--brand-100);
+
+  --color-background-neutral: var(--white);
+  --color-background-neutral-hover: var(--neutral-100);
+  --color-background-neutral-pressed: var(--neutral-200);
+  --color-background-neutral-disabled: var(--neutral-100);
+  --color-background-neutral-emphasis: var(--neutral-100);
+
+  --color-background-selected: var(--brand-200);
+  --color-background-selected-hover: var(--brand-300);
+  --color-background-selected-pressed: var(--brand-400);
+  --color-background-selected-disabled: var(--brand-100);
+
+  --color-background-danger: var(--red-100);
+  --color-background-danger-hover: var(--red-200);
+  --color-background-danger-pressed: var(--red-300);
+  --color-background-danger-disabled: var(--red-50);
+
+  --color-background-warning: var(--orange-100);
+  --color-background-warning-hover: var(--orange-200);
+  --color-background-warning-pressed: var(--orange-300);
+  --color-background-warning-disabled: var(--orange-50);
+
+  --color-background-success: var(--green-100);
+  --color-background-success-hover: var(--green-200);
+  --color-background-success-pressed: var(--green-300);
+  --color-background-success-disabled: var(--green-50);
+
+  --color-background-info: var(--brand-100);
+  --color-background-info-hover: var(--brand-200);
+  --color-background-info-pressed: var(--brand-300);
+  --color-background-info-disabled: var(--brand-100);
+
+  --color-background-brand-emphasis: var(--brand-500);
+  --color-background-brand-emphasis-hover: var(--brand-600);
+  --color-background-brand-emphasis-pressed: var(--brand-700);
+
+  --color-background-success-emphasis: var(--green-500);
+  --color-background-success-emphasis-hover: var(--green-600);
+  --color-background-success-emphasis-pressed: var(--green-700);
+
+  --color-background-danger-emphasis: var(--red-500);
+  --color-background-danger-emphasis-hover: var(--red-600);
+  --color-background-danger-emphasis-pressed: var(--red-700);
+
+  --color-background-warning-emphasis: var(--orange-500);
+  --color-background-warning-emphasis-hover: var(--orange-600);
+  --color-background-warning-emphasis-pressed: var(--orange-700);
+
+  --color-background-accentgray: var(--neutral-200);
+  --color-background-accentgray-hover: var(--neutral-300);
+  --color-background-accentgray-pressed: var(--neutral-400);
+  --color-background-accentgray-disabled: var(--neutral-100);
+
+  --color-background-accentgreen: var(--green-100);
+  --color-background-accentgreen-hover: var(--green-200);
+  --color-background-accentgreen-pressed: var(--green-300);
+  --color-background-accentgreen-disabled: var(--green-100);
+
+  --color-background-accentred: var(--red-100);
+  --color-background-accentred-hover: var(--red-200);
+  --color-background-accentred-pressed: var(--red-300);
+  --color-background-accentred-disabled: var(--red-100);
+
+  --color-background-accentorange: var(--orange-100);
+  --color-background-accentorange-hover: var(--orange-200);
+  --color-background-accentorange-pressed: var(--orange-300);
+  --color-background-accentorange-disabled: var(--orange-100);
+
+  --color-background-accentyellow: var(--yellow-100);
+  --color-background-accentyellow-hover: var(--yellow-200);
+  --color-background-accentyellow-pressed: var(--yellow-300);
+  --color-background-accentyellow-disabled: var(--yellow-100);
+
+  --color-background-accentpurple: var(--purple-100);
+  --color-background-accentpurple-hover: var(--purple-200);
+  --color-background-accentpurple-pressed: var(--purple-300);
+  --color-background-accentpurple-disabled: var(--purple-100);
+
+  --color-background-accentpink: var(--pink-100);
+  --color-background-accentpink-hover: var(--pink-200);
+  --color-background-accentpink-pressed: var(--pink-300);
+  --color-background-accentpink-disabled: var(--pink-100);
+
+  --color-background-accentteal: var(--teal-100);
+  --color-background-accentteal-hover: var(--teal-200);
+  --color-background-accentteal-pressed: var(--teal-300);
+  --color-background-accentteal-disabled: var(--teal-100);
+
+  --color-background-accentslate: var(--slate-100);
+  --color-background-accentslate-hover: var(--slate-200);
+  --color-background-accentslate-pressed: var(--slate-300);
+  --color-background-accentslate-disabled: var(--slate-100);
+
+  /* ── Border ── */
+  --color-border-brand: var(--brand-500);
+  --color-border-neutral: var(--neutral-300);
+  --color-border-focused: var(--brand-500);
+  --color-border-input: var(--neutral-300);
+  --color-border-selected: var(--brand-500);
+  --color-border-danger: var(--red-500);
+  --color-border-warning: var(--orange-500);
+  --color-border-success: var(--green-500);
+  --color-border-info: var(--brand-500);
+  --color-border-disabled: var(--neutral-200);
+
+  --color-border-accentgray: var(--neutral-500);
+  --color-border-accentgreen: var(--green-500);
+  --color-border-accentred: var(--red-500);
+  --color-border-accentorange: var(--orange-500);
+  --color-border-accentyellow: var(--yellow-500);
+  --color-border-accentpurple: var(--purple-500);
+  --color-border-accentpink: var(--pink-500);
+  --color-border-accentteal: var(--teal-500);
+  --color-border-accentslate: var(--slate-500);
+
+  /* ── Text ── */
+  --color-text-primary: var(--black);
+  --color-text-brand: var(--brand-500);
+  --color-text-neutral: var(--neutral-500);
+  --color-text-tertiary: var(--neutral-400);
+  --color-text-navigation: var(--neutral-700);
+  --color-text-disabled: var(--neutral-300);
+  --color-text-selected: var(--brand-500);
+  --color-text-danger: var(--red-500);
+  --color-text-warning: var(--orange-500);
+  --color-text-success: var(--green-500);
+  --color-text-info: var(--brand-500);
+  --color-text-contrast: var(--white);
+
+  --color-text-accentgray: var(--neutral-500);
+  --color-text-accentgreen: var(--green-500);
+  --color-text-accentred: var(--red-500);
+  --color-text-accentorange: var(--orange-500);
+  --color-text-accentyellow: var(--yellow-500);
+  --color-text-accentpurple: var(--purple-500);
+  --color-text-accentpink: var(--pink-500);
+  --color-text-accentteal: var(--teal-500);
+  --color-text-accentslate: var(--slate-500);
+
+  /* ── Icon ── */
+  --color-icon-primary: var(--black);
+  --color-icon-brand: var(--brand-500);
+  --color-icon-neutral: var(--neutral-500);
+  --color-icon-disabled: var(--neutral-300);
+  --color-icon-selected: var(--brand-500);
+  --color-icon-danger: var(--red-500);
+  --color-icon-warning: var(--orange-500);
+  --color-icon-success: var(--green-500);
+  --color-icon-info: var(--brand-500);
+  --color-icon-contrast: var(--white);
+
+  --color-icon-accentgray: var(--neutral-500);
+  --color-icon-accentgreen: var(--green-500);
+  --color-icon-accentred: var(--red-500);
+  --color-icon-accentorange: var(--orange-500);
+  --color-icon-accentyellow: var(--yellow-500);
+  --color-icon-accentpurple: var(--purple-500);
+  --color-icon-accentpink: var(--pink-500);
+  --color-icon-accentteal: var(--teal-500);
+  --color-icon-accentslate: var(--slate-500);
+
+  /* ── Primitives exposed as utilities ── */
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-brand-500: var(--brand-500);
+  --color-brand-900: var(--brand-900);
+  --color-neutral-700: var(--neutral-700);
+
+  /* ── Shared fallbacks (focus rings, invalid states) ── */
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
