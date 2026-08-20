@@ -96,7 +96,7 @@ function ToastDescription({
 
 function ToastAction({
   className,
-  render = <Button variant="default" size="sm" />,
+  render = <Button variant="default" />,
   ...props
 }: ToastPrimitive.Action.Props) {
   return (
