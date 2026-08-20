@@ -1,17 +1,19 @@
 /**
  * Nyck design tokens — the CSS custom properties every component in this
- * package is built on. Import this once at your app's root, after Tailwind:
+ * package is built on. Tailwind v4 is a required peer dependency; see
+ * packages/ui/README.md for the full setup (the @import below plus the
+ * @source line that's actually required for Tailwind to see this package's
+ * utility classes at all). In your app's root CSS, after Tailwind:
  *
  *   @import "tailwindcss";
  *   @import "@nyck/aqueous-ui/tokens.css";
+ *   @source "../node_modules/@nyck/aqueous-ui/dist";
  *
- * NOTE (packages/ui Phase 2 scaffold): this is a first-pass extraction from
- * the docs app's globals.css, decoupled from its Next.js font-loader
- * variables (--font-inter/--font-geist, which only exist in that app's own
- * layout.tsx). The exact distribution shape here — whether this stays plain
- * :root custom properties, becomes a Tailwind v4 @theme preset, how
- * consumers load Inter, and how their own Tailwind build picks up utility
- * classes from node_modules — is Phase 3 work and may still change.
+ * Decoupled from the docs app's Next.js font-loader variables
+ * (--font-inter/--font-geist, which only exist in that app's own
+ * layout.tsx) — --font-family-body/-heading below default to a plain
+ * "Inter" fallback so this works with zero font setup, and consumers who've
+ * loaded Inter themselves can override those two variables after the import.
  */
 
 :root {
