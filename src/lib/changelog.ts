@@ -24,6 +24,98 @@ export const changelog: VersionEntry[] = [
     changes: [],
   },
   {
+    version: "0.8.0",
+    date: "2026-08-20",
+    author: "Jason Jeong",
+    summary: "Retokenized Checkbox, Attachment, Radio Group, Skeleton, Slider, Spinner, Switch, Textarea, Toggle, Toggle Group, and Tooltip onto Nyck design tokens, fixed several Calendar range-selection and Date & Time bugs, and added a real typed Time Field.",
+    changes: [
+      {
+        type: "changed",
+        title: "Checkbox checked state recolored to Nyck brand blue",
+        description:
+          "Replaced the --black/--white primitive fill used for the checked state with --color-background-brand-emphasis (and hover/pressed variants) plus --color-text-contrast, and moved the resting border, focus ring, and aria-invalid states off shadcn's border-input/ring/destructive utilities onto --color-border-input, --color-border-focused, --color-border-danger, and --color-destructive in a new checkbox.css.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "fixed",
+        title: "Calendar range selection no longer shows gaps between selected days",
+        description:
+          "The week row's gap-2 spacing left a visible unstyled sliver between adjacent range-selected days. Range-middle cells now bleed half the row gap on each side and drop their border-radius, and range-start/end cells bleed only toward the range's interior while staying rounded on their outer edge, so a multi-day selection reads as one continuous band.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "fixed",
+        title: "Calendar range band clipping fixed",
+        description:
+          "The bled-out range cells inherited aspect-square from the day button, so widening them to bridge the row gap also stretched their height and clipped into the row below. Added aspect-ratio: auto and height: 100% to the range-middle/start/end overrides so only width changes.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "fixed",
+        title: "Selecting today's date no longer gets stuck on the gray \"today\" background",
+        description:
+          "The gray today-marker rule checked for a data-selected attribute that doesn't exist on the day button (it lives on a different element), so the guard never matched and the rule's higher specificity always beat the selected-state fill. Now excludes all four actual selected-state attributes (data-selected-single, data-range-start/-end/-middle), so today correctly shows solid brand blue once selected.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "fixed",
+        title: "Date & Time calendar's Done button no longer overflows the calendar width",
+        description:
+          "The DayPicker root was pinned to w-fit (its own intrinsic width), so when the time field + Done button row needed more horizontal space than a single month's grid, the grid stayed narrow while the row grew past it. Changed root to w-full so the grid stretches to match its widest sibling; Basic and Large are unaffected since their grids were already the dominant width.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "added",
+        title: "Time Field component",
+        description:
+          "Added time-field.tsx: a free-text time input that parses shorthand entry (\"2p\", \"230pm\", \"1430\", \"9:30 AM\") into a canonical \"H:MM AM/PM\" value on blur or Enter, reverting to the last valid time on unparseable input. Wired into CalendarDateTime in place of the static OpaqueTextField, with a new onTimeChange callback and a corrected \"Enter a time\" placeholder (was inheriting OpaqueTextField's default \"Search\").",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "Attachment component retokenized and radius fixed to 8px",
+        description:
+          "Replaced bg-card/text-card-foreground/border-destructive/bg-muted/text-foreground/text-muted-foreground/ring-ring with Nyck tokens in a new attachment.css (background, border, error-state, media thumbnail, title, and description), and collapsed the size-varying rounded-xl/rounded-lg/rounded-md radii to a single fixed 8px (var(--radius-md)) across the card and media thumbnail for every size and orientation.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "Radio Group retokenized with a brand blue selected state",
+        description:
+          "Unchecked border now uses --color-border-input; the checked state (previously bg-primary/border-primary) now uses --color-background-brand-emphasis with a --color-text-contrast inner dot, plus focus, aria-invalid, and disabled states tokenized in a new radio-group.css.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "Slider retokenized with a brand blue fill",
+        description:
+          "Track now uses --color-background-accentgray, the filled range (previously bg-primary) now uses --color-background-brand-emphasis, and the thumb's border/background/focus-ring move off border-ring/bg-white/ring-ring onto --color-border-brand, --color-background-neutral, and the shared focused box-shadow pattern, with disabled states using the -disabled token variants.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "Switch retokenized with a brand blue checked state",
+        description:
+          "Track now uses --color-background-accentgray (off) and --color-background-brand-emphasis (previously bg-primary) when checked, thumb uses --color-background-neutral, and focus/aria-invalid/disabled states are tokenized in a new switch.css.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "Skeleton, Spinner, Textarea, Toggle, Toggle Group, and Tooltip retokenized",
+        description:
+          "Skeleton's bg-muted moved to --color-background-accentgray. Spinner now defaults to --color-icon-neutral instead of relying on ambient inherited color. Textarea's border/background/placeholder/focus/invalid/disabled states now match Text Field's tokens exactly. Toggle and Toggle Group's hover/pressed/outline states move off hover:bg-muted/border-input onto --color-background-neutral-hover, --color-background-selected + --color-text-selected (pressed), and --color-border-input (outline variant). Tooltip's dark bubble and arrow use the --black/--color-text-contrast primitives directly, since no semantic \"inverse surface\" token exists yet.",
+        timestamp: "2026-08-20",
+      },
+      {
+        type: "changed",
+        title: "11 more components checkmarked as token-audited in the sidebar",
+        description:
+          "Attachment, Calendar, Checkbox, Radio Group, Skeleton, Slider, Spinner, Switch, Textarea, Textfield, Toggle, Toggle Group, and Tooltip now show a checkmark instead of the default dash in the \"All Components\" list.",
+        timestamp: "2026-08-20",
+      },
+    ],
+  },
+  {
     version: "0.7.0",
     date: "2026-08-19",
     author: "Jason Jeong",

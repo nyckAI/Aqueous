@@ -1,0 +1,43 @@
+/* ── Toggle / Toggle Group — Nyck Design System Tokens ── */
+
+.toggle-root {
+  color: var(--color-text-primary);
+}
+
+.toggle-root:hover {
+  background-color: var(--color-background-neutral-hover);
+  color: var(--color-text-primary);
+}
+
+.toggle-root:focus-visible {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.toggle-root[aria-invalid="true"] {
+  border-color: var(--color-border-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-destructive) 20%, transparent);
+}
+
+.toggle-root[aria-pressed="true"],
+.toggle-root[data-state="on"] {
+  background-color: var(--color-background-selected);
+  color: var(--color-text-selected);
+}
+
+.toggle-root[data-variant="outline"] {
+  border-color: var(--color-border-input);
+}
+
+.toggle-root[data-variant="outline"]:hover {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.toggle-root:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+}
+
+.toggle-root[data-variant="outline"]:disabled {
+  border-color: var(--color-border-disabled);
+}

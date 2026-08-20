@@ -1,0 +1,59 @@
+/* ── Attachment — Nyck Design System Tokens ── */
+
+.attachment-root {
+  border-radius: var(--radius-md);
+  background-color: var(--color-background-neutral);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-neutral);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.attachment-root:focus-within {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.attachment-root[data-state="idle"] {
+  border-style: dashed;
+}
+
+.attachment-root[data-state="error"] {
+  border-color: var(--color-border-danger);
+}
+
+.attachment-root:has(> a, > button):hover {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.attachment-media {
+  border-radius: var(--radius-md);
+  background-color: var(--color-background-accentgray);
+  color: var(--color-text-primary);
+}
+
+.attachment-root[data-state="error"] .attachment-media {
+  background-color: var(--color-background-danger);
+  color: var(--color-text-danger);
+}
+
+.attachment-title {
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.attachment-description {
+  font-family: var(--font-family-body);
+  font-size: var(--font-micro-sm-size);
+  line-height: var(--font-micro-sm-line-height);
+  letter-spacing: var(--font-micro-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-neutral);
+}
+
+.attachment-root[data-state="error"] .attachment-description {
+  color: var(--color-text-danger);
+}

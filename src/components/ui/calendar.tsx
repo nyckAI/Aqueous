@@ -7,11 +7,12 @@ import {
   type DayButton,
   type Locale,
 } from "react-day-picker"
-import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon, ArrowRight, Calendar as CalendarIcon, Clock } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon, ArrowRight, Calendar as CalendarIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { TextField, OpaqueTextField } from "@/components/ui/textfield"
+import { TextField } from "@/components/ui/textfield"
+import { TimeField, type TimeValue } from "@/components/ui/time-field"
 import "./calendar.css"
 
 function Calendar({
@@ -46,7 +47,7 @@ function Calendar({
         ...formatters,
       }}
       classNames={{
-        root: cn("w-fit", defaultClassNames.root),
+        root: cn("w-full", defaultClassNames.root),
         months: cn(
           "relative flex flex-col gap-4 md:flex-row",
           defaultClassNames.months
@@ -255,11 +256,13 @@ function CalendarLarge({
 function CalendarDateTime({
   className,
   onDone,
+  onTimeChange,
   doneLabel = "Done",
   defaultTime = "12:00 AM",
   ...props
 }: React.ComponentProps<typeof Calendar> & {
   onDone?: () => void
+  onTimeChange?: (value: TimeValue) => void
   doneLabel?: string
   defaultTime?: string
 }) {
@@ -267,11 +270,9 @@ function CalendarDateTime({
     <div className={cn("calendar-container", className)}>
       <Calendar mode="single" numberOfMonths={1} {...props} />
       <div className="calendar-datetime-row">
-        <OpaqueTextField
-          icon={Clock}
-          type="text"
+        <TimeField
           defaultValue={defaultTime}
-          aria-label="Time"
+          onValueChange={onTimeChange}
           className="w-fit"
         />
         <Button variant="primary" onClick={onDone}>

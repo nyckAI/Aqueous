@@ -1,0 +1,36 @@
+/* ── Slider — Nyck Design System Tokens ── */
+
+.slider-track {
+  background-color: var(--color-background-accentgray);
+}
+
+.slider-range {
+  background-color: var(--color-background-brand-emphasis);
+}
+
+.slider-thumb {
+  border-color: var(--color-border-brand);
+  background-color: var(--color-background-neutral);
+}
+
+.slider-thumb:hover,
+.slider-thumb:focus-visible,
+.slider-thumb:active {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.slider-thumb:focus-visible {
+  outline: none;
+}
+
+[data-disabled] .slider-track {
+  background-color: var(--color-background-neutral-disabled);
+}
+
+[data-disabled] .slider-range {
+  background-color: var(--color-background-brand-disabled);
+}
+
+[data-disabled] .slider-thumb {
+  border-color: var(--color-border-disabled);
+}

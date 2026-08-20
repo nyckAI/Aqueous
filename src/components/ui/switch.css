@@ -1,0 +1,31 @@
+/* ── Switch — Nyck Design System Tokens ── */
+
+.switch-root {
+  background-color: var(--color-background-accentgray);
+}
+
+.switch-root[data-checked] {
+  background-color: var(--color-background-brand-emphasis);
+}
+
+.switch-root:focus-visible {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.switch-root[aria-invalid="true"] {
+  border-color: var(--color-border-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-destructive) 20%, transparent);
+}
+
+.switch-root[data-disabled] {
+  background-color: var(--color-background-neutral-disabled);
+}
+
+.switch-root[data-disabled][data-checked] {
+  background-color: var(--color-background-brand-disabled);
+}
+
+.switch-thumb {
+  background-color: var(--color-background-neutral);
+}

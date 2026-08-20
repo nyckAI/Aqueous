@@ -1,0 +1,39 @@
+/* ── Radio Group — Nyck Design System Tokens ── */
+
+.radio-group-item {
+  border-color: var(--color-border-input);
+  background-color: var(--color-background-neutral);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.radio-group-item:not(:disabled):hover {
+  border-color: var(--color-border-focused);
+}
+
+.radio-group-item:focus-visible {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.radio-group-item[data-checked] {
+  border-color: var(--color-border-brand);
+  background-color: var(--color-background-brand-emphasis);
+}
+
+.radio-group-item[aria-invalid="true"] {
+  border-color: var(--color-border-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-destructive) 20%, transparent);
+}
+
+.radio-group-item:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-border-disabled);
+}
+
+.radio-group-item:disabled[data-checked] {
+  background-color: var(--color-background-neutral-disabled);
+}
+
+.radio-group-indicator-dot {
+  background-color: var(--color-text-contrast);
+}

@@ -1,0 +1,54 @@
+/* ── Checkbox — Nyck Design System Tokens ── */
+
+.checkbox-root {
+  border: 1px solid var(--color-border-input);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.checkbox-root:not(:disabled):hover {
+  border-color: var(--color-border-focused);
+}
+
+.checkbox-root:focus-visible {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.checkbox-root[data-checked] {
+  border-color: var(--color-border-brand);
+  background-color: var(--color-background-brand-emphasis);
+  color: var(--color-text-contrast);
+}
+
+.checkbox-root[data-checked]:not(:disabled):hover {
+  background-color: var(--color-background-brand-emphasis-hover);
+  border-color: var(--color-background-brand-emphasis-hover);
+}
+
+.checkbox-root[data-checked]:not(:disabled):active {
+  background-color: var(--color-background-brand-emphasis-pressed);
+  border-color: var(--color-background-brand-emphasis-pressed);
+}
+
+.checkbox-root[aria-invalid="true"] {
+  border-color: var(--color-border-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-destructive) 20%, transparent);
+}
+
+.checkbox-root[aria-invalid="true"][data-checked] {
+  border-color: var(--color-border-danger);
+}
+
+.checkbox-root:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-border-disabled);
+}
+
+.checkbox-root:disabled[data-checked] {
+  background-color: var(--color-background-neutral-disabled);
+  color: var(--color-icon-disabled);
+}
+
+.checkbox-indicator svg {
+  color: currentColor;
+}

@@ -1,0 +1,18 @@
+/* ── Tooltip — Nyck Design System Tokens ──
+   Uses the black/white primitives directly for its dark surface — per the
+   token-naming docs, black and white are primitives with no numeric scale
+   and no dedicated "inverse" semantic token exists for this dark bubble. */
+
+.tooltip-content {
+  background-color: var(--black);
+  color: var(--color-text-contrast);
+  font-family: var(--font-family-body);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}
+
+.tooltip-arrow {
+  background-color: var(--black);
+  fill: var(--black);
+}

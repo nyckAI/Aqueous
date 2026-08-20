@@ -1,0 +1,36 @@
+/* ── Textarea — Nyck Design System Tokens ── */
+
+.textarea-root {
+  background-color: var(--color-background-neutral);
+  border-color: var(--color-border-input);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+}
+
+.textarea-root::placeholder {
+  color: var(--color-text-neutral);
+}
+
+.textarea-root:focus-visible {
+  border-color: var(--color-border-focused);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focused) 50%, transparent);
+}
+
+.textarea-root[aria-invalid="true"] {
+  border-color: var(--color-border-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-destructive) 20%, transparent);
+}
+
+.textarea-root:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-background-neutral-disabled);
+  border-color: var(--color-border-disabled);
+  color: var(--color-text-disabled);
+}
+
+.textarea-root:disabled::placeholder {
+  color: var(--color-text-disabled);
+}

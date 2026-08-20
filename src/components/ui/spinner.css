@@ -1,0 +1,5 @@
+/* ── Spinner — Nyck Design System Tokens ── */
+
+.spinner-root {
+  color: var(--color-icon-neutral);
+}

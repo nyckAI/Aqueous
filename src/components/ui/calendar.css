@@ -1,6 +1,10 @@
 /* ── Calendar — Nyck Design System Tokens ── */
 
 .calendar-container {
+  /* Matches the `gap-2` Tailwind class on the day/week rows in calendar.tsx —
+     used below to bridge that gap so a selected range reads as one solid band. */
+  --calendar-cell-gap: 0.5rem;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -52,14 +56,25 @@
   color: var(--color-text-neutral);
 }
 
-.calendar-day[data-today="true"]:not([data-selected="true"]) {
+/* Today's gray marker only shows when the day isn't otherwise selected —
+   note the button never carries `data-selected` (that lives on the day-cell
+   wrapper), so each actual selected-state attribute must be excluded here or
+   this rule's higher specificity keeps beating the selected-state colors. */
+.calendar-day[data-today="true"]:not([data-selected-single="true"]):not([data-range-start="true"]):not([data-range-end="true"]):not([data-range-middle="true"]) {
   background-color: var(--color-background-accentgray);
 }
 
-/* Range middle — flat, tinted band connecting the two selected endpoints */
+/* Range middle — flat, tinted band connecting the two selected endpoints.
+   Bled out by half the row gap on both sides (and squared off) so it reads
+   as one continuous band instead of separated pills. */
 .calendar-day[data-range-middle="true"] {
   background-color: var(--color-background-selected);
   color: var(--color-text-primary);
+  border-radius: 0;
+  aspect-ratio: auto;
+  height: 100%;
+  width: calc(100% + var(--calendar-cell-gap));
+  margin-inline: calc(var(--calendar-cell-gap) / -2);
 }
 
 /* Range start/end and single-select — solid brand fill */
@@ -68,6 +83,26 @@
 .calendar-day[data-selected-single="true"] {
   background-color: var(--color-background-brand-emphasis);
   color: var(--color-text-contrast);
+}
+
+/* Range start/end that are part of a multi-day range bleed toward the
+   range's interior to close the row gap, but stay squared off on that
+   side and rounded on the outer side. A start/end that is also the other
+   (a single-day range) keeps the default fully-rounded pill shape. */
+.calendar-day[data-range-start="true"]:not([data-range-end="true"]) {
+  border-radius: var(--cell-radius) 0 0 var(--cell-radius);
+  aspect-ratio: auto;
+  height: 100%;
+  width: calc(100% + calc(var(--calendar-cell-gap) / 2));
+  margin-right: calc(var(--calendar-cell-gap) / -2);
+}
+
+.calendar-day[data-range-end="true"]:not([data-range-start="true"]) {
+  border-radius: 0 var(--cell-radius) var(--cell-radius) 0;
+  aspect-ratio: auto;
+  height: 100%;
+  width: calc(100% + calc(var(--calendar-cell-gap) / 2));
+  margin-left: calc(var(--calendar-cell-gap) / -2);
 }
 
 /* ── Large variant: From/To row ── */
