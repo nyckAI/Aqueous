@@ -6,8 +6,8 @@
  * utility classes at all). In your app's root CSS, after Tailwind:
  *
  *   @import "tailwindcss";
- *   @import "@nyck/aqueous-ui/tokens.css";
- *   @source "../node_modules/@nyck/aqueous-ui/dist";
+ *   @import "@nyckai/aqueous-ui/tokens.css";
+ *   @source "../node_modules/@nyckai/aqueous-ui/dist";
  *
  * Decoupled from the docs app's Next.js font-loader variables
  * (--font-inter/--font-geist, which only exist in that app's own
