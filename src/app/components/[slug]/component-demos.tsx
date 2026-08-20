@@ -24,12 +24,22 @@ import {
   AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
+  AlertDialogIcon,
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
+import {
+  Attachment,
+  AttachmentMedia,
+  AttachmentContent,
+  AttachmentTitle,
+  AttachmentDescription,
+  AttachmentActions,
+  AttachmentAction,
+} from "@/components/ui/attachment";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -41,40 +51,10 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { CalendarBasic, CalendarLarge, CalendarDateTime } from "@/components/ui/calendar";
+import type { DateRange } from "react-day-picker";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "@/components/ui/collapsible";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerClose,
-} from "@/components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -85,14 +65,23 @@ import {
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from "@/components/ui/empty";
+import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
 } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
+import { Marker, MarkerIcon, MarkerContent } from "@/components/ui/marker";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import {
   TextField,
-  SearchField,
+  OpaqueTextField,
   TextFieldGroup,
   TextFieldLabel,
   TextFieldDescription,
@@ -122,7 +111,23 @@ import {
   PopoverDescription,
 } from "@/components/ui/popover";
 import { Progress } from "@/components/ui/progress";
+import {
+  Questionnaire,
+  QuestionnaireItem,
+  QuestionnaireTitle,
+  QuestionnaireChoices,
+  QuestionnaireChoice,
+  QuestionnaireActions,
+  QuestionnaireNext,
+  QuestionnairePrevious,
+  QuestionnaireSubmit,
+} from "@/components/ui/questionnaire";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
@@ -140,6 +145,7 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { Sidebar as RealSidebar } from "@/components/sidebar/Sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Slider } from "@/components/ui/slider";
 import { Spinner } from "@/components/ui/spinner";
@@ -154,7 +160,9 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { Toaster, toast } from "@/components/ui/toast";
 import { Toggle } from "@/components/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Tooltip,
   TooltipTrigger,
@@ -171,7 +179,19 @@ import {
   Bell,
   Upload,
   SquarePen,
+  FileText,
+  Bold,
+  Italic,
+  Underline,
+  Inbox,
 } from "lucide-react";
+import {
+  BarChart as RechartsBarChart,
+  Bar as RechartsBar,
+  XAxis as RechartsXAxis,
+  YAxis as RechartsYAxis,
+  CartesianGrid as RechartsCartesianGrid,
+} from "recharts";
 
 type Demo = { preview: React.ReactNode; code: string };
 
@@ -180,13 +200,41 @@ type Demo = { preview: React.ReactNode; code: string };
 // ---------------------------------------------------------------------------
 
 function CalendarDemoPreview() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [basicRange, setBasicRange] = useState<DateRange | undefined>({
+    from: new Date(2026, 3, 16),
+    to: new Date(2026, 3, 19),
+  });
+  const [largeRange, setLargeRange] = useState<DateRange | undefined>();
+  const [dateTime, setDateTime] = useState<Date | undefined>(new Date());
+
   return (
-    <Calendar
-      mode="single"
-      selected={date}
-      onSelect={setDate}
-    />
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-3">
+        <h4 className="text-sm font-medium">Basic</h4>
+        <CalendarBasic
+          mode="range"
+          defaultMonth={new Date(2026, 3, 1)}
+          selected={basicRange}
+          onSelect={setBasicRange}
+        />
+      </div>
+      <div className="flex flex-col gap-3">
+        <h4 className="text-sm font-medium">Large</h4>
+        <CalendarLarge
+          mode="range"
+          selected={largeRange}
+          onSelect={setLargeRange}
+        />
+      </div>
+      <div className="flex flex-col gap-3">
+        <h4 className="text-sm font-medium">Date &amp; Time</h4>
+        <CalendarDateTime
+          mode="single"
+          selected={dateTime}
+          onSelect={setDateTime}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -201,24 +249,6 @@ function CheckboxDemoPreview() {
       />
       <Label htmlFor="terms">Accept terms and conditions</Label>
     </div>
-  );
-}
-
-function CollapsibleDemoPreview() {
-  const [open, setOpen] = useState(false);
-  return (
-    <Collapsible open={open} onOpenChange={setOpen}>
-      <div className="flex items-center gap-2">
-        <CollapsibleTrigger render={<Button variant="default" size="sm" />}>
-          {open ? "Hide" : "Show"} content
-        </CollapsibleTrigger>
-      </div>
-      <CollapsibleContent>
-        <div className="mt-2 rounded-md border p-3 text-sm">
-          This is the collapsible content. It can contain anything.
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
   );
 }
 
@@ -488,45 +518,60 @@ function AlertDemo(): Demo {
   };
 }
 
+const ALERT_DIALOG_VARIANTS = [
+  { key: "default", label: "Default" },
+  { key: "danger", label: "Danger" },
+  { key: "success", label: "Success" },
+  { key: "warning", label: "Warning" },
+  { key: "info", label: "Info" },
+] as const;
+
 function AlertDialogDemo(): Demo {
   return {
     preview: (
-      <AlertDialog>
-        <AlertDialogTrigger render={<Button variant="default" />}>
-          Open Alert Dialog
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <div className="flex flex-wrap gap-2">
+        {ALERT_DIALOG_VARIANTS.map(({ key, label }) => (
+          <AlertDialog key={key}>
+            <AlertDialogTrigger render={<Button variant="default" />}>
+              {label}
+            </AlertDialogTrigger>
+            <AlertDialogContent variant={key}>
+              <AlertDialogHeader>
+                <AlertDialogIcon />
+                <AlertDialogTitle>Title Here</AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogDescription>
+                The message of this pop up modal goes here
+              </AlertDialogDescription>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Action</AlertDialogCancel>
+                <AlertDialogAction>Action</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        ))}
+      </div>
     ),
     code: `<AlertDialog>
   <AlertDialogTrigger render={<Button variant="default" />}>
-    Open Alert Dialog
+    Danger
   </AlertDialogTrigger>
-  <AlertDialogContent>
+  <AlertDialogContent variant="danger">
     <AlertDialogHeader>
-      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-      <AlertDialogDescription>
-        This action cannot be undone.
-      </AlertDialogDescription>
+      <AlertDialogIcon />
+      <AlertDialogTitle>Title Here</AlertDialogTitle>
     </AlertDialogHeader>
+    <AlertDialogDescription>
+      The message of this pop up modal goes here
+    </AlertDialogDescription>
     <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Continue</AlertDialogAction>
+      <AlertDialogCancel>Action</AlertDialogCancel>
+      <AlertDialogAction>Action</AlertDialogAction>
     </AlertDialogFooter>
   </AlertDialogContent>
-</AlertDialog>`,
+</AlertDialog>
+
+{/* variant: "default" | "danger" | "success" | "warning" | "info" */}`,
   };
 }
 
@@ -689,44 +734,33 @@ function ButtonDemo(): Demo {
 function CalendarDemo(): Demo {
   return {
     preview: <CalendarDemoPreview />,
-    code: `const [date, setDate] = useState<Date | undefined>(new Date());
+    code: `{/* Basic — single month, no extra chrome */}
+const [basicRange, setBasicRange] = useState<DateRange | undefined>();
 
-<Calendar
+<CalendarBasic
+  mode="range"
+  selected={basicRange}
+  onSelect={setBasicRange}
+/>
+
+{/* Large — "From"/"To" text fields above two side-by-side months */}
+const [largeRange, setLargeRange] = useState<DateRange | undefined>();
+
+<CalendarLarge
+  mode="range"
+  selected={largeRange}
+  onSelect={setLargeRange}
+/>
+
+{/* Date & Time — single month plus a time field and a confirm action */}
+const [dateTime, setDateTime] = useState<Date | undefined>();
+
+<CalendarDateTime
   mode="single"
-  selected={date}
-  onSelect={setDate}
+  selected={dateTime}
+  onSelect={setDateTime}
+  onDone={() => console.log(dateTime)}
 />`,
-  };
-}
-
-function CardDemo(): Demo {
-  return {
-    preview: (
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card description goes here.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card content with some example text.</p>
-        </CardContent>
-        <CardFooter>
-          <p className="text-sm text-muted-foreground">Card footer</p>
-        </CardFooter>
-      </Card>
-    ),
-    code: `<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card description goes here.</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Card content with some example text.</p>
-  </CardContent>
-  <CardFooter>
-    <p className="text-sm text-muted-foreground">Card footer</p>
-  </CardFooter>
-</Card>`,
   };
 }
 
@@ -743,124 +777,6 @@ function CheckboxDemo(): Demo {
   />
   <Label htmlFor="terms">Accept terms and conditions</Label>
 </div>`,
-  };
-}
-
-function CollapsibleDemo(): Demo {
-  return {
-    preview: <CollapsibleDemoPreview />,
-    code: `const [open, setOpen] = useState(false);
-
-<Collapsible open={open} onOpenChange={setOpen}>
-  <CollapsibleTrigger render={<Button variant="default" size="sm" />}>
-    {open ? "Hide" : "Show"} content
-  </CollapsibleTrigger>
-  <CollapsibleContent>
-    <div className="mt-2 rounded-md border p-3 text-sm">
-      This is the collapsible content.
-    </div>
-  </CollapsibleContent>
-</Collapsible>`,
-  };
-}
-
-function DialogDemo(): Demo {
-  return {
-    preview: (
-      <Dialog>
-        <DialogTrigger render={<Button variant="default" />}>
-          Open Dialog
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Dialog Title</DialogTitle>
-            <DialogDescription>
-              This is a dialog description. It provides context for the dialog.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-4">
-            <p className="text-sm text-muted-foreground">
-              Dialog body content goes here.
-            </p>
-          </div>
-          <DialogFooter>
-            <Button>Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    ),
-    code: `<Dialog>
-  <DialogTrigger render={<Button variant="default" />}>
-    Open Dialog
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-      <DialogDescription>
-        This is a dialog description.
-      </DialogDescription>
-    </DialogHeader>
-    <div className="py-4">
-      <p>Dialog body content goes here.</p>
-    </div>
-    <DialogFooter>
-      <Button>Save changes</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
-  };
-}
-
-function DrawerDemo(): Demo {
-  return {
-    preview: (
-      <Drawer>
-        <DrawerTrigger render={<Button variant="default" />}>
-          Open Drawer
-        </DrawerTrigger>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Drawer Title</DrawerTitle>
-            <DrawerDescription>
-              This is a drawer description.
-            </DrawerDescription>
-          </DrawerHeader>
-          <div className="p-4">
-            <p className="text-sm text-muted-foreground">
-              Drawer body content goes here.
-            </p>
-          </div>
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose render={<Button variant="default" />}>
-              Cancel
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    ),
-    code: `<Drawer>
-  <DrawerTrigger render={<Button variant="default" />}>
-    Open Drawer
-  </DrawerTrigger>
-  <DrawerContent>
-    <DrawerHeader>
-      <DrawerTitle>Drawer Title</DrawerTitle>
-      <DrawerDescription>
-        This is a drawer description.
-      </DrawerDescription>
-    </DrawerHeader>
-    <div className="p-4">
-      <p>Drawer body content goes here.</p>
-    </div>
-    <DrawerFooter>
-      <Button>Submit</Button>
-      <DrawerClose render={<Button variant="default" />}>
-        Cancel
-      </DrawerClose>
-    </DrawerFooter>
-  </DrawerContent>
-</Drawer>`,
   };
 }
 
@@ -947,12 +863,12 @@ function TextfieldDemo(): Demo {
       <div className="flex w-full max-w-md flex-col gap-10">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <h3 className="text-base font-semibold">Search field</h3>
+            <h3 className="text-base font-semibold">Opaque text field</h3>
             <p className="text-sm text-muted-foreground">
               Filled search input with a leading magnifier.
             </p>
           </div>
-          <SearchField />
+          <OpaqueTextField />
         </div>
 
         <div className="flex flex-col gap-4">
@@ -981,9 +897,9 @@ function TextfieldDemo(): Demo {
         </div>
       </div>
     ),
-    code: `{/* Search field */}
-<SearchField />
-<SearchField placeholder="Search suppliers" />
+    code: `{/* Opaque text field */}
+<OpaqueTextField />
+<OpaqueTextField placeholder="Search suppliers" />
 
 {/* Text field — no icon */}
 <TextField placeholder="Default state" />
@@ -1606,6 +1522,355 @@ function TooltipDemo(): Demo {
 }
 
 // ---------------------------------------------------------------------------
+// Newly-registered component demos
+// ---------------------------------------------------------------------------
+
+function AttachmentDemo(): Demo {
+  return {
+    preview: (
+      <Attachment className="max-w-xs">
+        <AttachmentMedia>
+          <FileText className="size-5" />
+        </AttachmentMedia>
+        <AttachmentContent>
+          <AttachmentTitle>design-tokens.pdf</AttachmentTitle>
+          <AttachmentDescription>2.4 MB</AttachmentDescription>
+        </AttachmentContent>
+        <AttachmentActions>
+          <AttachmentAction aria-label="Remove attachment">
+            <XCircle />
+          </AttachmentAction>
+        </AttachmentActions>
+      </Attachment>
+    ),
+    code: `<Attachment>
+  <AttachmentMedia>
+    <FileText />
+  </AttachmentMedia>
+  <AttachmentContent>
+    <AttachmentTitle>design-tokens.pdf</AttachmentTitle>
+    <AttachmentDescription>2.4 MB</AttachmentDescription>
+  </AttachmentContent>
+  <AttachmentActions>
+    <AttachmentAction aria-label="Remove attachment">
+      <XCircle />
+    </AttachmentAction>
+  </AttachmentActions>
+</Attachment>`,
+  };
+}
+
+const chartConfig = {
+  visits: {
+    label: "Visits",
+    color: "var(--color-background-brand-emphasis)",
+  },
+} satisfies ChartConfig;
+
+const chartData = [
+  { day: "Mon", visits: 42 },
+  { day: "Tue", visits: 58 },
+  { day: "Wed", visits: 35 },
+  { day: "Thu", visits: 71 },
+  { day: "Fri", visits: 49 },
+];
+
+function ChartDemo(): Demo {
+  return {
+    preview: (
+      <ChartContainer config={chartConfig} className="max-h-64 w-full">
+        <RechartsBarChart data={chartData}>
+          <RechartsCartesianGrid vertical={false} />
+          <RechartsXAxis dataKey="day" tickLine={false} axisLine={false} />
+          <RechartsYAxis hide domain={[0, "auto"]} />
+          <ChartTooltip content={<ChartTooltipContent />} />
+          <RechartsBar
+            dataKey="visits"
+            fill="var(--color-visits)"
+            radius={4}
+            isAnimationActive={false}
+          />
+        </RechartsBarChart>
+      </ChartContainer>
+    ),
+    code: `const chartConfig = {
+  visits: { label: "Visits", color: "var(--color-background-brand-emphasis)" },
+} satisfies ChartConfig;
+
+<ChartContainer config={chartConfig}>
+  <BarChart data={chartData}>
+    <CartesianGrid vertical={false} />
+    <XAxis dataKey="day" tickLine={false} axisLine={false} />
+    <YAxis hide domain={[0, "auto"]} />
+    <ChartTooltip content={<ChartTooltipContent />} />
+    <Bar dataKey="visits" fill="var(--color-visits)" radius={4} />
+  </BarChart>
+</ChartContainer>`,
+  };
+}
+
+function EmptyDemo(): Demo {
+  return {
+    preview: (
+      <Empty className="w-full max-w-sm border border-dashed">
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <Inbox />
+          </EmptyMedia>
+          <EmptyTitle>No results</EmptyTitle>
+          <EmptyDescription>
+            Try adjusting your search or filters.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    ),
+    code: `<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">
+      <Inbox />
+    </EmptyMedia>
+    <EmptyTitle>No results</EmptyTitle>
+    <EmptyDescription>
+      Try adjusting your search or filters.
+    </EmptyDescription>
+  </EmptyHeader>
+</Empty>`,
+  };
+}
+
+function MarkerDemo(): Demo {
+  return {
+    preview: (
+      <div className="flex w-full max-w-sm flex-col gap-3">
+        <Marker>
+          <MarkerIcon>
+            <Bold className="size-4" />
+          </MarkerIcon>
+          <MarkerContent>Bold textformatting</MarkerContent>
+        </Marker>
+        <Marker variant="separator">
+          <MarkerContent>or</MarkerContent>
+        </Marker>
+        <Marker>
+          <MarkerIcon>
+            <Italic className="size-4" />
+          </MarkerIcon>
+          <MarkerContent>Italic text formatting</MarkerContent>
+        </Marker>
+      </div>
+    ),
+    code: `<Marker>
+  <MarkerIcon><Bold /></MarkerIcon>
+  <MarkerContent>Bold text formatting</MarkerContent>
+</Marker>
+<Marker variant="separator">
+  <MarkerContent>or</MarkerContent>
+</Marker>`,
+  };
+}
+
+function NativeSelectDemo(): Demo {
+  return {
+    preview: (
+      <NativeSelect defaultValue="colors" className="w-full max-w-xs">
+        <NativeSelectOption value="colors">Colors</NativeSelectOption>
+        <NativeSelectOption value="typography">Typography</NativeSelectOption>
+        <NativeSelectOption value="icons">Icons</NativeSelectOption>
+      </NativeSelect>
+    ),
+    code: `<NativeSelect defaultValue="colors">
+  <NativeSelectOption value="colors">Colors</NativeSelectOption>
+  <NativeSelectOption value="typography">Typography</NativeSelectOption>
+  <NativeSelectOption value="icons">Icons</NativeSelectOption>
+</NativeSelect>`,
+  };
+}
+
+function QuestionnaireDemo(): Demo {
+  return {
+    preview: (
+      <Questionnaire
+        items={[{ name: "role" }, { name: "experience" }]}
+        className="w-full max-w-sm"
+      >
+        <QuestionnaireItem name="role">
+          <QuestionnaireTitle>What&apos;s your role?</QuestionnaireTitle>
+          <QuestionnaireChoices>
+            <QuestionnaireChoice value="design">Design</QuestionnaireChoice>
+            <QuestionnaireChoice value="engineering">Engineering</QuestionnaireChoice>
+          </QuestionnaireChoices>
+        </QuestionnaireItem>
+        <QuestionnaireItem name="experience">
+          <QuestionnaireTitle>Years of experience?</QuestionnaireTitle>
+          <QuestionnaireChoices>
+            <QuestionnaireChoice value="0-2">0–2</QuestionnaireChoice>
+            <QuestionnaireChoice value="3-5">3–5</QuestionnaireChoice>
+          </QuestionnaireChoices>
+        </QuestionnaireItem>
+        <QuestionnaireActions>
+          <QuestionnairePrevious />
+          <QuestionnaireNext />
+          <QuestionnaireSubmit />
+        </QuestionnaireActions>
+      </Questionnaire>
+    ),
+    code: `<Questionnaire items={[{ name: "role" }, { name: "experience" }]}>
+  <QuestionnaireItem name="role">
+    <QuestionnaireTitle>What's your role?</QuestionnaireTitle>
+    <QuestionnaireChoices>
+      <QuestionnaireChoice value="design">Design</QuestionnaireChoice>
+      <QuestionnaireChoice value="engineering">Engineering</QuestionnaireChoice>
+    </QuestionnaireChoices>
+  </QuestionnaireItem>
+  <QuestionnaireActions>
+    <QuestionnairePrevious />
+    <QuestionnaireNext />
+    <QuestionnaireSubmit />
+  </QuestionnaireActions>
+</Questionnaire>`,
+  };
+}
+
+function ResizableDemo(): Demo {
+  return {
+    preview: (
+      <ResizablePanelGroup
+        orientation="horizontal"
+        className="h-40 w-full max-w-sm rounded-md border"
+      >
+        <ResizablePanel defaultSize={50}>
+          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+            One
+          </div>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={50}>
+          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+            Two
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    ),
+    code: `<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel defaultSize={50}>One</ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel defaultSize={50}>Two</ResizablePanel>
+</ResizablePanelGroup>`,
+  };
+}
+
+function SidebarDemoPreview() {
+  const [collapsed, setCollapsed] = useState(false);
+  return (
+    <div className="relative h-[560px] w-full overflow-hidden rounded-lg border border-border-neutral [&_.sticky]:!h-full">
+      <div className="flex h-full w-full">
+        <RealSidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed((prev) => !prev)}
+        />
+        <div className="flex min-w-0 flex-1 items-center justify-center bg-background-neutral">
+          <p className="text-sm text-muted-foreground">Page content</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SidebarDemo(): Demo {
+  return {
+    preview: <SidebarDemoPreview />,
+    code: `const [collapsed, setCollapsed] = useState(false);
+
+<div className="flex h-dvh w-full">
+  <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((prev) => !prev)} />
+  <div className="flex min-w-0 flex-1 flex-col">
+    {children}
+  </div>
+</div>`,
+  };
+}
+
+const TOAST_TYPES = [
+  { type: "loading", label: "Default" },
+  { type: "error", label: "Danger" },
+  { type: "warning", label: "Warning" },
+  { type: "success", label: "Success" },
+  { type: "info", label: "Info" },
+] as const;
+
+function ToastDemoPreview() {
+  return (
+    <Toaster>
+      <div className="flex flex-wrap gap-3">
+        {TOAST_TYPES.map(({ type, label }) => (
+          <Button
+            key={type}
+            variant="default"
+            onClick={() =>
+              toast.add({
+                title: "I'm a toast!",
+                description: "description here",
+                type,
+              })
+            }
+          >
+            Show {label}
+          </Button>
+        ))}
+      </div>
+    </Toaster>
+  );
+}
+
+function ToastDemo(): Demo {
+  return {
+    preview: <ToastDemoPreview />,
+    code: `const toast = createToastManager();
+
+{/* type: "loading" | "error" | "warning" | "success" | "info" */}
+<Toaster>
+  <Button
+    onClick={() =>
+      toast.add({
+        title: "I'm a toast!",
+        description: "description here",
+        type: "success",
+      })
+    }
+  >
+    Show toast
+  </Button>
+</Toaster>`,
+  };
+}
+
+function ToggleGroupDemo(): Demo {
+  return {
+    preview: (
+      <ToggleGroup variant="outline">
+        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+          <Bold className="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+          <Italic className="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+          <Underline className="size-4" />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    ),
+    code: `<ToggleGroup variant="outline">
+  <ToggleGroupItem value="bold" aria-label="Toggle bold">
+    <Bold />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic" aria-label="Toggle italic">
+    <Italic />
+  </ToggleGroupItem>
+</ToggleGroup>`,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Registry
 // ---------------------------------------------------------------------------
 
@@ -1613,29 +1878,32 @@ const demos: Record<string, () => Demo> = {
   accordion: AccordionDemo,
   alert: AlertDemo,
   "alert-dialog": AlertDialogDemo,
+  attachment: AttachmentDemo,
   avatar: AvatarDemo,
   badge: BadgeDemo,
   breadcrumb: BreadcrumbDemo,
   button: ButtonDemo,
   calendar: CalendarDemo,
-  card: CardDemo,
+  chart: ChartDemo,
   checkbox: CheckboxDemo,
-  collapsible: CollapsibleDemo,
-  dialog: DialogDemo,
-  drawer: DrawerDemo,
   "dropdown-menu": DropdownMenuDemo,
+  empty: EmptyDemo,
   "hover-card": HoverCardDemo,
-  textfield: TextfieldDemo,
   "input-otp": InputOTPDemo,
   label: LabelDemo,
+  marker: MarkerDemo,
+  "native-select": NativeSelectDemo,
   pagination: PaginationDemo,
   popover: PopoverDemo,
   progress: ProgressDemo,
+  questionnaire: QuestionnaireDemo,
   "radio-group": RadioGroupDemo,
+  resizable: ResizableDemo,
   "scroll-area": ScrollAreaDemo,
   select: SelectDemo,
   separator: SeparatorDemo,
   sheet: SheetDemo,
+  sidebar: SidebarDemo,
   skeleton: SkeletonDemo,
   slider: SliderDemo,
   spinner: SpinnerDemo,
@@ -1643,7 +1911,10 @@ const demos: Record<string, () => Demo> = {
   table: TableDemo,
   tabs: TabsDemo,
   textarea: TextareaDemo,
+  textfield: TextfieldDemo,
+  toast: ToastDemo,
   toggle: ToggleDemo,
+  "toggle-group": ToggleGroupDemo,
   tooltip: TooltipDemo,
 };
 

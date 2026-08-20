@@ -1,0 +1,116 @@
+/* ── Calendar — Nyck Design System Tokens ── */
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  width: fit-content;
+  gap: 16px;
+  background-color: var(--color-background-neutral);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* ── Month caption ── */
+.calendar-caption {
+  font-family: var(--font-family-body);
+  font-size: var(--font-heading-xs-size);
+  line-height: var(--font-heading-xs-line-height);
+  letter-spacing: var(--font-heading-xs-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.calendar-chevron {
+  color: var(--color-icon-primary);
+}
+
+/* ── Weekday row ── */
+.calendar-weekday {
+  font-family: var(--font-family-body);
+  font-size: var(--font-micro-sm-size);
+  line-height: var(--font-micro-sm-line-height);
+  letter-spacing: var(--font-micro-sm-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-neutral);
+  text-transform: uppercase;
+}
+
+/* ── Day cells ── */
+.calendar-day {
+  font-family: var(--font-family-body);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.calendar-day[data-outside="true"] {
+  color: var(--color-text-neutral);
+}
+
+.calendar-day[data-today="true"]:not([data-selected="true"]) {
+  background-color: var(--color-background-accentgray);
+}
+
+/* Range middle — flat, tinted band connecting the two selected endpoints */
+.calendar-day[data-range-middle="true"] {
+  background-color: var(--color-background-selected);
+  color: var(--color-text-primary);
+}
+
+/* Range start/end and single-select — solid brand fill */
+.calendar-day[data-range-start="true"],
+.calendar-day[data-range-end="true"],
+.calendar-day[data-selected-single="true"] {
+  background-color: var(--color-background-brand-emphasis);
+  color: var(--color-text-contrast);
+}
+
+/* ── Large variant: From/To row ── */
+.calendar-rangefields {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+}
+
+.calendar-rangefield {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.calendar-rangefield-label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.calendar-rangefields-arrow {
+  flex-shrink: 0;
+  color: var(--color-icon-primary);
+}
+
+.calendar-months {
+  display: flex;
+  align-items: flex-start;
+  gap: 46px;
+  width: 100%;
+}
+
+/* ── Date & Time variant: time field + confirm row ── */
+.calendar-datetime-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}

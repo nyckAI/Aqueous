@@ -87,8 +87,8 @@
   color: var(--color-text-disabled);
 }
 
-/* ── Search Field ── */
-.searchfield-root {
+/* ── Opaque Text Field ── */
+.opaquetextfield-root {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -100,24 +100,24 @@
   transition: border-color 150ms, background-color 150ms;
 }
 
-.searchfield-root:focus-within {
+.opaquetextfield-root:focus-within {
   border-color: var(--color-border-focused);
 }
 
-.searchfield-root:has(input:disabled) {
+.opaquetextfield-root:has(input:disabled) {
   background-color: var(--color-background-accentgray-disabled);
 }
 
-.searchfield-icon {
+.opaquetextfield-icon {
   flex-shrink: 0;
   color: var(--color-icon-neutral);
 }
 
-.searchfield-root:has(input:disabled) .searchfield-icon {
+.opaquetextfield-root:has(input:disabled) .opaquetextfield-icon {
   color: var(--color-icon-disabled);
 }
 
-.searchfield-input {
+.opaquetextfield-input {
   flex: 1 0 0;
   min-width: 0;
   border: none;
@@ -131,15 +131,15 @@
   font-weight: var(--font-weight-medium);
 }
 
-.searchfield-input::placeholder {
+.opaquetextfield-input::placeholder {
   color: var(--color-text-neutral);
 }
 
-.searchfield-input:disabled {
+.opaquetextfield-input:disabled {
   cursor: not-allowed;
   color: var(--color-text-disabled);
 }
 
-.searchfield-input:disabled::placeholder {
+.opaquetextfield-input:disabled::placeholder {
   color: var(--color-text-disabled);
 }

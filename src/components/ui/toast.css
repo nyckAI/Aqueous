@@ -1,0 +1,51 @@
+/* ── Toast — Nyck Design System Tokens ── */
+
+.toast-root {
+  background-color: var(--color-background-neutral);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: 8px;
+}
+
+/* ── Title & description ── */
+.toast-title {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: 24px;
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.toast-description {
+  color: var(--color-text-neutral);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: 22px;
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-regular);
+}
+
+/* ── Leading status icon, colored per toast type ── */
+.toast-icon {
+  color: var(--color-icon-primary);
+}
+.toast-icon[data-type="success"] {
+  color: var(--color-icon-success);
+}
+.toast-icon[data-type="info"] {
+  color: var(--color-icon-info);
+}
+.toast-icon[data-type="warning"] {
+  color: var(--color-icon-warning);
+}
+.toast-icon[data-type="error"] {
+  color: var(--color-icon-danger);
+}
+
+/* ── Close button ── */
+.toast-close {
+  color: var(--color-icon-neutral);
+}
+.toast-close:hover {
+  color: var(--color-icon-primary);
+}

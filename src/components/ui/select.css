@@ -1,0 +1,37 @@
+/* ── Select — Nyck Design System Tokens ──
+   Trigger is styled to match Text Field exactly: same padding, radius,
+   border, background, and typography tokens. */
+
+.select-trigger {
+  background-color: var(--color-background-neutral);
+  border: 1px solid var(--color-border-input);
+  transition: border-color 150ms, background-color 150ms;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  font-weight: var(--font-weight-regular);
+}
+
+.select-trigger:focus-visible {
+  border-color: var(--color-border-focused);
+}
+
+.select-trigger:disabled {
+  background-color: var(--color-background-neutral-disabled);
+  border-color: var(--color-border-disabled);
+  color: var(--color-text-disabled);
+}
+
+.select-trigger[data-placeholder] {
+  color: var(--color-text-neutral);
+}
+
+.select-icon {
+  color: var(--color-icon-neutral);
+}
+
+.select-trigger:disabled .select-icon {
+  color: var(--color-icon-disabled);
+}

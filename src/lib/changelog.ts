@@ -20,7 +20,141 @@ export const changelog: VersionEntry[] = [
     version: "Unreleased",
     date: "",
     author: "Jason Jeong",
-    summary: "Rebuilt Badge and Button from Figma with token-driven variants, tokenized Breadcrumb, and fixed the brand-700 primitive.",
+    summary: "",
+    changes: [],
+  },
+  {
+    version: "0.7.0",
+    date: "2026-08-19",
+    author: "Jason Jeong",
+    summary: "Widened the sidebar to 300px, collapsed the component list into a disclosure, added a bottom fade with a placeholder footer, and retokenized Calendar, Alert, Toast, Checkbox, and Select onto Nyck design tokens.",
+    changes: [
+      {
+        type: "changed",
+        title: "Sidebar collapse handle recolored and given a tooltip",
+        description:
+          "The idle rectangle indicator and its hover chevron now use text-icon-primary/bg-icon-primary instead of bg-border-neutral, and hovering the handle now shows a \"Collapse\"/\"Expand\" tooltip depending on state.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Sidebar collapse animation no longer appears to shrink from the center",
+        description:
+          "The nav's horizontal padding (px-5→px-2) and each row's icon/label alignment were snapping instantly while only the <aside>'s width animated, so content visibly re-centered mid-transition. Removed the instant justify-center/items-center toggles on NavLink, FooterButton, the header, and the nav/footer containers — icons now stay pinned to the left edge throughout — and added a matching transition-[padding] alongside the width transition (bumped to 300ms ease-in-out) so the whole rail now reads as a single continuous right-to-left collapse.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Checkmarks added to audited components in the sidebar nav list",
+        description:
+          "Accordion, Alert, Alert Dialog, Avatar, Badge, Breadcrumb, Button, Label, Sidebar, and Toast now show a checkmark instead of the default dash in the \"All Components\" list, marking them as reviewed against Nyck design tokens.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Sidebar docs page now shows the real site navigation",
+        description:
+          "Replaced the generic shadcn SidebarProvider/SidebarMenu mock (a fake \"Platform/Overview/Settings\" menu that didn't reflect anything actually built) with the actual Sidebar component from src/components/sidebar/Sidebar.tsx — the same collapsible nav rendered on every page of this site, wired to its own local collapsed state and clipped into a bounded preview box via a .sticky height override. Removed the now-unused generic sidebar primitive imports and the LayoutDashboard/Settings icon imports they depended on; updated the registry description to describe the real nav instead of the primitive.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Calendar Basic and Date & Time no longer stretch to Large's width",
+        description:
+          ".calendar-container now sets align-self: flex-start and width: fit-content, since the default flex align-items: stretch on a column layout was forcing the single-month variants to match the two-month Large variant's width whenever they shared a flex column parent.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Alert icon size fixed to 20×20px",
+        description:
+          "AlertIcon's wrapping div was sized size-5 (20px) but its child lucide icon had no size class, so it rendered at lucide's default 24px and overflowed the box. Added [&>svg]:size-full so the icon fills its 20×20 container exactly.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Toast retokenized from Figma onto Nyck tokens",
+        description:
+          "Rebuilt toast.tsx/added toast.css to match the Figma Toasts component: replaced bg-popover/text-popover-foreground/shadow-lg/rounded-2xl with --color-background-neutral, --color-border-neutral, and an 8px radius; title/description now use Body/SM typography at Figma's 24px/22px line heights; the leading status icon is recolored per type (--color-icon-success/-info/-warning/-danger/-primary) and corrected from 16px to the Figma-specified 20px. Swapped icon glyphs to match the Figma reference exactly: CircleCheckIcon→CheckIcon (success), InfoIcon→BellIcon (info), OctagonXIcon→XIcon (error) — Figma's toasts use plain check/bell/X glyphs, not the circled/octagon variants the shadcn defaults shipped with. Close button recolored from text-muted-foreground to --color-icon-neutral/--color-icon-primary on hover.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Checkbox retokenized onto Nyck tokens",
+        description:
+          "Resting border now uses --color-border-input instead of shadcn's border-input; the checked state's bg-primary/text-primary-foreground (shadcn's near-black/white theme pair) is now sourced from the --black/--white primitives directly, preserving the exact same visual since no semantic \"checked\" background token exists yet. Focus ring and aria-invalid states are left on the shared shadcn theme vars, matching the precedent already set in Button.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Select trigger redesigned to match Text Field",
+        description:
+          "Replaced border-input/bg-transparent/shadcn focus-ring classes with the same tokens Text Field uses: --color-background-neutral, --color-border-input (default) / --color-border-focused (focus), --color-text-primary/--color-text-neutral (placeholder), and Body/SM typography. Radius corrected from Tailwind's rounded-lg (10px in this app's scale) to an explicit 8px to match Text Field exactly. SelectContent/SelectItem menu styling is unchanged (out of scope — this pass only covers the closed-state trigger).",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "removed",
+        title: "Card and Drawer components removed",
+        description:
+          "Deleted card.tsx/drawer.tsx and their docs pages/demos entirely; neither was referenced anywhere else in the codebase.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Sidebar widened to 300px",
+        description:
+          "Expanded width changed from w-fit (hugging the widest visible label) to a fixed w-[300px], since collapsing \"All Components\" into a disclosure removed the long component names that were previously driving the hug-content width.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "\"All Components\" collapsed into a disclosure",
+        description:
+          "The flat list of all 35 component links no longer renders inline in the sidebar; it's now nested under an \"All Components\" row with a chevron toggle, closed by default. The disclosure auto-opens (and can't be manually closed) whenever the current page is one of its children, so the active item is never hidden.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "changed",
+        title: "Disclosure chevron direction fixed",
+        description:
+          "Was rotating from a sideways (collapsed) to a downward (open) arrow, backwards from the conventional \"chevron-down means expand, chevron-up means collapse\" pattern. Now points down when closed and rotates 180deg to point up when open.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "added",
+        title: "Calendar redesigned from Figma with Basic, Large, and Date & Time variants",
+        description:
+          "Retokenized the react-day-picker-backed Calendar off shadcn's bg-primary/bg-muted/text-muted-foreground classes onto Nyck tokens (caption uses Heading/XS, weekdays Micro/SM uppercase, days Caption/MD; range endpoints and single-select get a solid --color-background-brand-emphasis fill with --color-text-contrast, range middle gets a flat --color-background-selected band, matching Figma's brand-200 tint exactly). Added three composed exports on top of the retokenized primitive: CalendarBasic (single month), CalendarLarge (From/To TextField pair above two side-by-side months), and CalendarDateTime (single month plus an OpaqueTextField time chip and a Button variant=\"primary\" \"Done\" action) — reusing existing TextField/OpaqueTextField/Button components rather than building new inputs.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "added",
+        title: "BottomContainer with Settings / Give feedback",
+        description:
+          "Built the Figma BottomContainer as a pinned (non-scrolling) footer at the bottom of the sidebar: border-top divider, 12px top/bottom padding, 16px sides, 8px gap between the two rows, each row using 16px Inter Medium text in --color-text-navigation. Since this docs site has no real settings or feedback destinations yet, both rows are non-navigating placeholder buttons.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "added",
+        title: "Bottom fade on the scrollable nav list",
+        description:
+          "The sidebar was restructured into three parts — a fixed header, a scrollable middle, and the pinned BottomContainer — so a mask-image gradient can fade the middle list's last ~40px into transparent right where it meets the footer's divider, hinting that more items are scrollable below. The fade is computed from actual overflow (via ResizeObserver + scroll position), so it only appears when there's more content below the fold, and disappears once scrolled to the bottom.",
+        timestamp: "2026-08-19",
+      },
+      {
+        type: "added",
+        title: "Alert Dialog redesigned from Figma with 5 variants",
+        description:
+          "Rebuilt Alert Dialog around the Figma \"Message Modals\" component: default, danger, success, warning, and info, each with a 44px variant-colored icon chip (CircleAlert), a Heading/SM Semibold title colored to match, a Body/SM description in --color-text-neutral, and a plain right-aligned actions row using the existing Button component (no color/props changes needed there — the Figma \"Main Buttons\" instance in the modal already matches Button's default variant exactly). Replaced the old grid-based AlertDialogHeader/media-above-title layout and the gray border-t footer strip, neither of which the Figma design has. Added a new --color-background-neutral-emphasis token for the Default variant's icon chip (Figma's background/neutral-emphasis, mapped to neutral-100 — an existing primitive with no prior semantic name).",
+        timestamp: "2026-08-19",
+      },
+    ],
+  },
+  {
+    version: "0.6.0",
+    date: "2026-08-19",
+    author: "Jason Jeong",
+    summary: "Redesigned Badge, Button, and the navigation from Figma, added Text Field and Search Field with labels and descriptions, and expanded the semantic token set.",
     changes: [
       {
         type: "changed",

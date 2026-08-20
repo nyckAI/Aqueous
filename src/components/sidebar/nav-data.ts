@@ -7,13 +7,33 @@ import {
   Shapes,
   Component,
   Minus,
+  Check,
 } from "lucide-react";
 import { componentRegistry } from "@/lib/component-registry";
+
+/**
+ * Slugs audited against Nyck design tokens — shown with a checkmark instead
+ * of the default dash in the "All Components" nav list.
+ */
+const tokenAuditedSlugs = new Set([
+  "accordion",
+  "alert",
+  "alert-dialog",
+  "avatar",
+  "badge",
+  "breadcrumb",
+  "button",
+  "label",
+  "sidebar",
+  "toast",
+]);
 
 export type NavItem = {
   label: string;
   href: string;
   icon: LucideIcon;
+  /** Nested items shown in a collapsible disclosure beneath this item. */
+  children?: NavItem[];
 };
 
 export type NavSection = {
@@ -22,15 +42,19 @@ export type NavSection = {
 };
 
 const componentNavItems: NavItem[] = [
-  { label: "All Components", href: "/components", icon: Component },
-  ...componentRegistry
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((c) => ({
-      label: c.name,
-      href: `/components/${c.slug}`,
-      icon: Minus,
-    })),
+  {
+    label: "All Components",
+    href: "/components",
+    icon: Component,
+    children: componentRegistry
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((c) => ({
+        label: c.name,
+        href: `/components/${c.slug}`,
+        icon: tokenAuditedSlugs.has(c.slug) ? Check : Minus,
+      })),
+  },
 ];
 
 /** Design system docs sections */

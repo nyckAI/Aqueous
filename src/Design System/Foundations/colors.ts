@@ -167,6 +167,7 @@ export const Background = {
   'color-background-neutral-hover': Neutral['neutral-100'],
   'color-background-neutral-pressed': Neutral['neutral-200'],
   'color-background-neutral-disabled': Neutral['neutral-100'],
+  'color-background-neutral-emphasis': Neutral['neutral-100'],
   
   'color-background-selected': Brand['brand-200'],
   'color-background-selected-hover': Brand['brand-300'],

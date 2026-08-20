@@ -38,19 +38,26 @@ function TextField({
   )
 }
 
-/** Search Field — filled search input with a leading magnifier. */
-function SearchField({
+/**
+ * Opaque Text Field — filled input on an accent-gray background.
+ * Defaults to a leading magnifier for its usual search role, but accepts
+ * any leading `icon` so it can be reused for other opaque, borderless
+ * fields (e.g. the calendar's time field uses a clock).
+ */
+function OpaqueTextField({
   className,
+  icon: Icon = Search,
   placeholder = "Search",
+  type = "search",
   ...props
-}: React.ComponentProps<"input">) {
+}: React.ComponentProps<"input"> & { icon?: LucideIcon }) {
   return (
-    <div data-slot="search-field" className={cn("searchfield-root", className)}>
-      <Search aria-hidden className="searchfield-icon size-5" strokeWidth={1.75} />
+    <div data-slot="opaque-text-field" className={cn("opaquetextfield-root", className)}>
+      <Icon aria-hidden className="opaquetextfield-icon size-5" strokeWidth={1.75} />
       <InputPrimitive
-        type="search"
-        data-slot="search-field-input"
-        className="searchfield-input"
+        type={type}
+        data-slot="opaque-text-field-input"
+        className="opaquetextfield-input"
         placeholder={placeholder}
         {...props}
       />
@@ -96,7 +103,7 @@ function TextFieldDescription({ className, ...props }: React.ComponentProps<"p">
 
 export {
   TextField,
-  SearchField,
+  OpaqueTextField,
   TextFieldGroup,
   TextFieldLabel,
   TextFieldDescription,

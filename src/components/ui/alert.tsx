@@ -26,7 +26,7 @@ function AlertIcon({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-icon"
-      className={cn("alert-icon size-5 shrink-0", className)}
+      className={cn("alert-icon size-5 shrink-0 [&>svg]:size-full", className)}
       {...props}
     />
   )

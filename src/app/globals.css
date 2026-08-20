@@ -266,6 +266,7 @@
   --color-background-neutral-hover: var(--neutral-100);
   --color-background-neutral-pressed: var(--neutral-200);
   --color-background-neutral-disabled: var(--neutral-100);
+  --color-background-neutral-emphasis: var(--neutral-100);
 
   --color-background-selected: var(--brand-200);
   --color-background-selected-hover: var(--brand-300);

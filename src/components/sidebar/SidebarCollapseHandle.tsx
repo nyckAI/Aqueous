@@ -1,6 +1,12 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function SidebarCollapseHandle({
   collapsed,
@@ -23,33 +29,44 @@ export function SidebarCollapseHandle({
       />
 
       {/* Collapse / expand handle — sits fully to the right of the border, outside the nav */}
-      <button
-        type="button"
-        onClick={onToggle}
-        onMouseEnter={() => onHoverChange(true)}
-        onMouseLeave={() => onHoverChange(false)}
-        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        className="pointer-events-auto relative ml-auto flex h-8 w-4 shrink-0 cursor-pointer items-center justify-center rounded-sm text-icon-neutral transition-colors hover:text-icon-primary"
-      >
-        <span
-          className={`absolute transition-all duration-200 ${
-            hovered ? "scale-50 opacity-0" : "scale-100 opacity-100"
-          }`}
-        >
-          <span className="block h-3 w-0.5 rounded-full bg-border-neutral" />
-        </span>
-        <span
-          className={`absolute transition-all duration-200 ${
-            hovered ? "scale-100 opacity-100" : "scale-50 opacity-0"
-          }`}
-        >
-          {collapsed ? (
-            <ChevronRight className="size-3.5" strokeWidth={2} />
-          ) : (
-            <ChevronLeft className="size-3.5" strokeWidth={2} />
-          )}
-        </span>
-      </button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <button
+                type="button"
+                onClick={onToggle}
+                onMouseEnter={() => onHoverChange(true)}
+                onMouseLeave={() => onHoverChange(false)}
+                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+                className="pointer-events-auto relative ml-auto flex h-8 w-4 shrink-0 cursor-pointer items-center justify-center rounded-sm text-icon-primary transition-colors hover:text-icon-primary"
+              />
+            }
+          >
+            <span
+              className={`absolute transition-all duration-200 ${
+                hovered ? "scale-50 opacity-0" : "scale-100 opacity-100"
+              }`}
+            >
+              <span className="block h-3 w-0.5 rounded-full bg-icon-primary" />
+            </span>
+            <span
+              className={`absolute transition-all duration-200 ${
+                hovered ? "scale-100 opacity-100" : "scale-50 opacity-0"
+              }`}
+            >
+              {collapsed ? (
+                <ChevronRight className="size-3.5" strokeWidth={2} />
+              ) : (
+                <ChevronLeft className="size-3.5" strokeWidth={2} />
+              )}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            {collapsed ? "Expand" : "Collapse"}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 }

@@ -1,0 +1,72 @@
+/* ── Alert Dialog — Nyck Design System Tokens ── */
+
+.alert-dialog-content {
+  background-color: var(--color-background-neutral);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: var(--radius-md);
+}
+
+/* ── Icon chip ── */
+.alert-dialog-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+}
+
+.alert-dialog-content[data-variant="default"] .alert-dialog-icon {
+  background-color: var(--color-background-neutral-emphasis);
+  color: var(--color-icon-primary);
+}
+.alert-dialog-content[data-variant="danger"] .alert-dialog-icon {
+  background-color: var(--color-background-danger);
+  color: var(--color-icon-danger);
+}
+.alert-dialog-content[data-variant="success"] .alert-dialog-icon {
+  background-color: var(--color-background-success);
+  color: var(--color-icon-success);
+}
+.alert-dialog-content[data-variant="warning"] .alert-dialog-icon {
+  background-color: var(--color-background-warning);
+  color: var(--color-icon-warning);
+}
+.alert-dialog-content[data-variant="info"] .alert-dialog-icon {
+  background-color: var(--color-background-info);
+  color: var(--color-icon-info);
+}
+
+/* ── Title ── */
+.alert-dialog-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-heading-sm-size);
+  line-height: var(--font-heading-sm-line-height);
+  letter-spacing: var(--font-heading-sm-letter-spacing);
+  color: var(--color-text-primary);
+}
+
+.alert-dialog-content[data-variant="danger"] .alert-dialog-title {
+  color: var(--color-text-danger);
+}
+.alert-dialog-content[data-variant="success"] .alert-dialog-title {
+  color: var(--color-text-success);
+}
+.alert-dialog-content[data-variant="warning"] .alert-dialog-title {
+  color: var(--color-text-warning);
+}
+.alert-dialog-content[data-variant="info"] .alert-dialog-title {
+  color: var(--color-text-info);
+}
+
+/* ── Description ── */
+.alert-dialog-description {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-body-sm-size);
+  line-height: var(--font-body-sm-line-height);
+  letter-spacing: var(--font-body-sm-letter-spacing);
+  color: var(--color-text-neutral);
+}
