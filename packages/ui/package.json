@@ -1,8 +1,10 @@
 {
   "name": "@nyck/aqueous-ui",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.1",
   "description": "Nyck's Aqueous design system — published React components.",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"

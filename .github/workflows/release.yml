@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # If there are pending changesets, this opens/updates a standing
+      # "Version Packages" PR that bumps @nyck/aqueous-ui's version and
+      # writes packages/ui/CHANGELOG.md from the accumulated changesets.
+      # Merging that PR re-triggers this workflow; at that point there are
+      # no pending changesets left, so this step instead runs the `publish`
+      # command below.
+      #
+      # NOTE (Phase 6 dependency): the `publish` command needs registry
+      # credentials that don't exist yet — add an NPM_TOKEN repo secret
+      # (or the GitHub Packages equivalent) once Phase 6 picks a registry,
+      # and reference it below. Until then, merging a Version Packages PR
+      # will bump the version and generate the changelog but fail the
+      # actual `npm publish` step, which is expected.
+      - name: Create Release PR or Publish
+        uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          publish: pnpm release
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

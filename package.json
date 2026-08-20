@@ -6,9 +6,13 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=@nyck/aqueous-ui && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.1",
     "turbo": "^2.5.0"
   },
   "packageManager": "pnpm@9.15.0"
