@@ -19,7 +19,7 @@
     "dist"
   ],
   "exports": {
-    "./tokens.css": "./src/styles/tokens.css",
+    "./tokens.css": "./dist/tokens.css",
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
