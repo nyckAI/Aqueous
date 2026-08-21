@@ -1,5 +1,11 @@
 # @nyckai/aqueous-ui
 
+## 1.1.0
+
+### Minor Changes
+
+- Added a spacing token scale (`--space-3xs` through `--space-7xl`) to `tokens.css`, and a corresponding Foundation → Spacing showcase page and Tokens page section in the docs app.
+
 ## 1.0.0
 
 ### Major Changes
