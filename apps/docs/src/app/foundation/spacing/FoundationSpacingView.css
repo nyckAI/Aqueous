@@ -1,0 +1,98 @@
+/* ── Foundation / Spacing — Nyck Design System Tokens ── */
+
+.fs-header {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.fs-eyebrow {
+  color: var(--color-text-neutral);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.fs-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-lg-size);
+  line-height: var(--font-heading-lg-line-height);
+  letter-spacing: var(--font-heading-lg-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fs-description {
+  color: var(--color-text-neutral);
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.fs-section-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-heading-sm-size);
+  line-height: var(--font-heading-sm-line-height);
+  letter-spacing: var(--font-heading-sm-letter-spacing);
+  font-weight: var(--font-weight-semibold);
+}
+
+.fs-section-caption {
+  color: var(--color-text-neutral);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.fs-list {
+  border: 1px solid var(--color-border-disabled);
+}
+
+.fs-row {
+  border-bottom: 1px solid var(--color-border-disabled);
+  background-color: var(--color-background-neutral);
+}
+
+.fs-row:last-child {
+  border-bottom: none;
+}
+
+.fs-row:hover {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.fs-row:focus-visible {
+  outline: 2px solid var(--color-border-focused);
+  outline-offset: -2px;
+}
+
+.fs-row-name {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+  font-weight: var(--font-weight-medium);
+}
+
+.fs-row-value {
+  color: var(--color-text-neutral);
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: var(--font-caption-lg-size);
+  line-height: var(--font-caption-lg-line-height);
+  letter-spacing: var(--font-caption-lg-letter-spacing);
+}
+
+.fs-row-track {
+  background-color: var(--color-background-neutral-hover);
+  border-radius: var(--radius-sm);
+  height: 8px;
+}
+
+.fs-row-bar {
+  background-color: var(--color-background-brand-emphasis);
+  border-radius: var(--radius-sm);
+  height: 100%;
+}
+
+.fs-row-copy {
+  color: var(--color-text-brand);
+  font-size: var(--font-caption-md-size);
+  line-height: var(--font-caption-md-line-height);
+  letter-spacing: var(--font-caption-md-letter-spacing);
+}

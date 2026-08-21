@@ -23,6 +23,11 @@ import {
   type FontSizeTokenEntry,
   type FontValueTokenEntry,
 } from "@/lib/font-tokens";
+import {
+  spacingTokens,
+  spacingScaleDescription,
+  type SpacingTokenEntry,
+} from "@/lib/spacing-tokens";
 import "./TokenColorsView.css";
 
 function matchesQuery(token: ColorTokenEntry, query: string) {
@@ -53,6 +58,14 @@ function matchesFontValueQuery(token: FontValueTokenEntry, query: string) {
     token.name.toLowerCase().includes(q) ||
     token.value.toLowerCase().includes(q) ||
     token.category.toLowerCase().includes(q)
+  );
+}
+
+function matchesSpacingQuery(token: SpacingTokenEntry, query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  return (
+    token.name.toLowerCase().includes(q) || token.value.toLowerCase().includes(q)
   );
 }
 
@@ -208,6 +221,25 @@ function FontValueTokenRow({ token }: { token: FontValueTokenEntry }) {
   );
 }
 
+const MAX_SPACING_PX = Math.max(...spacingTokens.map((token) => token.px));
+
+function SpacingTokenRow({ token }: { token: SpacingTokenEntry }) {
+  return (
+    <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] items-center gap-6 py-5">
+      <div className="min-w-0">
+        <CopyableTokenName name={token.name} />
+      </div>
+      <span className="tc-font-meta">{token.value}</span>
+      <span className="tc-spacing-track block">
+        <span
+          className="tc-spacing-bar block"
+          style={{ width: `${(token.px / MAX_SPACING_PX) * 100}%` }}
+        />
+      </span>
+    </div>
+  );
+}
+
 function TocButton({
   active,
   indent,
@@ -237,6 +269,7 @@ const OBSERVED_IDS = [
   "color", "background", "border", "text", "icon",
   "font", "font-heading", "font-body", "font-caption",
   "font-button", "font-micro", "font-weight", "font-family",
+  "spacing",
 ];
 
 function TableOfContents({
@@ -308,6 +341,10 @@ function TableOfContents({
 
         <TocButton active={activeSection === "font-family"} indent onClick={() => onNavigate("font-family")}>
           Family
+        </TocButton>
+
+        <TocButton active={activeSection === "spacing"} onClick={() => onNavigate("spacing")}>
+          Spacing
         </TocButton>
       </div>
     </nav>
@@ -398,6 +435,11 @@ export function TokenColorsView() {
 
   const filteredFamilyTokens = useMemo(
     () => familyTokens.filter((t) => matchesFontValueQuery(t, deferredQuery)),
+    [deferredQuery],
+  );
+
+  const filteredSpacingTokens = useMemo(
+    () => spacingTokens.filter((t) => matchesSpacingQuery(t, deferredQuery)),
     [deferredQuery],
   );
 
@@ -647,6 +689,31 @@ export function TokenColorsView() {
                 No tokens match &ldquo;{query.trim()}&rdquo;.
               </p>
             )}
+        </section>
+
+        <section id="spacing" className="mt-16 scroll-mt-8">
+          <h2 className="tc-section-title">Spacing</h2>
+
+          <div className="mt-6">
+            <div className="tc-column-headers grid grid-cols-[minmax(0,1.2fr)_minmax(200px,0.8fr)_minmax(0,1fr)] gap-6 pb-3">
+              <span>Token</span>
+              <span>Value</span>
+              <span>Preview</span>
+            </div>
+
+            {filteredSpacingTokens.length === 0 ? (
+              <p className="tc-empty-state py-8">
+                No tokens match &ldquo;{query.trim()}&rdquo;.
+              </p>
+            ) : (
+              filteredSpacingTokens.map((token) => (
+                <SpacingTokenRow key={token.name} token={token} />
+              ))
+            )}
+            <p className="tc-group-description max-w-3xl pb-6">
+              {spacingScaleDescription}
+            </p>
+          </div>
         </section>
 
         </div>

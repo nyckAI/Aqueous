@@ -166,6 +166,19 @@
   color: var(--color-text-primary);
 }
 
+/* ── Spacing token rows ── */
+.tc-spacing-track {
+  background-color: var(--color-background-neutral-hover);
+  border-radius: var(--radius-sm);
+  height: 8px;
+}
+
+.tc-spacing-bar {
+  background-color: var(--color-background-brand-emphasis);
+  border-radius: var(--radius-sm);
+  height: 100%;
+}
+
 /* ── Table of contents ── */
 .tc-toc-nav {
   border-left: 1px solid var(--color-border-disabled);
