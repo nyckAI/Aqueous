@@ -24,6 +24,21 @@ export const changelog: VersionEntry[] = [
     changes: [],
   },
   {
+    version: "1.0.0",
+    date: "2026-08-21",
+    author: "Jason Jeong",
+    summary: "First stable release of the Aqueous design system, marking @nyckai/aqueous-ui 1.0.0.",
+    changes: [
+      {
+        type: "changed",
+        title: "Design system version set to 1.0.0",
+        description:
+          "Bumped @nyckai/aqueous-ui and the docs site to 1.0.0, marking the first stable release of the published component library after the token-audit passes across all 23 components.",
+        timestamp: "2026-08-21",
+      },
+    ],
+  },
+  {
     version: "0.8.0",
     date: "2026-08-20",
     author: "Jason Jeong",

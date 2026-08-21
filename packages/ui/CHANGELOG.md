@@ -1,5 +1,11 @@
 # @nyckai/aqueous-ui
 
+## 1.0.0
+
+### Major Changes
+
+- First stable release of `@nyckai/aqueous-ui`. All 23 published components (Accordion, Alert, Alert Dialog, Attachment, Avatar, Badge, Breadcrumb, Button, Calendar, Checkbox, Label, Radio Group, Skeleton, Slider, Spinner, Switch, Textarea, Textfield, Time Field, Toast, Toggle, Toggle Group, and Tooltip) are retokenized onto Nyck design tokens and considered stable for general use.
+
 ## 0.1.3
 
 ### Patch Changes
