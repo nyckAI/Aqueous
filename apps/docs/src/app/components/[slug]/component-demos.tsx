@@ -54,6 +54,13 @@ import {
   TextFieldLabel,
   TextFieldDescription,
   Label,
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
   RadioGroup,
   RadioGroupItem,
   Skeleton,
@@ -103,15 +110,6 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/components/ui/pagination";
 import {
   Popover,
   PopoverTrigger,

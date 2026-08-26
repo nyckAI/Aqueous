@@ -13,6 +13,7 @@ const COMPONENTS = [
   "calendar",
   "checkbox",
   "label",
+  "pagination",
   "radio-group",
   "skeleton",
   "slider",

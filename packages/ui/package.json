@@ -68,6 +68,10 @@
       "types": "./dist/components/ui/label.d.ts",
       "import": "./dist/components/ui/label.js"
     },
+    "./pagination": {
+      "types": "./dist/components/ui/pagination.d.ts",
+      "import": "./dist/components/ui/pagination.js"
+    },
     "./radio-group": {
       "types": "./dist/components/ui/radio-group.d.ts",
       "import": "./dist/components/ui/radio-group.js"
