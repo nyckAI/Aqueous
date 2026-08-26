@@ -1,5 +1,11 @@
 # @nyckai/aqueous-ui
 
+## 1.2.0
+
+### Minor Changes
+
+- 8109ed5: Add the Pagination component (`Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink`, `PaginationPrevious`, `PaginationNext`, `PaginationEllipsis`) for page navigation.
+
 ## 1.1.0
 
 ### Minor Changes
