@@ -31,7 +31,7 @@ export const componentRegistry: ComponentMeta[] = [
   { slug: "label", name: "Label", description: "Labels and descriptions for text fields.", published: true },
   { slug: "marker", name: "Marker", description: "A small inline marker for separators and section markers in text.", published: false },
   { slug: "native-select", name: "Native Select", description: "A styled wrapper around the native HTML select element.", published: false },
-  { slug: "pagination", name: "Pagination", description: "Pagination with page navigation, previous and next links.", published: false },
+  { slug: "pagination", name: "Pagination", description: "Pagination with page navigation, previous and next links.", published: true },
   { slug: "popover", name: "Popover", description: "Displays rich content in a portal, triggered by a button.", published: false },
   { slug: "progress", name: "Progress", description: "Displays an indicator showing the completion progress of a task.", published: false },
   { slug: "questionnaire", name: "Questionnaire", description: "A multi-step form for stepping through a sequence of questions.", published: false },

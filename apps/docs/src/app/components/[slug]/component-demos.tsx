@@ -155,6 +155,7 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { Sidebar as RealSidebar } from "@/components/sidebar/Sidebar";
+import { FigmaSidebarDemo } from "@/components/sidebar/FigmaSidebarDemo";
 import {
   Table,
   TableHeader,
@@ -1756,15 +1757,35 @@ function ResizableDemo(): Demo {
 
 function SidebarDemoPreview() {
   const [collapsed, setCollapsed] = useState(false);
+  const [figmaCollapsed, setFigmaCollapsed] = useState(false);
   return (
-    <div className="relative h-[560px] w-full overflow-hidden rounded-lg border border-border-neutral [&_.sticky]:!h-full">
-      <div className="flex h-full w-full">
-        <RealSidebar
-          collapsed={collapsed}
-          onToggle={() => setCollapsed((prev) => !prev)}
-        />
-        <div className="flex min-w-0 flex-1 items-center justify-center bg-background-neutral">
-          <p className="text-sm text-muted-foreground">Page content</p>
+    <div className="flex w-full flex-col gap-8">
+      <div className="flex w-full flex-col gap-3">
+        <h4 className="text-sm font-medium">Current</h4>
+        <div className="relative h-[560px] w-full overflow-hidden rounded-lg border border-border-neutral [&_.sticky]:!h-full">
+          <div className="flex h-full w-full">
+            <RealSidebar
+              collapsed={collapsed}
+              onToggle={() => setCollapsed((prev) => !prev)}
+            />
+            <div className="flex min-w-0 flex-1 items-center justify-center bg-background-neutral">
+              <p className="text-sm text-muted-foreground">Page content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-3">
+        <h4 className="text-sm font-medium">Figma redesign</h4>
+        <div className="relative h-[560px] w-full overflow-hidden rounded-lg border border-border-neutral [&_.sticky]:!h-full">
+          <div className="flex h-full w-full">
+            <FigmaSidebarDemo
+              collapsed={figmaCollapsed}
+              onToggle={() => setFigmaCollapsed((prev) => !prev)}
+            />
+            <div className="flex min-w-0 flex-1 items-center justify-center bg-background-neutral">
+              <p className="text-sm text-muted-foreground">Page content</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
