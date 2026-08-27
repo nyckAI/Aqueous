@@ -76,6 +76,10 @@
       "types": "./dist/components/ui/radio-group.d.ts",
       "import": "./dist/components/ui/radio-group.js"
     },
+    "./sidebar": {
+      "types": "./dist/components/ui/sidebar.d.ts",
+      "import": "./dist/components/ui/sidebar.js"
+    },
     "./skeleton": {
       "types": "./dist/components/ui/skeleton.d.ts",
       "import": "./dist/components/ui/skeleton.js"
