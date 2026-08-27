@@ -18,10 +18,39 @@ export type VersionEntry = {
 export const changelog: VersionEntry[] = [
   {
     version: "Unreleased",
-    date: "",
+    date: "Unreleased",
     author: "Jason Jeong",
-    summary: "",
-    changes: [],
+    summary: "Reworked the Sidebar docs page around the Figma redesign — dropped the outdated demo, added the Nyck brand mark, and swapped the external collapse handle for an inline toggle.",
+    changes: [
+      {
+        type: "removed",
+        title: "Old Sidebar demo removed from docs",
+        description:
+          "The Sidebar component page showed the production sidebar side-by-side with the Figma redesign. The production version isn't meant to be showcased or used directly by developers, so its preview was removed — the page now shows only the Figma redesign.",
+        timestamp: "2026-08-27",
+      },
+      {
+        type: "added",
+        title: "Nyck logo added to the sidebar header",
+        description:
+          "Added the Nyck brand mark (Nyck_Logo_Blue.svg) to the top-left of the Figma-redesign sidebar preview, paired with the \"Nyck AI\" wordmark in brand blue with 8px spacing between them, matching the Figma design system lockup.",
+        timestamp: "2026-08-27",
+      },
+      {
+        type: "changed",
+        title: "Sidebar collapse handle replaced with an inline toggle",
+        description:
+          "Removed the chevron handle that sat outside the nav bar and replaced it with a panel-left-close/panel-left-open icon button placed to the right of the Nyck logo in the sidebar header, colored with the neutral icon token.",
+        timestamp: "2026-08-27",
+      },
+      {
+        type: "changed",
+        title: "Sidebar expanded width reduced to 250px",
+        description:
+          "Narrowed the Figma-redesign sidebar's expanded width from 292px to 250px.",
+        timestamp: "2026-08-27",
+      },
+    ],
   },
   {
     version: "1.0.0",
