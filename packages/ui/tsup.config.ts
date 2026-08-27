@@ -15,6 +15,7 @@ const COMPONENTS = [
   "label",
   "pagination",
   "radio-group",
+  "sidebar",
   "skeleton",
   "slider",
   "spinner",

@@ -1,6 +1,6 @@
 {
   "name": "@nyckai/aqueous-ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Nyck's Aqueous design system — published React components.",
   "publishConfig": {
     "access": "restricted",
@@ -75,6 +75,10 @@
     "./radio-group": {
       "types": "./dist/components/ui/radio-group.d.ts",
       "import": "./dist/components/ui/radio-group.js"
+    },
+    "./sidebar": {
+      "types": "./dist/components/ui/sidebar.d.ts",
+      "import": "./dist/components/ui/sidebar.js"
     },
     "./skeleton": {
       "types": "./dist/components/ui/skeleton.d.ts",
