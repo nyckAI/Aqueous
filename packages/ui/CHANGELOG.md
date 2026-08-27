@@ -1,11 +1,20 @@
 # @nyckai/aqueous-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- Add the Sidebar component (`Sidebar`, `SidebarHeader`, `SidebarToggle`, `SidebarNav`, `SidebarNavGroup`, `SidebarNavGroupLabel`, `SidebarNavItem`, `SidebarFooter`, `useSidebar`) — a collapsible app navigation sidebar with an icon-rail collapsed state, a scrollable nav region with a bottom fade mask, and a built-in expand/collapse toggle.
+  
+  (Re-recorded here: the version that was meant to ship this, 1.2.0, had already been published under a different, Pagination-only changeset before this branch merged, so the Sidebar component never actually reached the registry until now.)
+
 ## 1.2.0
 
 ### Minor Changes
 
 - 8109ed5: Add the Pagination component (`Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink`, `PaginationPrevious`, `PaginationNext`, `PaginationEllipsis`) for page navigation.
-- Add the Sidebar component (`Sidebar`, `SidebarHeader`, `SidebarToggle`, `SidebarNav`, `SidebarNavGroup`, `SidebarNavGroupLabel`, `SidebarNavItem`, `SidebarFooter`, `useSidebar`) — a collapsible app navigation sidebar with an icon-rail collapsed state, a scrollable nav region with a bottom fade mask, and a built-in expand/collapse toggle.
+
+  Note: the Sidebar entry previously listed here was recorded before the version bump that actually shipped it — see 1.3.0 below for the real Sidebar release.
 
 ## 1.1.0
 
